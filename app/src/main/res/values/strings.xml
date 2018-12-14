@@ -1,0 +1,30 @@
+<resources>
+    <string name="app_name">IOReno</string>
+
+    <string name="nav_open">Nav Open</string>
+    <string name="nav_close">Nav Close</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="LoginTitle">\@</string>
+    <string name="LoginPasswordTitle">***</string>
+    <string name="btnCustomerSignUp">Sign up</string>
+    <string name="CustomerSignupTitle">Have a Project?</string>
+    <string name="ContnractorSignUpTitle">You are a Contractor?</string>
+    <string name="signupname">Name:</string>
+    <string name="signupemail">Email:</string>
+    <string name="signuptitle">Email:</string>
+    <string name="signupphone">Phone:</string>
+    <string name="signuppassword1">Password:</string>
+    <string name="signuppassword2">Confirm Password:</string>
+    <string name="conconumber">CO Number:</string>
+    <string name="conconame">CO Name</string>
+    <string name="conphone">Phone:</string>
+    <string name="conconame1">CO Name:</string>
+    <string name="conemail">Email:</string>
+    <string name="concontactname">Contact Name:</string>
+    <string name="conpassword" />
+    <string name="conpassword1">Password:</string>
+    <string name="conpassword2">Confirm Password:</string>
+    <string name="signinbutton">Sign in</string>
+</resources>
