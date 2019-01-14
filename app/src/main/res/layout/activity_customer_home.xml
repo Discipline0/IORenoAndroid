@@ -18,4 +18,9 @@
         android:layout_height="wrap_content"
         android:background="@color/DarkerBlue"
         android:text="@string/New_Project" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerViewProjects"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 </LinearLayout>
