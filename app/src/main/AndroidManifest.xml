@@ -18,7 +18,8 @@
         </activity>
         <activity android:name=".CustomerSignUp" />
         <activity android:name=".ContractorSignUp" />
-        <activity android:name=".CustomerHome"></activity>
+        <activity android:name=".CustomerHome" />
+        <activity android:name=".ContractorHome"></activity>
     </application>
 
 </manifest>

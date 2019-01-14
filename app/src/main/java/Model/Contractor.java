@@ -10,7 +10,7 @@ public class Contractor {
     private String  contractorEmail;
     private String  contractorContactName;
     private String  contractorPassword;
-    private String     contractorDateRegistered;
+    private String  contractorDateRegistered;
     private int     approved;
 
 
@@ -87,7 +87,7 @@ public class Contractor {
         return contractorPassword;
     }
 
-    public void setContractorPassowrd(String contractorPassowrd) {
+    public void setContractorPassword(String contractorPassowrd) {
         this.contractorPassword = contractorPassowrd;
     }
 

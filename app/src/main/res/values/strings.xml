@@ -27,4 +27,7 @@
     <string name="conpassword1">Password:</string>
     <string name="conpassword2">Confirm Password:</string>
     <string name="signinbutton">Sign in</string>
+    <string name="btnConSignUp">Sign up</string>
+    <string name="btnsignin">Sign in</string>
+    <string name="New_Project">Create a new project</string>
 </resources>

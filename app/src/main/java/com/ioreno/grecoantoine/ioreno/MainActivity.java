@@ -53,6 +53,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     public void onContractorSignUpClick(View v){
+        Intent i = new Intent(this, ContractorSignUp.class);
+        startActivity(i);
     }
 
     public void onSignInClick(View v){
@@ -70,6 +72,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         //    User.setCurrUser(newUser.getUsername());
         //    User.setIsLoggedIn(true);
             Intent i = new Intent(this,CustomerHome.class);
+            startActivity(i);
+
+        }
+        else if(db.checkForContractor(editEmailLogin, editPasswordLogin)){
+            Intent i = new Intent(this, ContractorHome.class);
             startActivity(i);
 
         }

@@ -9,18 +9,18 @@ public class Customer {
     private String customerEmail;
     private String customerPhone;
     private String customerPassword;
-    private String    customerDateRegistered;
+    private String customerDateRegistered;
 
     public static boolean isLoggedIn = false;
     public static String currUser;
 
-    public static final String CUSTOMER_TABLE_NAME = "Customer";
+    public static final String CUSTOMER_TABLE_NAME          = "Customer";
 
-    public static final String CUSTOMER_COL_ID = "Customer_ID";
-    public static final String CUSTOMER_COL_NAME = "Customer_Name";
-    public static final String CUSTOMER_COL_EMAIL = "Customer_Email";
-    public static final String CUSTOMER_COL_PHONE = "Customer_Phone";
-    public static final String CUSTOMER_COL_PASSWORD = "Customer_Password";
+    public static final String CUSTOMER_COL_ID              = "Customer_ID";
+    public static final String CUSTOMER_COL_NAME            = "Customer_Name";
+    public static final String CUSTOMER_COL_EMAIL           = "Customer_Email";
+    public static final String CUSTOMER_COL_PHONE           = "Customer_Phone";
+    public static final String CUSTOMER_COL_PASSWORD        = "Customer_Password";
     public static final String CUSTOMER_COL_DATE_REGISTERED = "Customer_Date_Registered";
 
     public Customer(){}
