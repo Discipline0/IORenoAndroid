@@ -30,4 +30,9 @@
     <string name="btnConSignUp">Sign up</string>
     <string name="btnsignin">Sign in</string>
     <string name="New_Project">Create a new project</string>
+    <string name="projectImageDescription">Project\'s Image</string>
+    <string name="Edit">Edit</string>
+    <string name="View">View</string>
+    <string name="SeeEstimates">See Estimates</string>
+    <string name="Delete">Delete</string>
 </resources>

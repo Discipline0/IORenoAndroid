@@ -19,7 +19,8 @@
         <activity android:name=".CustomerSignUp" />
         <activity android:name=".ContractorSignUp" />
         <activity android:name=".CustomerHome" />
-        <activity android:name=".ContractorHome"></activity>
+        <activity android:name=".ContractorHome" />
+        <activity android:name=".customer_project_item"></activity>
     </application>
 
 </manifest>
