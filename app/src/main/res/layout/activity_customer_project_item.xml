@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     tools:context=".customer_project_item">
 
     <LinearLayout
@@ -16,6 +16,7 @@
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:layout_gravity="center|top"
+            android:layout_marginTop="10dp"
             android:adjustViewBounds="true"
             android:contentDescription="@string/projectImageDescription"
             android:scaleType="fitCenter"
@@ -25,66 +26,67 @@
             android:id="@+id/txtProjectTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:text="TextView"
             android:textAlignment="center"
             android:textSize="24sp"
-            android:textStyle="bold"
-            android:layout_marginTop="10dp"/>
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/txtProjectPrice"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="TextView"
-            android:layout_marginStart="5dp"/>
+            android:layout_marginStart="5dp"
+            android:text="TextView" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
             android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp">
+            android:layout_marginBottom="10dp"
+            android:orientation="horizontal">
 
             <Button
                 android:id="@+id/btnView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
                 android:layout_weight="1"
                 android:background="@color/colorPrimary"
                 android:text="@string/View"
-                android:textColor="@android:color/background_light"
-                android:layout_marginStart="5dp"/>
+                android:textColor="@android:color/background_light" />
 
             <Button
                 android:id="@+id/btnSeeEstimates"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
                 android:layout_weight="1"
                 android:background="@color/DarkerBlue"
                 android:text="@string/SeeEstimates"
-                android:textColor="@android:color/background_light"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp"/>
+                android:textColor="@android:color/background_light" />
 
             <Button
                 android:id="@+id/btnEdit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="5dp"
                 android:layout_weight="1"
                 android:background="@color/Yellow"
                 android:text="@string/Edit"
-                android:textColor="@android:color/background_dark"
-                android:layout_marginEnd="5dp"/>
+                android:textColor="@android:color/background_dark" />
         </LinearLayout>
 
         <Button
             android:id="@+id/btnDelete"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginBottom="10dp"
             android:background="@color/Red"
             android:text="@string/Delete"
-            android:textColor="@android:color/background_light"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"/>
+            android:textColor="@android:color/background_light" />
     </LinearLayout>
 </LinearLayout>

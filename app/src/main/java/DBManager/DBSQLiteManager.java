@@ -174,10 +174,10 @@ public class DBSQLiteManager extends SQLiteOpenHelper {
             Project.PROJECT_COL_TYPE + " TEXT," +
             Project.PROJECT_COL_BUDGET + " REAL," +
             Project.PROJECT_COL_TITLE + " TEXT," +
-            Project.PROJECT_COL_ADDRESS + "TEXT," +
-            Project.PROJECT_COL_CITY + "TEXT," +
-            Project.PROJECT_COL_IMAGE + "BLOB," +
-            Project.PROJECT_COL_DATE_POSTED + "TEXT" +
+            Project.PROJECT_COL_ADDRESS + " TEXT," +
+            Project.PROJECT_COL_CITY + " TEXT," +
+            Project.PROJECT_COL_IMAGE + " BLOB," +
+            Project.PROJECT_COL_DATE_POSTED + " TEXT" +
             ")";
 
     public void addProject(Project p){
@@ -235,7 +235,7 @@ public class DBSQLiteManager extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
 
         String GET_LIST = "SELECT * FROM " + Project.PROJECT_TABLE_NAME + " WHERE "
-                + Project.PROJECT_COL_CUST_EMAIL + " = "+email + ";";
+                + Project.PROJECT_COL_CUST_EMAIL + " = '"+email + "';";
         Cursor c = db.rawQuery(GET_LIST,null);
 
         if (c.moveToFirst())
@@ -408,9 +408,6 @@ public class DBSQLiteManager extends SQLiteOpenHelper {
         db.execSQL(CREATE_PROJECT_TABLE_QUERY);
         db.execSQL(CREATE_PROPOSAL_QUERY);
         db.execSQL(CREATE_PAYMENT_QUERY);
-
-
-
     }
 
     @Override

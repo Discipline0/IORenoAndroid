@@ -129,10 +129,10 @@ public class ProjectAdapter extends RecyclerView.Adapter<ProjectAdapter.ViewHold
                         Toast.LENGTH_LONG).show();
                 }
 
-                // Might or might not work
-                CustomerHome ch = (CustomerHome) v.getContext();
-                ch.finish();
-                ch.startActivity(ch.getIntent());
+                // Refresh the CustomerHome page
+                CustomerHome customerHome = (CustomerHome) v.getContext();
+                customerHome.finish();
+                customerHome.startActivity(customerHome.getIntent());
             }
         });
     }
