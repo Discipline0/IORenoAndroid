@@ -48,7 +48,7 @@
     <string name="New_Project">Create a new project</string>
     <string name="createNewProjectTitle">Project Title:</string>
     <string name="CreateNewProjectImage">Project Description:</string>
-    <string name="CreateNewProjectTYpe">Project Type:</string>
+    <string name="CreateNewProjectType">Project Type:</string>
     <string name="CreateNewProjectAddress">Address:</string>
     <string name="CreateNewProjectCity">City:</string>
     <string name="CreateNewProjectBudget">Project Budget:</string>
