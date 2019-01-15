@@ -53,23 +53,23 @@ public class CustomerCreateNewProject extends AppCompatActivity {
         startActivity(i);
     }
     public void onConfirm(View v){
-        EditText projTitleIn = (EditText)findViewById(R.id.editCreateNewProjectTitle);
+        EditText projTitleIn       = (EditText)findViewById(R.id.editCreateNewProjectTitle);
         EditText projDescriptionIn = (EditText) findViewById(R.id.editCreateNewProjectDescription);
-        Spinner  projTypeIn = (Spinner)findViewById(R.id.spinnerCreateNewProjectType);
-        EditText projAddressIn = (EditText) findViewById(R.id.editCreateNewProjectAddress);
-        EditText projCityIn = (EditText) findViewById(R.id.editCreateNewProjectCity);
-        EditText projBudgetIn = (EditText) findViewById(R.id.numCreateNewProjectBudget);
-        ImageView projImageIn = (ImageView) findViewById(R.id.imgProjectImage);
+        Spinner  projTypeIn        = (Spinner)findViewById(R.id.spinnerCreateNewProjectType);
+        EditText projAddressIn     = (EditText) findViewById(R.id.editCreateNewProjectAddress);
+        EditText projCityIn        = (EditText) findViewById(R.id.editCreateNewProjectCity);
+        EditText projBudgetIn      = (EditText) findViewById(R.id.numCreateNewProjectBudget);
+        ImageView projImageIn      = (ImageView) findViewById(R.id.imgProjectImage);
 
-        TextView projErrorIn   = (TextView)findViewById(R.id.txtCreateNewProjectError);
+        TextView projErrorIn       = (TextView)findViewById(R.id.txtCreateNewProjectError);
         projErrorIn.setSingleLine(false);
 
-        String projTitle = projTitleIn.getText().toString().trim();
+        String projTitle      = projTitleIn.getText().toString().trim();
         String projDescripion = projDescriptionIn.getText().toString().trim();
-        String projType = projTypeIn.getSelectedItem().toString();
-        String projAddress = projAddressIn.getText().toString().trim();
-        String projCity = projCityIn.getText().toString().trim();
-        double projBudget = 0;
+        String projType       = projTypeIn.getSelectedItem().toString();
+        String projAddress    = projAddressIn.getText().toString().trim();
+        String projCity       = projCityIn.getText().toString().trim();
+        double projBudget     = 0;
 
         //imageview to bitmap to byte[]
         Bitmap bitmap = ((BitmapDrawable) projImageIn.getDrawable()).getBitmap();
@@ -98,19 +98,10 @@ public class CustomerCreateNewProject extends AppCompatActivity {
             Intent i = new Intent(this, CustomerHome.class);
             startActivity(i);
 
-            toast.show();
-
+            toast.show()
         }
         else{
             projErrorIn.setText(error);
         }
-
-
-
-
-
     }
-
-
-
 }
