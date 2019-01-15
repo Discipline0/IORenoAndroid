@@ -29,7 +29,8 @@ public class CustomerHome extends AppCompatActivity {
 
         manager = new DBSQLiteManager(this);
 
-        products = manager.getProjectList();
+        // Change the String value to the logged in user once it is implemented ****************
+        products = manager.getProjectListForCustomerEmail("");
 
         adapter = new ProjectAdapter(products);
         recyclerView.setAdapter(adapter);
