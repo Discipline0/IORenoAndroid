@@ -49,8 +49,9 @@ public class CustomerCreateNewProject extends AppCompatActivity {
     }
 
     public void onGoBack(View v){
-        Intent i = new Intent(this, CustomerHome.class);
-        startActivity(i);
+   //     Intent i = new Intent(this, CustomerHome.class);
+   //     startActivity(i);
+        super.finish();
     }
     public void onConfirm(View v){
         EditText projTitleIn       = (EditText)findViewById(R.id.editCreateNewProjectTitle);
@@ -98,7 +99,7 @@ public class CustomerCreateNewProject extends AppCompatActivity {
             Intent i = new Intent(this, CustomerHome.class);
             startActivity(i);
 
-            toast.show()
+            toast.show();
         }
         else{
             projErrorIn.setText(error);
