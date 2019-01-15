@@ -1,6 +1,22 @@
 <resources>
     <string name="app_name">IOReno</string>
 
+
+    <string name="project_type_promt">Choose a Project</string>
+    <string-array name="type_arrays">
+        <item>Bathroom</item>
+        <item>Kitchen</item>
+        <item>Tiling</item>
+        <item>Wood Work</item>
+        <item>Landscaping</item>
+        <item>Plumbing</item>
+        <item>Masonry</item>
+        <item>Painting</item>
+        <item>Drywalling</item>
+        <item>Electrical Work</item>
+        <item>Other</item>
+    </string-array>
+
     <string name="nav_open">Nav Open</string>
     <string name="nav_close">Nav Close</string>
 
@@ -30,6 +46,16 @@
     <string name="btnConSignUp">Sign up</string>
     <string name="btnsignin">Sign in</string>
     <string name="New_Project">Create a new project</string>
+    <string name="createNewProjectTitle">Project Title:</string>
+    <string name="CreateNewProjectImage">Project Description:</string>
+    <string name="CreateNewProjectType">Project Type:</string>
+    <string name="CreateNewProjectAddress">Address:</string>
+    <string name="CreateNewProjectCity">City:</string>
+    <string name="CreateNewProjectBudget">Project Budget:</string>
+    <string name="CreateNewProjectImg">Image:</string>
+    <string name="CreateNewProjectBrowse">Browse...</string>
+    <string name="CreateNewProjectGoBack">Go back</string>
+    <string name="CreateNewProjectConfirm">Confirm</string>
     <string name="projectImageDescription">Project\'s Image</string>
     <string name="Edit">Edit</string>
     <string name="View">View</string>

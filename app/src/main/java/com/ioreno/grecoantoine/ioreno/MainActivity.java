@@ -22,6 +22,8 @@ import com.ioreno.grecoantoine.ioreno.Fragments.index_frag;
 import com.ioreno.grecoantoine.ioreno.Fragments.terms_of_use_frag;
 
 import DBManager.DBSQLiteManager;
+import Model.Contractor;
+import Model.Customer;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
@@ -72,6 +74,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         //    User.setCurrUser(newUser.getUsername());
         //    User.setIsLoggedIn(true);
             Intent i = new Intent(this,CustomerHome.class);
+            Customer.currUser = editEmailLogin;
+            //might wanna add an if statement to see if user if customer or contractor
+            Contractor.currUser = editEmailLogin;
+
             startActivity(i);
 
         }

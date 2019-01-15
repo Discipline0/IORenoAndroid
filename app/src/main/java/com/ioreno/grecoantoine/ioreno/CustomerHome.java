@@ -1,5 +1,6 @@
 package com.ioreno.grecoantoine.ioreno;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DividerItemDecoration;
@@ -38,6 +39,9 @@ public class CustomerHome extends AppCompatActivity {
     }
 
     public void onCreateNewProject(View v){
+        Intent i = new Intent(this, CustomerCreateNewProject.class);
+        startActivity(i);
+
 
     }
 }
