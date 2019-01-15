@@ -114,7 +114,7 @@ public class CustomerCreateNewProject extends AppCompatActivity {
             Project p = new Project(Customer.currUser, projDescripion, projType, projBudget, projTitle, projAddress, projCity, imageInByte);
             db.addProject(p);
             Toast toast = Toast.makeText(getApplicationContext(),
-                    "Project: "+p.getTitle()+" has sucessfully been created!",
+                    "Project: "+p.getTitle()+" has successfully been created!",
                     Toast.LENGTH_SHORT);
             Intent i = new Intent(this, CustomerHome.class);
             startActivity(i);
