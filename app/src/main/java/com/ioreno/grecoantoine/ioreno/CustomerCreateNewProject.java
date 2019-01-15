@@ -56,7 +56,7 @@ public class CustomerCreateNewProject extends AppCompatActivity {
 
     public void onGalleryPicker(View v){
         Intent getImageIntent = new Intent(Intent.ACTION_GET_CONTENT);
-        getImageIntent .setType("image/*");
+        getImageIntent.setType("image/*");
         startActivityForResult(getImageIntent , IMAGE_PICKER );
     }
 
@@ -64,7 +64,7 @@ public class CustomerCreateNewProject extends AppCompatActivity {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode== IMAGE_PICKER  && resultCode == RESULT_OK) {
             Uri fullPhotoUri = data.getData();
-            ImageView projImageIn      = (ImageView) findViewById(R.id.imgProjectImage);
+            ImageView projImageIn = (ImageView) findViewById(R.id.imgProjectImage);
             projImageIn.setImageURI(fullPhotoUri);
         }
     }
