@@ -56,4 +56,9 @@
     <string name="CreateNewProjectBrowse">Browse...</string>
     <string name="CreateNewProjectGoBack">Go back</string>
     <string name="CreateNewProjectConfirm">Confirm</string>
+    <string name="projectImageDescription">Project\'s Image</string>
+    <string name="Edit">Edit</string>
+    <string name="View">View</string>
+    <string name="SeeEstimates">See Estimates</string>
+    <string name="Delete">Delete</string>
 </resources>

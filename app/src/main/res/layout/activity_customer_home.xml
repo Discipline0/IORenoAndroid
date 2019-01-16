@@ -19,4 +19,9 @@
         android:background="@color/DarkerBlue"
         android:onClick="onCreateNewProject"
         android:text="@string/New_Project" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerViewProjects"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 </LinearLayout>

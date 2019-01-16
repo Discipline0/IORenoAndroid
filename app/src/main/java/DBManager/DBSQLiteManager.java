@@ -69,6 +69,7 @@ public class DBSQLiteManager extends SQLiteOpenHelper {
                 list.add(cus);
             } while (c.moveToNext());
         }
+        db.close();
         return list;
     }
 
@@ -115,7 +116,7 @@ public class DBSQLiteManager extends SQLiteOpenHelper {
         vals.put(Contractor.CONTRACTOR_COL_APPROVED, c.getApproved());
 
         db.insert(Contractor.CONTRACTOR_TABLE_NAME, null, vals);
-
+        db.close();
     }
 
     public ArrayList<Contractor> getContractorList()
@@ -143,6 +144,7 @@ public class DBSQLiteManager extends SQLiteOpenHelper {
                 list.add(con);
             } while (c.moveToNext());
         }
+        db.close();
         return list;
     }
 
@@ -172,10 +174,10 @@ public class DBSQLiteManager extends SQLiteOpenHelper {
             Project.PROJECT_COL_TYPE + " TEXT," +
             Project.PROJECT_COL_BUDGET + " REAL," +
             Project.PROJECT_COL_TITLE + " TEXT," +
-            Project.PROJECT_COL_ADDRESS + "TEXT," +
-            Project.PROJECT_COL_CITY + "TEXT," +
-            Project.PROJECT_COL_IMAGE + "BLOB," +
-            Project.PROJECT_COL_DATE_POSTED + "TEXT" +
+            Project.PROJECT_COL_ADDRESS + " TEXT," +
+            Project.PROJECT_COL_CITY + " TEXT," +
+            Project.PROJECT_COL_IMAGE + " BLOB," +
+            Project.PROJECT_COL_DATE_POSTED + " TEXT" +
             ")";
 
     public void addProject(Project p){
@@ -193,7 +195,7 @@ public class DBSQLiteManager extends SQLiteOpenHelper {
         vals.put(Project.PROJECT_COL_DATE_POSTED, p.getDatePosted());
 
         db.insert(Project.PROJECT_TABLE_NAME, null, vals);
-
+        db.close();
     }
 
     public ArrayList<Project> getProjectList()
@@ -215,15 +217,60 @@ public class DBSQLiteManager extends SQLiteOpenHelper {
                 proj.setProjectBudget(c.getDouble(c.getColumnIndex(Project.PROJECT_COL_BUDGET)));
                 proj.setTitle(c.getString(c.getColumnIndex(Project.PROJECT_COL_TITLE)));
                 proj.setCity(c.getString(c.getColumnIndex(Project.PROJECT_COL_CITY)));
-                //NOT SURE WITH THE BLOBS AND SHIT
                 proj.setImage(c.getBlob(c.getColumnIndex(Project.PROJECT_COL_IMAGE)));
                 proj.setDatePosted(c.getString(c.getColumnIndex(Project.PROJECT_COL_DATE_POSTED)));
 
                 list.add(proj);
             } while (c.moveToNext());
         }
+
+        db.close();
         return list;
     }
+
+    public ArrayList<Project> getProjectListForCustomerEmail(String email)
+    {
+        ArrayList<Project> list = new ArrayList<Project>();
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        String GET_LIST = "SELECT * FROM " + Project.PROJECT_TABLE_NAME + " WHERE "
+                + Project.PROJECT_COL_CUST_EMAIL + " = '"+email + "';";
+        Cursor c = db.rawQuery(GET_LIST,null);
+
+        if (c.moveToFirst())
+        {
+            do {
+                Project proj = new Project();
+                proj.setProjectID(c.getInt(c.getColumnIndex(Project.PROJECT_COL_ID)));
+                proj.setCustomerEmail(c.getString(c.getColumnIndex(Project.PROJECT_COL_CUST_EMAIL)));
+                proj.setProjectDescription(c.getString(c.getColumnIndex(Project.PROJECT_COL_DESCRIPTION)));
+                proj.setProjectType(c.getString(c.getColumnIndex(Project.PROJECT_COL_TYPE)));
+                proj.setProjectBudget(c.getDouble(c.getColumnIndex(Project.PROJECT_COL_BUDGET)));
+                proj.setTitle(c.getString(c.getColumnIndex(Project.PROJECT_COL_TITLE)));
+                proj.setCity(c.getString(c.getColumnIndex(Project.PROJECT_COL_CITY)));
+                proj.setImage(c.getBlob(c.getColumnIndex(Project.PROJECT_COL_IMAGE)));
+                proj.setDatePosted(c.getString(c.getColumnIndex(Project.PROJECT_COL_DATE_POSTED)));
+
+                list.add(proj);
+            } while (c.moveToNext());
+        }
+        db.close();
+        return list;
+    }
+
+    public boolean deleteProject(Project project)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        boolean isDeleted = db.delete(
+                Project.PROJECT_TABLE_NAME,
+                Project.PROJECT_COL_ID + "=" + project.getProjectID(),
+                null) > 0;
+        db.close();
+
+        return isDeleted;
+    }
+
+
     //Proposal*************************************************************************************
     public static final String CREATE_PROPOSAL_QUERY = "CREATE TABLE " + Proposal.PROPOSAL_TABLE_NAME + " (" +
             Proposal.PROPOSAL_ID+ " INTEGER PRIMARY KEY AUTOINCREMENT," +
@@ -243,6 +290,7 @@ public class DBSQLiteManager extends SQLiteOpenHelper {
         vals.put(Proposal.PROPOSAL_APPROVED, p.getProposalApproved());
 
         db.insert(Proposal.PROPOSAL_TABLE_NAME, null, vals);
+        db.close();
     }
 
     public ArrayList<Proposal> getProposalList()
@@ -266,6 +314,7 @@ public class DBSQLiteManager extends SQLiteOpenHelper {
                 list.add(prop);
             } while (c.moveToNext());
         }
+        db.close();
         return list;
     }
 
@@ -292,6 +341,7 @@ public class DBSQLiteManager extends SQLiteOpenHelper {
         vals.put(Payment.PAYMENT_DATE, p.getPaymentDate());
 
         db.insert(Payment.PAYMENT_TABLE_NAME, null, vals);
+        db.close();
     }
 
     public ArrayList<Payment> getPaymentList()
@@ -316,6 +366,7 @@ public class DBSQLiteManager extends SQLiteOpenHelper {
                 list.add(pay);
             } while (c.moveToNext());
         }
+        db.close();
         return list;
     }
 
@@ -355,9 +406,6 @@ public class DBSQLiteManager extends SQLiteOpenHelper {
         db.execSQL(CREATE_PROJECT_TABLE_QUERY);
         db.execSQL(CREATE_PROPOSAL_QUERY);
         db.execSQL(CREATE_PAYMENT_QUERY);
-
-
-
     }
 
     @Override
