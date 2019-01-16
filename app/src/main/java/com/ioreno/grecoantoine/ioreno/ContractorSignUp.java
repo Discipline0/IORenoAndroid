@@ -87,7 +87,10 @@ public class ContractorSignUp extends AppCompatActivity {
         }
 
         if(error.equals("")){
-            Contractor c = new Contractor(conCOName, conPhone, conEmail, conContactName, conPassword);
+            String emailPassword = conEmail + conPassword;
+            String hashPassword = Sha1Hashing.sha1(emailPassword);
+
+            Contractor c = new Contractor(conCOName, conPhone, conEmail, conContactName, hashPassword);
             db.addContractor(c);
             Intent i = new Intent(this, MainActivity.class);
             startActivity(i);
