@@ -1,6 +1,8 @@
 package com.ioreno.grecoantoine.ioreno;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.support.v7.widget.RecyclerView;
@@ -114,25 +116,46 @@ public class ProjectAdapter extends RecyclerView.Adapter<ProjectAdapter.ViewHold
             @Override
             public void onClick(View v)
             {
-                if(manager.deleteProject(project))
-                {
-                    Toast.makeText(
-                        v.getContext(),
-                        project.getTitle() + " was successfully deleted.",
-                        Toast.LENGTH_LONG).show();
-                }
-                else
-                {
-                    Toast.makeText(
-                        v.getContext(),
-                        "An error occurred while trying to delete: " + project.getTitle(),
-                        Toast.LENGTH_LONG).show();
-                }
+                final Context context = v.getContext();
 
-                // Refresh the CustomerHome page
-                CustomerHome customerHome = (CustomerHome) v.getContext();
-                customerHome.finish();
-                customerHome.startActivity(customerHome.getIntent());
+                DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        switch (which){
+                            case DialogInterface.BUTTON_POSITIVE:
+                                // The Yes button clicked
+                                if(manager.deleteProject(project))
+                                {
+                                    Toast.makeText(
+                                        context,
+                                        project.getTitle() + " was successfully deleted.",
+                                        Toast.LENGTH_LONG).show();
+                                }
+                                else
+                                {
+                                    Toast.makeText(
+                                        context,
+                                        "An error occurred while trying to delete: " + project.getTitle(),
+                                        Toast.LENGTH_LONG).show();
+                                }
+
+                                // Refresh the CustomerHome page
+                                CustomerHome customerHome = (CustomerHome) context;
+                                customerHome.finish();
+                                customerHome.startActivity(customerHome.getIntent());
+                                break;
+
+                            case DialogInterface.BUTTON_NEGATIVE:
+                                // The No button clicked
+                                break;
+                        }
+                    }
+                };
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
+                builder.setMessage("Are you sure?\n\nOnce you delete your project you cannot retrieve it ever again.")
+                       .setPositiveButton("Yes", dialogClickListener)
+                       .setNegativeButton("No", dialogClickListener).show();
             }
         });
     }
