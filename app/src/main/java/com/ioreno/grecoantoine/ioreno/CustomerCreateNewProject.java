@@ -1,9 +1,13 @@
 package com.ioreno.grecoantoine.ioreno;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.media.Image;
+import android.net.Uri;
+import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -36,6 +40,7 @@ public class CustomerCreateNewProject extends AppCompatActivity {
 
     private DrawerLayout dl;
     private ActionBarDrawerToggle t;
+    public static final int IMAGE_PICKER = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,9 +53,24 @@ public class CustomerCreateNewProject extends AppCompatActivity {
 
     }
 
+
+    public void onGalleryPicker(View v){
+        Intent getImageIntent = new Intent(Intent.ACTION_GET_CONTENT);
+        getImageIntent.setType("image/*");
+        startActivityForResult(getImageIntent , IMAGE_PICKER );
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode== IMAGE_PICKER  && resultCode == RESULT_OK) {
+            Uri fullPhotoUri = data.getData();
+            ImageView projImageIn = (ImageView) findViewById(R.id.imgProjectImage);
+            projImageIn.setImageURI(fullPhotoUri);
+        }
+    }
+
+
     public void onGoBack(View v){
-   //     Intent i = new Intent(this, CustomerHome.class);
-   //     startActivity(i);
         super.finish();
     }
     public void onConfirm(View v){
@@ -94,7 +114,7 @@ public class CustomerCreateNewProject extends AppCompatActivity {
             Project p = new Project(Customer.currUser, projDescripion, projType, projBudget, projTitle, projAddress, projCity, imageInByte);
             db.addProject(p);
             Toast toast = Toast.makeText(getApplicationContext(),
-                    "Project: "+p.getTitle()+" has sucessfully been created!",
+                    "Project: "+p.getTitle()+" has successfully been created!",
                     Toast.LENGTH_SHORT);
             Intent i = new Intent(this, CustomerHome.class);
             startActivity(i);

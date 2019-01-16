@@ -77,7 +77,7 @@ public class ContractorSignUp extends AppCompatActivity {
         }
         else{
             if(!conPassword.matches("^(?=.*\\d)(?=.*[a-zA-Z]).{8,}$")){
-                error+="\nPassword must contain at least 1 letter and 1 number and be 8 characters long";
+                error+="\nPassword must contain at least a letter, a number and be 8 characters long";
             }
             else{
                 if(conPassword.length() > 8){
