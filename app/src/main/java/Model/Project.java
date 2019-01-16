@@ -1,9 +1,10 @@
 package Model;
 
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class Project {
+public class Project implements Serializable {
     private int    projectID;
     private String customerEmail;
     private String projectDescription;
@@ -12,7 +13,6 @@ public class Project {
     private String title;
     private String address;
     private String city;
-    //i think this is the data type for image
     private byte[] image;
     private String datePosted;
 

@@ -3,6 +3,7 @@ package com.ioreno.grecoantoine.ioreno;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.support.v7.widget.RecyclerView;
@@ -86,7 +87,10 @@ public class ProjectAdapter extends RecyclerView.Adapter<ProjectAdapter.ViewHold
             @Override
             public void onClick(View v)
             {
+                Intent intent = new Intent(v.getContext(), ViewProjectActivity.class);
+                intent.putExtra("project", project);
 
+                v.getContext().startActivity(intent);
             }
         });
 
