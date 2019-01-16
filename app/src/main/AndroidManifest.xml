@@ -9,6 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".ViewProjectActivity"></activity>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -20,8 +21,8 @@
         <activity android:name=".ContractorSignUp" />
         <activity android:name=".CustomerHome" />
         <activity android:name=".ContractorHome" />
-        <activity android:name=".customer_project_item"></activity>
-        <activity android:name=".CustomerCreateNewProject"></activity>
+        <activity android:name=".customer_project_item" />
+        <activity android:name=".CustomerCreateNewProject" />
     </application>
 
 </manifest>

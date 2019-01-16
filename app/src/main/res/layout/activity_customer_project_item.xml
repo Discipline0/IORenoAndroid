@@ -52,7 +52,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
                 android:layout_weight="1"
-                android:background="@color/colorPrimary"
+                android:backgroundTint="@color/colorPrimary"
                 android:text="@string/View"
                 android:textColor="@android:color/background_light" />
 
@@ -63,7 +63,7 @@
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
                 android:layout_weight="1"
-                android:background="@color/DarkerBlue"
+                android:backgroundTint="@color/DarkerBlue"
                 android:text="@string/SeeEstimates"
                 android:textColor="@android:color/background_light" />
 
@@ -73,7 +73,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="5dp"
                 android:layout_weight="1"
-                android:background="@color/Yellow"
+                android:backgroundTint="@color/Yellow"
                 android:text="@string/Edit"
                 android:textColor="@android:color/background_dark" />
         </LinearLayout>
@@ -85,7 +85,7 @@
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
             android:layout_marginBottom="10dp"
-            android:background="@color/Red"
+            android:backgroundTint="@color/Red"
             android:text="@string/Delete"
             android:textColor="@android:color/background_light" />
     </LinearLayout>
