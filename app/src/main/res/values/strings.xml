@@ -48,12 +48,12 @@
     <string name="New_Project">Create a new project</string>
     <string name="createNewProjectTitle">Project Title:</string>
     <string name="CreateNewProjectImage">Project Description:</string>
-    <string name="CreateNewProjectType">Project Type:</string>
+    <string name="CreateNewProjectType">Project Type: </string>
     <string name="CreateNewProjectAddress">Address:</string>
     <string name="CreateNewProjectCity">City:</string>
     <string name="CreateNewProjectBudget">Project Budget:</string>
     <string name="CreateNewProjectImg">Image:</string>
-    <string name="CreateNewProjectBrowse">Browse...</string>
+    <string name="CreateNewProjectBrowse">Browse…</string>
     <string name="CreateNewProjectGoBack">Go back</string>
     <string name="CreateNewProjectConfirm">Confirm</string>
     <string name="projectImageDescription">Project\'s Image</string>
@@ -61,4 +61,6 @@
     <string name="View">View</string>
     <string name="SeeEstimates">See Estimates</string>
     <string name="Delete">Delete</string>
+    <string name="YourProject">Your Project</string>
+    <string name="Budget">Budget: </string>
 </resources>
