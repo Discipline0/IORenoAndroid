@@ -31,7 +31,6 @@ public class CustomerHome extends AppCompatActivity {
 
         manager = new DBSQLiteManager(this);
 
-        // Change the String value to the logged in user once it is implemented ****************
         products = manager.getProjectListForCustomerEmail(Customer.currUser);
 
         adapter = new ProjectAdapter(products);

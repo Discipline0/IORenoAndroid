@@ -39,7 +39,7 @@ public class ProjectAdapter extends RecyclerView.Adapter<ProjectAdapter.ViewHold
             super(itemView);
             txtTitle = itemView.findViewById(R.id.txtProjectTitle);
             txtPrice = itemView.findViewById(R.id.txtProjectPrice);
-            projectImage = itemView.findViewById(R.id.imageProjectPic);
+            projectImage = itemView.findViewById(R.id.imgProjectPic);
             btnView = itemView.findViewById(R.id.btnView);
             btnSeeEstimates = itemView.findViewById(R.id.btnSeeEstimates);
             btnEdit = itemView.findViewById(R.id.btnEdit);

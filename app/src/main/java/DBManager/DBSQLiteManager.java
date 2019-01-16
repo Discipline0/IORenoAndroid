@@ -217,7 +217,6 @@ public class DBSQLiteManager extends SQLiteOpenHelper {
                 proj.setProjectBudget(c.getDouble(c.getColumnIndex(Project.PROJECT_COL_BUDGET)));
                 proj.setTitle(c.getString(c.getColumnIndex(Project.PROJECT_COL_TITLE)));
                 proj.setCity(c.getString(c.getColumnIndex(Project.PROJECT_COL_CITY)));
-                //NOT SURE WITH THE BLOBS AND SHIT
                 proj.setImage(c.getBlob(c.getColumnIndex(Project.PROJECT_COL_IMAGE)));
                 proj.setDatePosted(c.getString(c.getColumnIndex(Project.PROJECT_COL_DATE_POSTED)));
 
@@ -249,7 +248,6 @@ public class DBSQLiteManager extends SQLiteOpenHelper {
                 proj.setProjectBudget(c.getDouble(c.getColumnIndex(Project.PROJECT_COL_BUDGET)));
                 proj.setTitle(c.getString(c.getColumnIndex(Project.PROJECT_COL_TITLE)));
                 proj.setCity(c.getString(c.getColumnIndex(Project.PROJECT_COL_CITY)));
-                //NOT SURE WITH THE BLOBS AND SHIT
                 proj.setImage(c.getBlob(c.getColumnIndex(Project.PROJECT_COL_IMAGE)));
                 proj.setDatePosted(c.getString(c.getColumnIndex(Project.PROJECT_COL_DATE_POSTED)));
 
