@@ -8,9 +8,6 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import java.math.BigInteger;
-import java.security.MessageDigest;
-
 import DBManager.DBSQLiteManager;
 import Model.Customer;
 
