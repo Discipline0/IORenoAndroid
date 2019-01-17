@@ -198,6 +198,26 @@ public class DBSQLiteManager extends SQLiteOpenHelper {
         db.close();
     }
 
+    public void editProject(Project p){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues vals = new ContentValues();
+
+        vals.put(Project.PROJECT_COL_CUST_EMAIL, p.getCustomerEmail());
+        vals.put(Project.PROJECT_COL_DESCRIPTION, p.getProjectDescription());
+        vals.put(Project.PROJECT_COL_TYPE, p.getProjectType());
+        vals.put(Project.PROJECT_COL_BUDGET, p.getProjectBudget());
+        vals.put(Project.PROJECT_COL_TITLE, p.getTitle());
+        vals.put(Project.PROJECT_COL_ADDRESS, p.getAddress());
+        vals.put(Project.PROJECT_COL_CITY, p.getCity());
+        vals.put(Project.PROJECT_COL_IMAGE, p.getImage());
+        vals.put(Project.PROJECT_COL_DATE_POSTED, p.getDatePosted());
+
+        db.update(Project.PROJECT_TABLE_NAME, vals, Project.PROJECT_COL_ID+"="+p.getProjectID(), null);
+        db.close();
+
+
+    }
+
     public ArrayList<Project> getProjectList()
     {
         ArrayList<Project> list = new ArrayList<Project>();

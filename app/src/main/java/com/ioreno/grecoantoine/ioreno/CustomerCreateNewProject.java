@@ -17,6 +17,8 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.InputType;
+import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
@@ -42,12 +44,14 @@ public class CustomerCreateNewProject extends AppCompatActivity {
     private ActionBarDrawerToggle t;
     public static final int IMAGE_PICKER = 1;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customer_create_new_project);
 
-
+        EditText projBudgetIn      = (EditText) findViewById(R.id.numCreateNewProjectBudget);
+        projBudgetIn.setInputType(InputType.TYPE_CLASS_NUMBER);
  /*       NavigationView nv = findViewById(R.id.nav_view);
         nv.setNavigationItemSelectedListener(this);*/
 
@@ -82,11 +86,12 @@ public class CustomerCreateNewProject extends AppCompatActivity {
         EditText projBudgetIn      = (EditText) findViewById(R.id.numCreateNewProjectBudget);
         ImageView projImageIn      = (ImageView) findViewById(R.id.imgProjectImage);
 
+
         TextView projErrorIn       = (TextView)findViewById(R.id.txtCreateNewProjectError);
         projErrorIn.setSingleLine(false);
 
         String projTitle      = projTitleIn.getText().toString().trim();
-        String projDescripion = projDescriptionIn.getText().toString().trim();
+        String projDescription = projDescriptionIn.getText().toString().trim();
         String projType       = projTypeIn.getSelectedItem().toString();
         String projAddress    = projAddressIn.getText().toString().trim();
         String projCity       = projCityIn.getText().toString().trim();
@@ -97,21 +102,40 @@ public class CustomerCreateNewProject extends AppCompatActivity {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
         byte[] imageInByte = baos.toByteArray();
-        //save your stuff);
+        //save your stuff
 
         DBSQLiteManager db = new DBSQLiteManager(this);
 
         String error = "";
 
+        if (TextUtils.isEmpty(projTitle)) {
+            error+="\nTitle can't be empty";
+
+        }
+        else if(projTitle.length() <= 3){
+            error+="\nTitle must be at least 3 characters";
+        }
+
+        if(TextUtils.isEmpty(projDescription)){
+            error+="\nPlease add a Description";
+        }
+
+        if(TextUtils.isEmpty(projAddress)){
+            error+="\nAddress can't be empty";
+        }
+
+        if(TextUtils.isEmpty(projCity)){
+            error+="\nCity can't be empty";
+        }
         try{
-            projBudget = Integer.parseInt(projBudgetIn.getText().toString().trim());
+            projBudget = Double.parseDouble(projBudgetIn.getText().toString().trim());
         }
         catch(Exception e){
-            error+= "Invalid Budget";
+            error+= "\nInvalid Budget";
         }
 
         if(error.equals("")){
-            Project p = new Project(Customer.currUser, projDescripion, projType, projBudget, projTitle, projAddress, projCity, imageInByte);
+            Project p = new Project(Customer.currUser, projDescription, projType, projBudget, projTitle, projAddress, projCity, imageInByte);
             db.addProject(p);
             Toast toast = Toast.makeText(getApplicationContext(),
                     "Project: "+p.getTitle()+" has successfully been created!",
