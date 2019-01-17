@@ -5,7 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ViewProjectActivity">
-
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -30,14 +32,16 @@
             android:adjustViewBounds="true"
             android:contentDescription="@string/projectImageDescription"
             android:scaleType="fitCenter"
+            android:layout_marginBottom="5dp"
             app:srcCompat="@drawable/placeholder" />
 
         <TextView
             android:id="@+id/txtViewProjectProjectTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
             android:text="TextView"
-            android:textSize="18sp"
+            android:textSize="24sp"
             android:textStyle="bold" />
 
         <LinearLayout
@@ -49,8 +53,10 @@
                 android:id="@+id/txtViewProjectProjectType"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
                 android:layout_weight="0"
                 android:text="@string/CreateNewProjectType"
+                android:textSize="18sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -59,6 +65,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="TextView"
+                android:textSize="18sp"
                 android:textStyle="bold" />
         </LinearLayout>
 
@@ -71,22 +78,27 @@
                 android:id="@+id/txtViewProjectProjectBudget"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
                 android:layout_weight="0"
-                android:text="@string/Budget" />
+                android:text="@string/Budget"
+                android:textSize="18sp" />
 
             <TextView
                 android:id="@+id/txtViewProjectProjectBudgetValue"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="TextView" />
+                android:text="TextView"
+                android:textSize="18sp" />
         </LinearLayout>
 
         <TextView
             android:id="@+id/txtViewProjectProjectDescription"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="TextView" />
+            android:layout_marginBottom="5dp"
+            android:text="TextView"
+            android:textSize="18sp" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -98,14 +110,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="0"
-                android:text="@string/CreateNewProjectAddress" />
+                android:text="@string/CreateNewProjectAddress"
+                android:textSize="18sp" />
 
             <TextView
                 android:id="@+id/txtViewProjectProjectAddressValue"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="TextView" />
+                android:text="TextView"
+                android:textSize="18sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -117,15 +131,18 @@
                 android:id="@+id/txtViewProjectProjectCity"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
                 android:layout_weight="0"
-                android:text="@string/CreateNewProjectCity" />
+                android:text="@string/CreateNewProjectCity"
+                android:textSize="18sp" />
 
             <TextView
                 android:id="@+id/txtViewProjectProjectCityValue"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="TextView" />
+                android:text="TextView"
+                android:textSize="18sp" />
         </LinearLayout>
 
         <Button
@@ -137,4 +154,5 @@
             android:onClick="btnGoBack_onClick"/>
 
     </LinearLayout>
+</ScrollView>
 </LinearLayout>
