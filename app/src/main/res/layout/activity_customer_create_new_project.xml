@@ -150,7 +150,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:ems="10"
-            android:inputType="number" />
+            android:inputType="numberDecimal" />
 
     </LinearLayout>
 
@@ -201,7 +201,7 @@
             android:layout_height="wrap_content"
             android:layout_marginRight="5dp"
             android:layout_weight="1"
-            android:background="@color/DarkerRed"
+            android:backgroundTint="@color/DarkerRed"
             android:onClick="onGoBack"
             android:text="@string/CreateNewProjectGoBack" />
 
@@ -211,7 +211,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
             android:layout_weight="1"
-            android:background="@color/Green"
+            android:backgroundTint="@color/Green"
             android:onClick="onConfirm"
             android:text="@string/CreateNewProjectConfirm" />
     </LinearLayout>
