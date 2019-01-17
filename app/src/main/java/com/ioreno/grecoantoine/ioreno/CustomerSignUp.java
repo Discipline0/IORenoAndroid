@@ -76,7 +76,10 @@ public class CustomerSignUp extends AppCompatActivity {
         }
 
         if(error.equals("")){
-            Customer c = new Customer(custName, custEmail, custPhone, custPassword);
+            String emailPassword = custEmail + custPassword;
+            String hashPassword = Sha1Hashing.sha1(emailPassword);
+
+            Customer c = new Customer(custName, custEmail, custPhone, hashPassword);
             db.addCustomer(c);
             Intent i = new Intent(this, MainActivity.class);
             startActivity(i);
@@ -84,8 +87,6 @@ public class CustomerSignUp extends AppCompatActivity {
         else{
             custErrorIn.setText(error);
         }
-
-
 
         error="";
 
