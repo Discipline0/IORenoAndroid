@@ -1,9 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".ContractorHome">
 
-</android.support.constraint.ConstraintLayout>
+    <TextView
+        android:id="@+id/txtConHomeProjectListings"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/ProjectListings"
+        android:textSize="30sp"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/btnConHomeSeeYourEstimates"
+        android:layout_width="247dp"
+        android:layout_height="wrap_content"
+        android:text="@string/SeeYourEstimates"/>
+
+    <TextView
+        android:id="@+id/txtConHomeFilterBy"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/FilterBy"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+    <com.ioreno.grecoantoine.ioreno.MultiSelectionSpinner
+        android:id="@+id/spinnerFilters"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="2dp"/>
+
+    <Button
+        android:id="@+id/btnConHomeSearch"
+        android:layout_width="218dp"
+        android:layout_height="wrap_content"
+        android:text="@string/Search"
+        android:layout_gravity="center"/>
+
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+</LinearLayout>
