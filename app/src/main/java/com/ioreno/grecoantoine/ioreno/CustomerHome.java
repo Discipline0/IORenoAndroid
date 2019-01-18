@@ -16,7 +16,7 @@ import Model.Project;
 
 public class CustomerHome extends AppCompatActivity {
 
-    private ArrayList<Project> products;
+    private ArrayList<Project> projects;
     private ProjectAdapter adapter;
     private DBSQLiteManager manager;
 
@@ -31,9 +31,10 @@ public class CustomerHome extends AppCompatActivity {
 
         manager = new DBSQLiteManager(this);
 
-        products = manager.getProjectListForCustomerEmail(Customer.currUser);
+        projects = manager.getProjectListForCustomerEmail(Customer.currUser);
 
-        adapter = new ProjectAdapter(products);
+
+        adapter = new ProjectAdapter(projects);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }

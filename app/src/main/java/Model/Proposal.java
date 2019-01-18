@@ -17,7 +17,7 @@ public class Proposal {
 
     public Proposal(){};
 
-    public Proposal(int proposalID, int contractorCONum, int projectID, double projectEstimate, int proposalApproved) {
+    public Proposal(int proposalID, int contractorCONum, int projectID, double projectEstimate) {
         this.proposalID = proposalID;
         this.contractorCONum = contractorCONum;
         this.projectID = projectID;
