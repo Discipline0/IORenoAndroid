@@ -135,7 +135,8 @@ public class CustomerCreateNewProject extends AppCompatActivity {
         }
 
         if(error.equals("")){
-            Project p = new Project(Customer.currUser, projDescription, projType, projBudget, projTitle, projAddress, projCity, imageInByte);
+            //id set 0, it will be updated when inserted in db
+            Project p = new Project(0, Customer.currUser, projDescription, projType, projBudget, projTitle, projAddress, projCity, imageInByte);
             db.addProject(p);
             Toast toast = Toast.makeText(getApplicationContext(),
                     "Project: "+p.getTitle()+" has successfully been created!",

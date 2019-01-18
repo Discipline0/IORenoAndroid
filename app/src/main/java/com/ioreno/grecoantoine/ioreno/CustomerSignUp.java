@@ -79,7 +79,8 @@ public class CustomerSignUp extends AppCompatActivity {
             String emailPassword = custEmail + custPassword;
             String hashPassword = Sha1Hashing.sha1(emailPassword);
 
-            Customer c = new Customer(custName, custEmail, custPhone, hashPassword);
+            //id set to 0, will be updated when inserted in DB
+            Customer c = new Customer(0, custName, custEmail, custPhone, hashPassword);
             db.addCustomer(c);
             Intent i = new Intent(this, MainActivity.class);
             startActivity(i);

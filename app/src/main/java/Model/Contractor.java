@@ -11,6 +11,7 @@ public class Contractor {
     private String  contractorContactName;
     private String  contractorPassword;
     private String  contractorDateRegistered;
+    //set to 0 for pending, 1 is approved, 1 is denied
     private int     approved;
 
 
@@ -31,15 +32,15 @@ public class Contractor {
 
     public Contractor(){};
 
-    public Contractor(String contractorCOName, String contractorPhone, String contractorEmail, String contractorContactName, String contractorPassword) {
-        this.contractorCONum = 0;
+    public Contractor(int contractorCONum, String contractorCOName, String contractorPhone, String contractorEmail, String contractorContactName, String contractorPassword) {
+        this.contractorCONum = contractorCONum;
         this.contractorCOName = contractorCOName;
         this.contractorPhone = contractorPhone;
         this.contractorEmail = contractorEmail;
         this.contractorContactName = contractorContactName;
         this.contractorPassword = contractorPassword;
         this.contractorDateRegistered = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
-        //set to 0 for false, not approved by default
+        //set to 0 for pending, 1 is approved, 1 is denied
         this.approved = 0;
     }
 
