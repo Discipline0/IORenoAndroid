@@ -66,33 +66,29 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         String editEmailLogin = editEmailLoginIn.getText().toString();
         String editPasswordLogin = editPasswordLoginIn.getText().toString();
+
+        String hashPassword = Sha1Hashing.sha1(editEmailLogin+editPasswordLogin);
+
         DBSQLiteManager db = new DBSQLiteManager(this);
 
-
-        if (db.checkForCustomer(editEmailLogin, editPasswordLogin))
+        if (db.checkForCustomer(editEmailLogin, hashPassword))
         {
-        //    User.setCurrUser(newUser.getUsername());
-        //    User.setIsLoggedIn(true);
-            Intent i = new Intent(this,CustomerHome.class);
             Customer.currUser = editEmailLogin;
-            //might wanna add an if statement to see if user if customer or contractor
-            Contractor.currUser = editEmailLogin;
 
+            Intent i = new Intent(this,CustomerHome.class);
             startActivity(i);
 
         }
-        else if(db.checkForContractor(editEmailLogin, editPasswordLogin)){
+        else if(db.checkForContractor(editEmailLogin, hashPassword)){
+            Contractor.currUser = editEmailLogin;
+
             Intent i = new Intent(this, ContractorHome.class);
             startActivity(i);
-
         }
         else
         {
             txtLoginError.setText("Invalid Username or Password");
         }
-
-
-
     }
 
 
@@ -101,7 +97,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         if(t.onOptionsItemSelected(item))
             return true;
-
 
         return super.onOptionsItemSelected(item);
     }
@@ -143,8 +138,4 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         ft.replace(R.id.frameLay, fg );
         ft.commit();
     }
-
-
-
-
 }

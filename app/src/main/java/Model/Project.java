@@ -45,6 +45,19 @@ public Project(){};
         this.datePosted = new SimpleDateFormat("yyyy-MM-dd:mm:ss").format(new Date());
     }
 
+    public Project(int projectID, String customerEmail, String projectDescription, String projectType, double projectBudget, String title, String address, String city, byte[] image) {
+        this.projectID = projectID;
+        this.customerEmail = customerEmail;
+        this.projectDescription = projectDescription;
+        this.projectType = projectType;
+        this.projectBudget = projectBudget;
+        this.title = title;
+        this.address = address;
+        this.city = city;
+        this.image = image;
+        this.datePosted = new SimpleDateFormat("yyyy-MM-dd:mm:ss").format(new Date());
+    }
+
     public int getProjectID() {
         return projectID;
     }
