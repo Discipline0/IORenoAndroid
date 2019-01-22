@@ -11,7 +11,7 @@ public class Contractor {
     private String  contractorContactName;
     private String  contractorPassword;
     private String  contractorDateRegistered;
-    //set to 0 for pending, 1 is approved, 1 is denied
+    //set 0 for pending, 1 is approved, 2 is denied
     private int     approved;
 
 
@@ -40,7 +40,7 @@ public class Contractor {
         this.contractorContactName = contractorContactName;
         this.contractorPassword = contractorPassword;
         this.contractorDateRegistered = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
-        //set to 0 for pending, 1 is approved, 1 is denied
+        //set 0 for pending, 1 is approved, 2 is denied
         this.approved = 0;
     }
 

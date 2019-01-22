@@ -85,6 +85,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             Intent i = new Intent(this, ContractorHome.class);
             startActivity(i);
         }
+        //hardcore admin :)
+        else if(editEmailLogin.equals("admin") && editPasswordLogin.equals("admin")){
+            Intent i = new Intent(this, AdminHome.class);
+            startActivity(i);
+        }
         else
         {
             txtLoginError.setText("Invalid Username or Password");
