@@ -81,10 +81,10 @@ public class ProjectContractorHomeAdapter extends RecyclerView.Adapter<ProjectCo
             @Override
             public void onClick(View v)
             {
-//                Intent intent = new Intent(v.getContext(), ViewProjectActivity.class);
-//                intent.putExtra("project", project);
+                Intent intent = new Intent(v.getContext(), ContractorReadMoreActivity.class);
+                intent.putExtra("project", project);
 
-//                v.getContext().startActivity(intent);
+                v.getContext().startActivity(intent);
             }
         });
     }
