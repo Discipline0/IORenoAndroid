@@ -90,7 +90,8 @@ public class ContractorSignUp extends AppCompatActivity {
             String emailPassword = conEmail + conPassword;
             String hashPassword = Sha1Hashing.sha1(emailPassword);
 
-            Contractor c = new Contractor(conCOName, conPhone, conEmail, conContactName, hashPassword);
+            //contractorCONum set 0, will be updated when inserted in database
+            Contractor c = new Contractor(0, conCOName, conPhone, conEmail, conContactName, hashPassword);
             db.addContractor(c);
             Intent i = new Intent(this, MainActivity.class);
             startActivity(i);

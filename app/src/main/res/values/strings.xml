@@ -17,6 +17,11 @@
         <item>Other</item>
     </string-array>
 
+    <string-array name="time_arrays">
+        <item>All-Time</item>
+        <item>Last 7 Days</item>
+    </string-array>
+
     <string name="nav_open">Nav Open</string>
     <string name="nav_close">Nav Close</string>
 
@@ -72,4 +77,7 @@
     <string name="MakeEstimate">Make Estimate</string>
     <string name="DollarSign">$</string>
     <string name="Submit">Submit</string>
+    <string name="Print">Print</string>
+    <string name="Customer">Customer</string>
+    <string name="Contractor">Contractor</string>
 </resources>

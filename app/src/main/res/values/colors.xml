@@ -13,4 +13,6 @@
     <color name="Yellow">#ffc705</color>
     <color name="DarkerRed">#E43748</color>
     <color name="Green">#009900</color>
+    <color name="LegendCustomer">#FF0055</color>
+    <color name="LegendContractor">#03C0FF</color>"
 </resources>
