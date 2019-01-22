@@ -75,7 +75,7 @@ public class ProjectContractorHomeAdapter extends RecyclerView.Adapter<ProjectCo
         Bitmap bmp = BitmapFactory.decodeByteArray(project.getImage(), 0, project.getImage().length);
         viewHolder.projectImage.setImageBitmap(bmp);
 
-        // Read Button --------------------------------------------------------------------------
+        // Read More Button --------------------------------------------------------------------
         viewHolder.btnReadMore.setOnClickListener(new View.OnClickListener()
         {
             @Override

@@ -17,6 +17,7 @@
             android:layout_height="200dp"
             android:layout_gravity="center|top"
             android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
             android:adjustViewBounds="true"
             android:contentDescription="@string/projectImageDescription"
             android:scaleType="fitCenter"
@@ -26,6 +27,7 @@
             android:id="@+id/txtConHomeProjectTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
             android:text="TextView"
             android:textSize="24sp"
             android:textStyle="bold" />
@@ -34,18 +36,22 @@
             android:id="@+id/txtConHomeProjectDescription"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
             android:text="TextView" />
 
         <TextView
             android:id="@+id/txtConHomeProjectBudget"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
             android:text="TextView" />
 
         <Button
             android:id="@+id/btnConHomeReadMore"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/ReadMore" />
+            android:backgroundTint="@color/DarkerBlue"
+            android:text="@string/ReadMore"
+            android:textColor="@android:color/background_light" />
     </LinearLayout>
 </LinearLayout>
