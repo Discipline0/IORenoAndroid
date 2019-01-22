@@ -5,7 +5,7 @@ public class Proposal {
     private int    contractorCONum;
     private int    projectID;
     private double projectEstimate;
-    private int    proposalApproved;
+    private int    proposalApproved; // 0 => Denied, 1 => Accepted, 2 => Pending
 
     public static final String PROPOSAL_TABLE_NAME ="Proposal";
 
@@ -17,13 +17,13 @@ public class Proposal {
 
     public Proposal(){};
 
-    public Proposal(int proposalID, int contractorCONum, int projectID, double projectEstimate, int proposalApproved) {
+    public Proposal(int proposalID, int contractorCONum, int projectID, double projectEstimate) {
         this.proposalID = proposalID;
         this.contractorCONum = contractorCONum;
         this.projectID = projectID;
         this.projectEstimate = projectEstimate;
-        //not approved by default;
-        this.proposalApproved = 0;
+        // pending by default;
+        this.proposalApproved = 2;
     }
 
     public int getProposalID() {

@@ -12,6 +12,9 @@
         <activity android:name=".AdminHome"></activity>
         <activity android:name=".CustomerEditProject" />
         <activity android:name=".ViewProjectActivity" />
+        <activity android:name=".contractor_project_item"></activity>
+        <activity android:name=".ViewProjectActivity" />
+        <activity android:name=".CustomerEditProject"></activity>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

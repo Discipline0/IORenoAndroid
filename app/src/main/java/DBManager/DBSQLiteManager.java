@@ -280,6 +280,37 @@ public class DBSQLiteManager extends SQLiteOpenHelper {
         return list;
     }
 
+    public ArrayList<Project> getProjectListFromTypes(String types)
+    {
+        ArrayList<Project> list = new ArrayList<Project>();
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        String GET_LIST = "SELECT * FROM " + Project.PROJECT_TABLE_NAME + " WHERE "
+                + Project.PROJECT_COL_TYPE + " in ('"+ types + "');";
+        Cursor c = db.rawQuery(GET_LIST,null);
+
+        if (c.moveToFirst())
+        {
+            do {
+                Project proj = new Project();
+                proj.setProjectID(c.getInt(c.getColumnIndex(Project.PROJECT_COL_ID)));
+                proj.setCustomerEmail(c.getString(c.getColumnIndex(Project.PROJECT_COL_CUST_EMAIL)));
+                proj.setProjectDescription(c.getString(c.getColumnIndex(Project.PROJECT_COL_DESCRIPTION)));
+                proj.setProjectType(c.getString(c.getColumnIndex(Project.PROJECT_COL_TYPE)));
+                proj.setProjectBudget(c.getDouble(c.getColumnIndex(Project.PROJECT_COL_BUDGET)));
+                proj.setTitle(c.getString(c.getColumnIndex(Project.PROJECT_COL_TITLE)));
+                proj.setAddress(c.getString(c.getColumnIndex(Project.PROJECT_COL_ADDRESS)));
+                proj.setCity(c.getString(c.getColumnIndex(Project.PROJECT_COL_CITY)));
+                proj.setImage(c.getBlob(c.getColumnIndex(Project.PROJECT_COL_IMAGE)));
+                proj.setDatePosted(c.getString(c.getColumnIndex(Project.PROJECT_COL_DATE_POSTED)));
+
+                list.add(proj);
+            } while (c.moveToNext());
+        }
+        db.close();
+        return list;
+    }
+
     public boolean deleteProject(Project project)
     {
         SQLiteDatabase db = this.getWritableDatabase();
