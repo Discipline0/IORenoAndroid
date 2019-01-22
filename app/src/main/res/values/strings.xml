@@ -63,4 +63,9 @@
     <string name="Delete">Delete</string>
     <string name="YourProject">Your Project</string>
     <string name="Budget">Budget: </string>
+    <string name="ProjectListings">Project Listings</string>
+    <string name="SeeYourEstimates">See your Estimates</string>
+    <string name="FilterBy">Filter By:</string>
+    <string name="Search">Search</string>
+    <string name="ReadMore">Read More</string>
 </resources>
