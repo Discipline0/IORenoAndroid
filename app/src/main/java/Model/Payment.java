@@ -22,8 +22,8 @@ public class Payment {
 
     public Payment(){};
 
-    public Payment(int contractorCONum, double paymentAmount, int proposalID, int paymentStatus) {
-        this.paymentID = 0;
+    public Payment(int paymentID, int contractorCONum, double paymentAmount, int proposalID, int paymentStatus) {
+        this.paymentID = paymentID;
         this.contractorCONum = contractorCONum;
         this.paymentAmount = paymentAmount;
         this.proposalID = proposalID;
