@@ -73,6 +73,10 @@
     <string name="FilterBy">Filter By:</string>
     <string name="Search">Search</string>
     <string name="ReadMore">Read More</string>
+    <string name="ProjectDetails">Project Details</string>
+    <string name="MakeEstimate">Make Estimate</string>
+    <string name="DollarSign">$</string>
+    <string name="Submit">Submit</string>
     <string name="Print">Print</string>
     <string name="Customer">Customer</string>
     <string name="Contractor">Contractor</string>

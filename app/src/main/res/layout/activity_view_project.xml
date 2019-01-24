@@ -147,7 +147,7 @@
 
         <Button
             android:id="@+id/btnViewProjectGoBack"
-            android:layout_width="129dp"
+            android:layout_width="128dp"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/Red"
             android:text="@string/CreateNewProjectGoBack"
