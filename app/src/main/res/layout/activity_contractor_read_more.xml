@@ -154,6 +154,13 @@
                 android:textSize="22sp"
                 android:textStyle="bold" />
 
+            <TextView
+                android:id="@+id/txtReadMoreError"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textColor="#F00" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"

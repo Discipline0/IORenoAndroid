@@ -69,6 +69,7 @@ public class DBSQLiteManager extends SQLiteOpenHelper {
                 list.add(cus);
             } while (c.moveToNext());
         }
+        c.close();
         db.close();
         return list;
     }
@@ -144,8 +145,36 @@ public class DBSQLiteManager extends SQLiteOpenHelper {
                 list.add(con);
             } while (c.moveToNext());
         }
+        c.close();
         db.close();
         return list;
+    }
+
+    public Contractor getContractorFromEmail(String email)
+    {
+        Contractor contractor = new Contractor();
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        String GET_LIST = "SELECT * FROM " + Contractor.CONTRACTOR_TABLE_NAME+" WHERE " + Contractor.CONTRACTOR_COL_EMAIL
+                + " = '" + email + "';";
+        Cursor c = db.rawQuery(GET_LIST,null);
+
+        if (c.moveToFirst())
+        {
+            do {
+                contractor.setContractorCONum(c.getInt(c.getColumnIndex(Contractor.CONTRACTOR_COL_CO_NUM)));
+                contractor.setContractorCOName(c.getString(c.getColumnIndex(Contractor.CONTRACTOR_COL_CO_NAME)));
+                contractor.setContractorPhone(c.getString(c.getColumnIndex(Contractor.CONTRACTOR_COL_PHONE)));
+                contractor.setContractorEmail(c.getString(c.getColumnIndex(Contractor.CONTRACTOR_COL_EMAIL)));
+                contractor.setContractorContactName(c.getString(c.getColumnIndex(Contractor.CONTRACTOR_COL_CONTACT_NAME)));
+                contractor.setContractorPassword(c.getString(c.getColumnIndex(Contractor.CONTRACTOR_COL_PASSWORD)));
+                contractor.setContractorDateRegistered(c.getString(c.getColumnIndex(Contractor.CONTRACTOR_COL_DATE_REGISTERED)));
+                contractor.setApproved(c.getInt(c.getColumnIndex(Contractor.CONTRACTOR_COL_APPROVED)));
+            } while (c.moveToNext());
+        }
+        c.close();
+        db.close();
+        return contractor;
     }
 
     public boolean checkForContractor(String email, String password)
@@ -244,7 +273,7 @@ public class DBSQLiteManager extends SQLiteOpenHelper {
                 list.add(proj);
             } while (c.moveToNext());
         }
-
+        c.close();
         db.close();
         return list;
     }
@@ -276,6 +305,7 @@ public class DBSQLiteManager extends SQLiteOpenHelper {
                 list.add(proj);
             } while (c.moveToNext());
         }
+        c.close();
         db.close();
         return list;
     }
@@ -307,6 +337,7 @@ public class DBSQLiteManager extends SQLiteOpenHelper {
                 list.add(proj);
             } while (c.moveToNext());
         }
+        c.close();
         db.close();
         return list;
     }
@@ -346,6 +377,21 @@ public class DBSQLiteManager extends SQLiteOpenHelper {
         db.close();
     }
 
+    public void replaceProposal(Proposal p)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues vals = new ContentValues();
+
+        vals.put(Proposal.PROPOSAL_ID, p.getProposalID());
+        vals.put(Proposal.PROPOSAL_CONTRACTOR_CO_NUM, p.getContractorCONum());
+        vals.put(Proposal.PROPOSAL_PROJECT_ID, p.getProjectID());
+        vals.put(Proposal.PROPOSAL_PROJECT_ESTIMATE, p.getProjectEstimate());
+        vals.put(Proposal.PROPOSAL_APPROVED, p.getProposalApproved());
+
+        db.replace(Proposal.PROPOSAL_TABLE_NAME, null, vals);
+        db.close();
+    }
+
     public ArrayList<Proposal> getProposalList()
     {
         ArrayList<Proposal> list = new ArrayList<Proposal>();
@@ -367,11 +413,37 @@ public class DBSQLiteManager extends SQLiteOpenHelper {
                 list.add(prop);
             } while (c.moveToNext());
         }
+        c.close();
         db.close();
         return list;
     }
 
+    // Returns the proposal if it is found, otherwise returns null
+    public Proposal didContractorAlreadyMadeProposal(Contractor contractor, Project project)
+    {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Proposal proposal = null;
 
+        String GET_LIST = "SELECT * FROM " + Proposal.PROPOSAL_TABLE_NAME + " WHERE " + Proposal.PROPOSAL_CONTRACTOR_CO_NUM
+                + " = " + contractor.getContractorCONum() + " AND " + Proposal.PROPOSAL_PROJECT_ID
+                + " = " + project.getProjectID() + ";";
+        Cursor c = db.rawQuery(GET_LIST, null);
+
+        if (c.moveToFirst())
+        {
+            proposal = new Proposal();
+            proposal.setProposalID(c.getInt(c.getColumnIndex(Proposal.PROPOSAL_ID)));
+            proposal.setContractorCONum(c.getInt(c.getColumnIndex(Proposal.PROPOSAL_CONTRACTOR_CO_NUM)));
+            proposal.setProjectID(c.getInt(c.getColumnIndex(Proposal.PROPOSAL_PROJECT_ID)));
+            proposal.setProjectEstimate(c.getDouble(c.getColumnIndex(Proposal.PROPOSAL_PROJECT_ESTIMATE)));
+            proposal.setProposalApproved(c.getInt(c.getColumnIndex(Proposal.PROPOSAL_APPROVED)));
+        }
+
+        c.close();
+        db.close();
+
+        return proposal;
+    }
 
     //Payment**************************************************************************************
     public static final String CREATE_PAYMENT_QUERY = "CREATE TABLE " + Payment.PAYMENT_TABLE_NAME + " (" +
@@ -419,6 +491,7 @@ public class DBSQLiteManager extends SQLiteOpenHelper {
                 list.add(pay);
             } while (c.moveToNext());
         }
+        c.close();
         db.close();
         return list;
     }

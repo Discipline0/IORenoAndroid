@@ -9,10 +9,14 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.text.DecimalFormat;
 
+import DBManager.DBSQLiteManager;
+import Model.Contractor;
 import Model.Project;
+import Model.Proposal;
 
 public class ContractorReadMoreActivity extends AppCompatActivity {
 
@@ -48,6 +52,9 @@ public class ContractorReadMoreActivity extends AppCompatActivity {
     public void btnSubmit_onClick(View v)
     {
         EditText editBudget = findViewById(R.id.editReadMoreBudget);
+        TextView txtError = findViewById(R.id.txtReadMoreError);
+        txtError.setText("");
+
         double budget = 0;
         try
         {
@@ -59,11 +66,29 @@ public class ContractorReadMoreActivity extends AppCompatActivity {
 
         if (budget > 0)
         {
+            DBSQLiteManager manager = new DBSQLiteManager(this);
+            Contractor contractor = manager.getContractorFromEmail(Contractor.currUser);
 
+            Proposal alreadyExistingProposal = manager.didContractorAlreadyMadeProposal(contractor, project);
+
+            if(alreadyExistingProposal == null)
+            {
+                Proposal proposal = new Proposal(0, contractor.getContractorCONum(), project.getProjectID(), budget);
+                manager.addProposal(proposal);
+                Toast.makeText(getApplicationContext(), "The estimate has been submitted", Toast.LENGTH_LONG).show();
+            }
+            else
+            {
+                Proposal proposal = new Proposal(alreadyExistingProposal.getProposalID(), contractor.getContractorCONum(), project.getProjectID(), budget);
+                manager.replaceProposal(proposal);
+                Toast.makeText(getApplicationContext(), "The estimate has been updated", Toast.LENGTH_LONG).show();
+            }
+            
+            super.finish();
         }
         else
         {
-
+            txtError.setText("The Budget cannot be smaller than 0");
         }
     }
 
