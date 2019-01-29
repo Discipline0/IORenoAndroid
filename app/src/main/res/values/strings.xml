@@ -80,4 +80,9 @@
     <string name="Print">Print</string>
     <string name="Customer">Customer</string>
     <string name="Contractor">Contractor</string>
+    <string name="Select">Select</string>
+    <string name="SeeReviews">See Reviews</string>
+    <string name="YouHaveSelected">You have accepted this estimate for this project:</string>
+    <string name="NoEstimateAvailable">You don\'t have any estimates for this project yet!</string>
+    <string name="LeaveReview">Leave Review</string>
 </resources>
