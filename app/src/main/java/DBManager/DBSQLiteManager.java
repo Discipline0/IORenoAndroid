@@ -177,6 +177,33 @@ public class DBSQLiteManager extends SQLiteOpenHelper {
         return contractor;
     }
 
+    public Contractor getContractorFromCoNum(int coNum)
+    {
+        Contractor contractor = new Contractor();
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        String GET_LIST = "SELECT * FROM " + Contractor.CONTRACTOR_TABLE_NAME+" WHERE " + Contractor.CONTRACTOR_COL_CO_NUM
+                + " = " + coNum + ";";
+        Cursor c = db.rawQuery(GET_LIST,null);
+
+        if (c.moveToFirst())
+        {
+            do {
+                contractor.setContractorCONum(c.getInt(c.getColumnIndex(Contractor.CONTRACTOR_COL_CO_NUM)));
+                contractor.setContractorCOName(c.getString(c.getColumnIndex(Contractor.CONTRACTOR_COL_CO_NAME)));
+                contractor.setContractorPhone(c.getString(c.getColumnIndex(Contractor.CONTRACTOR_COL_PHONE)));
+                contractor.setContractorEmail(c.getString(c.getColumnIndex(Contractor.CONTRACTOR_COL_EMAIL)));
+                contractor.setContractorContactName(c.getString(c.getColumnIndex(Contractor.CONTRACTOR_COL_CONTACT_NAME)));
+                contractor.setContractorPassword(c.getString(c.getColumnIndex(Contractor.CONTRACTOR_COL_PASSWORD)));
+                contractor.setContractorDateRegistered(c.getString(c.getColumnIndex(Contractor.CONTRACTOR_COL_DATE_REGISTERED)));
+                contractor.setApproved(c.getInt(c.getColumnIndex(Contractor.CONTRACTOR_COL_APPROVED)));
+            } while (c.moveToNext());
+        }
+        c.close();
+        db.close();
+        return contractor;
+    }
+
     public boolean checkForContractor(String email, String password)
     {
         ArrayList<Contractor> list = getContractorList();
@@ -416,6 +443,50 @@ public class DBSQLiteManager extends SQLiteOpenHelper {
         c.close();
         db.close();
         return list;
+    }
+
+    public ArrayList<Proposal> getProposalListForProject(Project project)
+    {
+        ArrayList<Proposal> list = new ArrayList<Proposal>();
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        String GET_LIST = "SELECT * FROM " + Proposal.PROPOSAL_TABLE_NAME+" WHERE "
+                + Proposal.PROPOSAL_PROJECT_ID + " = " + project.getProjectID() + ";";
+        Cursor c = db.rawQuery(GET_LIST,null);
+
+        if (c.moveToFirst())
+        {
+            do {
+                Proposal prop = new Proposal();
+                prop.setProposalID(c.getInt(c.getColumnIndex(Proposal.PROPOSAL_ID)));
+                prop.setContractorCONum(c.getInt(c.getColumnIndex(Proposal.PROPOSAL_CONTRACTOR_CO_NUM)));
+                prop.setProjectID(c.getInt(c.getColumnIndex(Proposal.PROPOSAL_PROJECT_ID)));
+                prop.setProjectEstimate(c.getDouble(c.getColumnIndex(Proposal.PROPOSAL_PROJECT_ESTIMATE)));
+                prop.setProposalApproved(c.getInt(c.getColumnIndex(Proposal.PROPOSAL_APPROVED)));
+
+                list.add(prop);
+            } while (c.moveToNext());
+        }
+
+        c.close();
+        db.close();
+        return list;
+    }
+
+    public void acceptProposal(Proposal proposal)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues vals = new ContentValues();
+
+        vals.put(Proposal.PROPOSAL_APPROVED, 0);
+        db.update(Proposal.PROPOSAL_TABLE_NAME, vals, Proposal.PROPOSAL_PROJECT_ID + " = "
+                + proposal.getProjectID(), null);
+
+        vals.put(Proposal.PROPOSAL_APPROVED, 1);
+        db.update(Proposal.PROPOSAL_TABLE_NAME, vals, Proposal.PROPOSAL_ID + " = "
+                + proposal.getProposalID(), null);
+
+        db.close();
     }
 
     // Returns the proposal if it is found, otherwise returns null

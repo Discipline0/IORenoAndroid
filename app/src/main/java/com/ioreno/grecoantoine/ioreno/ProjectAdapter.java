@@ -100,7 +100,10 @@ public class ProjectAdapter extends RecyclerView.Adapter<ProjectAdapter.ViewHold
             @Override
             public void onClick(View v)
             {
-
+                final Context context = v.getContext();
+                Intent i = new Intent(context, CustomerSeeEstimatesActivity.class);
+                i.putExtra("project", project);
+                context.startActivity(i);
             }
         });
 

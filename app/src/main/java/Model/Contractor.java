@@ -1,9 +1,10 @@
 package Model;
 
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class Contractor {
+public class Contractor implements Serializable {
     private int     contractorCONum;
     private String  contractorCOName;
     private String  contractorPhone;

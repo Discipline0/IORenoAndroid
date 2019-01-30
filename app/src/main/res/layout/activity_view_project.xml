@@ -150,8 +150,9 @@
             android:layout_width="128dp"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/Red"
+            android:onClick="btnGoBack_onClick"
             android:text="@string/CreateNewProjectGoBack"
-            android:onClick="btnGoBack_onClick"/>
+            android:textColor="@android:color/background_light" />
 
     </LinearLayout>
 </ScrollView>

@@ -9,11 +9,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".AdminHome"></activity>
+        <activity android:name=".customerSeeEstimatesItemActivity"></activity>
+        <activity android:name=".CustomerSeeEstimatesActivity" />
+        <activity android:name=".AdminHome" />
         <activity android:name=".CustomerEditProject" />
         <activity android:name=".ViewProjectActivity" />
-        <activity android:name=".contractor_project_item"></activity>
-        <activity android:name=".ContractorReadMoreActivity"></activity>
+        <activity android:name=".contractor_project_item" />
+        <activity android:name=".ContractorReadMoreActivity" />
         <activity android:name=".ViewProjectActivity" />
         <activity android:name=".CustomerEditProject" />
         <activity android:name=".MainActivity">
