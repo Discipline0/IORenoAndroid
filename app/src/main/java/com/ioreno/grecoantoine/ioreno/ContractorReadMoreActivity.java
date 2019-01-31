@@ -13,10 +13,10 @@ import android.widget.Toast;
 
 import java.text.DecimalFormat;
 
-import DBManager.DBSQLiteManager;
-import Model.Contractor;
-import Model.Project;
-import Model.Proposal;
+import com.ioreno.grecoantoine.ioreno.DBManager.DBSQLiteManager;
+import com.ioreno.grecoantoine.ioreno.Model.Contractor;
+import com.ioreno.grecoantoine.ioreno.Model.Project;
+import com.ioreno.grecoantoine.ioreno.Model.Proposal;
 
 public class ContractorReadMoreActivity extends AppCompatActivity {
 

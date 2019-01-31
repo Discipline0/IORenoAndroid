@@ -1,5 +1,6 @@
 package com.ioreno.grecoantoine.ioreno;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DividerItemDecoration;
@@ -9,9 +10,8 @@ import android.view.View;
 
 import java.util.ArrayList;
 
-import DBManager.DBSQLiteManager;
-import Model.Customer;
-import Model.Project;
+import com.ioreno.grecoantoine.ioreno.DBManager.DBSQLiteManager;
+import com.ioreno.grecoantoine.ioreno.Model.Project;
 
 public class ContractorHome extends AppCompatActivity {
 
@@ -56,6 +56,7 @@ public class ContractorHome extends AppCompatActivity {
 
     public void btnSeeYourEstimates(View v)
     {
-
+        Intent i = new Intent(this, ContractorSeeEstimatesActivity.class);
+        startActivity(i);
     }
 }

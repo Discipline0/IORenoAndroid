@@ -1,25 +1,15 @@
 package com.ioreno.grecoantoine.ioreno;
 
 import android.content.Intent;
-import android.database.Cursor;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
-import android.media.Image;
 import android.net.Uri;
-import android.provider.MediaStore;
-import android.support.annotation.NonNull;
-import android.support.design.widget.NavigationView;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.InputType;
 import android.text.TextUtils;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -27,16 +17,11 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.ioreno.grecoantoine.ioreno.Fragments.about_frag;
-import com.ioreno.grecoantoine.ioreno.Fragments.contact_frag;
-import com.ioreno.grecoantoine.ioreno.Fragments.index_frag;
-import com.ioreno.grecoantoine.ioreno.Fragments.terms_of_use_frag;
-
 import java.io.ByteArrayOutputStream;
 
-import DBManager.DBSQLiteManager;
-import Model.Customer;
-import Model.Project;
+import com.ioreno.grecoantoine.ioreno.DBManager.DBSQLiteManager;
+import com.ioreno.grecoantoine.ioreno.Model.Customer;
+import com.ioreno.grecoantoine.ioreno.Model.Project;
 
 public class CustomerCreateNewProject extends AppCompatActivity {
 

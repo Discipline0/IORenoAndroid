@@ -8,8 +8,8 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import DBManager.DBSQLiteManager;
-import Model.Customer;
+import com.ioreno.grecoantoine.ioreno.DBManager.DBSQLiteManager;
+import com.ioreno.grecoantoine.ioreno.Model.Customer;
 
 public class CustomerSignUp extends AppCompatActivity {
 

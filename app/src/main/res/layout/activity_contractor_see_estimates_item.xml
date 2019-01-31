@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    tools:context=".ContractorSeeEstimatesItemActivity">
+
+    <ImageView
+        android:id="@+id/imgConSeeEstimatesProjectPic"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_gravity="center|top"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:adjustViewBounds="true"
+        android:contentDescription="@string/projectImageDescription"
+        android:scaleType="fitCenter"
+        app:srcCompat="@drawable/placeholder" />
+
+    <TextView
+        android:id="@+id/txtConSeeEstimatesProjectTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/txtConSeeEstimatesEstimate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/txtConSeeEstimatesStatus"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="TextView" />
+
+    <Button
+        android:id="@+id/btnConSeeEstimatesGetCustInfo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/DarkerBlue"
+        android:text="@string/GetCustomerInformation"
+        android:textColor="@android:color/background_light" />
+</LinearLayout>

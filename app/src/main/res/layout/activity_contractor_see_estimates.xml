@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ContractorSeeEstimatesActivity">
+
+    <TextView
+        android:id="@+id/txtConSeeEstimatesTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/SentEstimates"
+        android:textAlignment="center"
+        android:textSize="30sp"
+        android:textStyle="bold" />
+
+    <com.ioreno.grecoantoine.ioreno.MultiSelectionSpinner
+        android:id="@+id/spinnerEstimateStatus"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="2dp"/>
+
+    <Button
+        android:id="@+id/btnConSeeEstimatesSearch"
+        android:layout_width="218dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:backgroundTint="@color/Green"
+        android:text="@string/Search"
+        android:textColor="@android:color/background_light"
+        android:onClick="btnStatusSearch_onClick"/>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerViewConSeeEstimates"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"/>
+
+</LinearLayout>

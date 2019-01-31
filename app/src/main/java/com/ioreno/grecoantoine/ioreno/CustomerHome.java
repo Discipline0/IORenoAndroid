@@ -10,9 +10,9 @@ import android.view.View;
 
 import java.util.ArrayList;
 
-import DBManager.DBSQLiteManager;
-import Model.Customer;
-import Model.Project;
+import com.ioreno.grecoantoine.ioreno.DBManager.DBSQLiteManager;
+import com.ioreno.grecoantoine.ioreno.Model.Customer;
+import com.ioreno.grecoantoine.ioreno.Model.Project;
 
 public class CustomerHome extends AppCompatActivity {
 

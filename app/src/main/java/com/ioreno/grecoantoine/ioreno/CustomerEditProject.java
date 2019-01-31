@@ -16,13 +16,11 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.w3c.dom.Text;
-
 import java.io.ByteArrayOutputStream;
 
-import DBManager.DBSQLiteManager;
-import Model.Customer;
-import Model.Project;
+import com.ioreno.grecoantoine.ioreno.DBManager.DBSQLiteManager;
+import com.ioreno.grecoantoine.ioreno.Model.Customer;
+import com.ioreno.grecoantoine.ioreno.Model.Project;
 
 public class CustomerEditProject extends AppCompatActivity {
     EditText editTitleIn;
