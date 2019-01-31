@@ -23,6 +23,7 @@ public class ContractorSeeEstimatesActivity extends AppCompatActivity {
     private ContractorSeeEstimatesAdapter adapter;
     private MultiSelectionSpinner spinner;
     private RecyclerView recyclerView;
+    private TextView txtNoEstimate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +32,8 @@ public class ContractorSeeEstimatesActivity extends AppCompatActivity {
 
         spinner = findViewById(R.id.spinnerEstimateStatus);
         spinner.setItems(new String[] {"Approved", "Pending", "Denied"});
+
+        txtNoEstimate = findViewById(R.id.txtConSeeEstimatesNoEstimatesYet);
 
         recyclerView = findViewById(R.id.recyclerViewConSeeEstimates);
 
@@ -43,9 +46,13 @@ public class ContractorSeeEstimatesActivity extends AppCompatActivity {
         if (proposals.size() == 0)
         {
             recyclerView.setVisibility(View.GONE);
+            txtNoEstimate.setVisibility(View.VISIBLE);
         }
         else
         {
+            recyclerView.setVisibility(View.VISIBLE);
+            txtNoEstimate.setVisibility(View.GONE);
+
             adapter = new ContractorSeeEstimatesAdapter(proposals);
             recyclerView.setAdapter(adapter);
             recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -87,8 +94,24 @@ public class ContractorSeeEstimatesActivity extends AppCompatActivity {
                 ? manager.getProposalListForContractor(manager.getContractorFromEmail(Contractor.currUser))
                 : manager.getProposalListForContractorAndStatus(manager.getContractorFromEmail(Contractor.currUser), selectedStatus);
 
-        adapter = new ContractorSeeEstimatesAdapter(proposals);
-        recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        if (proposals.size() == 0)
+        {
+            recyclerView.setVisibility(View.GONE);
+            txtNoEstimate.setVisibility(View.VISIBLE);
+        }
+        else
+        {
+            recyclerView.setVisibility(View.VISIBLE);
+            txtNoEstimate.setVisibility(View.GONE);
+
+            adapter = new ContractorSeeEstimatesAdapter(proposals);
+            recyclerView.setAdapter(adapter);
+            recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        }
+    }
+
+    public void btnGoBack_onClick(View v)
+    {
+        super.finish();
     }
 }

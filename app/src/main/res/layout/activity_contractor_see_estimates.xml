@@ -7,36 +7,66 @@
     android:orientation="vertical"
     tools:context=".ContractorSeeEstimatesActivity">
 
-    <TextView
-        android:id="@+id/txtConSeeEstimatesTitle"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/SentEstimates"
-        android:textAlignment="center"
-        android:textSize="30sp"
-        android:textStyle="bold" />
+        android:layout_height="match_parent">
 
-    <com.ioreno.grecoantoine.ioreno.MultiSelectionSpinner
-        android:id="@+id/spinnerEstimateStatus"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="2dp"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-    <Button
-        android:id="@+id/btnConSeeEstimatesSearch"
-        android:layout_width="218dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:backgroundTint="@color/Green"
-        android:text="@string/Search"
-        android:textColor="@android:color/background_light"
-        android:onClick="btnStatusSearch_onClick"/>
+            <TextView
+                android:id="@+id/txtConSeeEstimatesTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/SentEstimates"
+                android:textAlignment="center"
+                android:textSize="30sp"
+                android:textStyle="bold" />
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recyclerViewConSeeEstimates"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"/>
+            <com.ioreno.grecoantoine.ioreno.MultiSelectionSpinner
+                android:id="@+id/spinnerEstimateStatus"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="2dp" />
+
+            <Button
+                android:id="@+id/btnConSeeEstimatesSearch"
+                android:layout_width="218dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:backgroundTint="@color/Green"
+                android:onClick="btnStatusSearch_onClick"
+                android:text="@string/Search"
+                android:textColor="@android:color/background_light" />
+
+            <TextView
+                android:id="@+id/txtConSeeEstimatesNoEstimatesYet"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/NoEstimateYet"
+                android:visibility="gone" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recyclerViewConSeeEstimates"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp">
+
+            </android.support.v7.widget.RecyclerView>
+
+            <Button
+                android:id="@+id/btnConSeeEstimatesGoBack"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:backgroundTint="@color/Red"
+                android:onClick="btnGoBack_onClick"
+                android:text="@string/CreateNewProjectGoBack"
+                android:textColor="@android:color/background_light" />
+        </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>

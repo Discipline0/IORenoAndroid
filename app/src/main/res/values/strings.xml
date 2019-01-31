@@ -87,4 +87,5 @@
     <string name="NoEstimateAvailable">You don\'t have any estimates for this project yet!</string>
     <string name="LeaveReview">Leave Review</string>
     <string name="GetCustomerInformation">Get Customer Information</string>
+    <string name="NoEstimateYet">You don\'t have any estimates yet!</string>
 </resources>
