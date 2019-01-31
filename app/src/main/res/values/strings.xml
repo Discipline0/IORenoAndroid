@@ -85,4 +85,9 @@
     <string name="YouHaveSelected">You have accepted this estimate for this project:</string>
     <string name="NoEstimateAvailable">You don\'t have any estimates for this project yet!</string>
     <string name="LeaveReview">Leave Review</string>
+    <string name="CustomerInformationAndProject">Customer Information and Project</string>
+    <string name="CustomerInformation">Customer Information</string>
+    <string name="Name">Name:</string>
+    <string name="PhoneNumber">Phone Number:</string>
+    <string name="EmailAddress">Email Address:</string>
 </resources>
