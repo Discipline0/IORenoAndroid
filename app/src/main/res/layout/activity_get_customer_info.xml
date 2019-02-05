@@ -155,7 +155,9 @@
                     android:id="@+id/txtGetCustInfoCustomerInformation"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/CustomerInformation" />
+                    android:text="@string/CustomerInformation"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -166,15 +168,18 @@
                         android:id="@+id/txtGetCustInfoCustomerName"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="@string/Name" />
+                        android:layout_weight="0"
+                        android:text="@string/Name"
+                        android:textSize="18sp" />
 
                     <TextView
                         android:id="@+id/txtGetCustInfoCustomerNameValue"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="TextView" />
+                        android:text="TextView"
+                        android:textAlignment="textStart"
+                        android:textSize="18sp" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -186,15 +191,18 @@
                         android:id="@+id/txtGetCustInfoCustomerPhone"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="@string/PhoneNumber" />
+                        android:layout_weight="0"
+                        android:text="@string/PhoneNumber"
+                        android:textSize="18sp" />
 
                     <TextView
                         android:id="@+id/txtGetCustInfoCustomerPhoneValue"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="TextView" />
+                        android:text="TextView"
+                        android:textAlignment="textStart"
+                        android:textSize="18sp" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -206,15 +214,18 @@
                         android:id="@+id/txtGetCustInfoCustomerEmail"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="@string/EmailAddress" />
+                        android:layout_weight="0"
+                        android:text="@string/EmailAddress"
+                        android:textSize="18sp" />
 
                     <TextView
                         android:id="@+id/txtGetCustInfoCustomerEmailValue"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="TextView" />
+                        android:text="TextView"
+                        android:textAlignment="textStart"
+                        android:textSize="18sp" />
 
                 </LinearLayout>
             </LinearLayout>

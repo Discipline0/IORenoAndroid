@@ -18,7 +18,8 @@
         android:layout_height="wrap_content"
         android:backgroundTint="@color/DarkerBlue"
         android:onClick="onCreateNewProject"
-        android:text="@string/New_Project" />
+        android:text="@string/New_Project"
+        android:textColor="@android:color/background_light" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerViewProjects"

@@ -9,11 +9,12 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.ioreno.grecoantoine.ioreno.DBManager.DBSQLiteManager;
+import com.ioreno.grecoantoine.ioreno.Model.Customer;
+import com.ioreno.grecoantoine.ioreno.Model.Project;
+
 import java.text.DecimalFormat;
 
-import DBManager.DBSQLiteManager;
-import Model.Customer;
-import Model.Project;
 
 public class GetCustomerInfoActivity extends AppCompatActivity
 {
@@ -26,12 +27,12 @@ public class GetCustomerInfoActivity extends AppCompatActivity
         Intent intent = getIntent();
         Project project = (Project) intent.getSerializableExtra("project");
 
-        TextView txtProjectTitle       = findViewById(R.id.txtReadMoreProjectTitle);
-        TextView txtProjectType        = findViewById(R.id.txtReadMoreProjectTypeValue);
-        TextView txtProjectBudget      = findViewById(R.id.txtReadMoreProjectBudgetValue);
-        TextView txtProjectDescription = findViewById(R.id.txtReadMoreProjectDescription);
-        TextView txtProjectAddress     = findViewById(R.id.txtReadMoreProjectAddressValue);
-        TextView txtProjectCity        = findViewById(R.id.txtReadMoreProjectCityValue);
+        TextView txtProjectTitle       = findViewById(R.id.txtGetCustInfoProjectTitle);
+        TextView txtProjectType        = findViewById(R.id.txtGetCustInfoProjectTypeValue);
+        TextView txtProjectBudget      = findViewById(R.id.txtGetCustInfoProjectBudgetValue);
+        TextView txtProjectDescription = findViewById(R.id.txtGetCustInfoProjectDescription);
+        TextView txtProjectAddress     = findViewById(R.id.txtGetCustInfoProjectAddressValue);
+        TextView txtProjectCity        = findViewById(R.id.txtGetCustInfoProjectCityValue);
 
         txtProjectTitle.setText(project.getTitle());
         txtProjectType.setText(" " + project.getProjectType());
@@ -40,7 +41,7 @@ public class GetCustomerInfoActivity extends AppCompatActivity
         txtProjectAddress.setText(" " + project.getAddress());
         txtProjectCity.setText(" " + project.getCity());
 
-        ImageView imgProjectPicture = findViewById(R.id.imgReadMoreProjectPic);
+        ImageView imgProjectPicture = findViewById(R.id.imgGetCustInfoProjectPic);
         Bitmap bmp = BitmapFactory.decodeByteArray(project.getImage(), 0, project.getImage().length);
         imgProjectPicture.setImageBitmap(bmp);
 
@@ -51,10 +52,11 @@ public class GetCustomerInfoActivity extends AppCompatActivity
         TextView txtCustPhone = findViewById(R.id.txtGetCustInfoCustomerPhoneValue);
         TextView txtCustEmail = findViewById(R.id.txtGetCustInfoCustomerEmailValue);
 
-        txtCustName.setText(customer.getCustomerName());
-        txtCustPhone.setText("(" + customer.getCustomerPhone().substring(0, 2) + ") "
-                + customer.getCustomerPhone().substring(2, 5) + "-" + customer.getCustomerPhone().substring(5, 9));
-        txtCustEmail.setText(customer.getCustomerEmail());
+        txtCustName.setText(" " + customer.getCustomerName());
+        String phoneNumber = customer.getCustomerPhone();
+        txtCustPhone.setText(" (" + phoneNumber.substring(0, 3) + ") "+ phoneNumber.substring(3, 6)
+                + "-" + phoneNumber.substring(6, 10));
+        txtCustEmail.setText(" " + customer.getCustomerEmail());
     }
 
     public void btnGoBack_onClick(View v)
