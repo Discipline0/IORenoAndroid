@@ -113,10 +113,10 @@ public class CustomerSeeEstimatesAdapter extends RecyclerView.Adapter<CustomerSe
                     }
                 };
 
-                AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
-                builder.setMessage("Are you sure?\n\nAre you sure this is the estimate you wish to select?")
-                        .setPositiveButton("Yes", dialogClickListener)
-                        .setNegativeButton("No", dialogClickListener).show();
+            AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
+            builder.setMessage("Are you sure?\n\nAre you sure this is the estimate you wish to select?")
+                    .setPositiveButton("Yes", dialogClickListener)
+                    .setNegativeButton("No", dialogClickListener).show();
             }
         });
     }
