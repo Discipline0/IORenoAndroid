@@ -11,13 +11,12 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.text.DecimalFormat;
 import java.util.List;
 
-import DBManager.DBSQLiteManager;
-import Model.Project;
+import com.ioreno.grecoantoine.ioreno.DBManager.DBSQLiteManager;
+import com.ioreno.grecoantoine.ioreno.Model.Project;
 
 public class ProjectContractorHomeAdapter extends RecyclerView.Adapter<ProjectContractorHomeAdapter.ViewHolder>
 {

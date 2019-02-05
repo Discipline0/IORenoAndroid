@@ -14,11 +14,10 @@ import android.widget.TextView;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
-import DBManager.DBSQLiteManager;
-import Model.Contractor;
-import Model.Customer;
-import Model.Project;
-import Model.Proposal;
+import com.ioreno.grecoantoine.ioreno.DBManager.DBSQLiteManager;
+import com.ioreno.grecoantoine.ioreno.Model.Contractor;
+import com.ioreno.grecoantoine.ioreno.Model.Project;
+import com.ioreno.grecoantoine.ioreno.Model.Proposal;
 
 public class CustomerSeeEstimatesActivity extends AppCompatActivity {
 

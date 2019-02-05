@@ -13,9 +13,9 @@ import android.widget.Toast;
 import java.text.DecimalFormat;
 import java.util.List;
 
-import DBManager.DBSQLiteManager;
-import Model.Contractor;
-import Model.Proposal;
+import com.ioreno.grecoantoine.ioreno.DBManager.DBSQLiteManager;
+import com.ioreno.grecoantoine.ioreno.Model.Contractor;
+import com.ioreno.grecoantoine.ioreno.Model.Proposal;
 
 public class CustomerSeeEstimatesAdapter extends RecyclerView.Adapter<CustomerSeeEstimatesAdapter.ViewHolder>
 {

@@ -19,8 +19,11 @@
         android:id="@+id/btnConHomeSeeYourEstimates"
         android:layout_width="247dp"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:backgroundTint="@color/colorPrimary"
+        android:onClick="btnSeeYourEstimates"
         android:text="@string/SeeYourEstimates"
-        android:onClick="btnSeeYourEstimates"/>
+        android:textColor="@android:color/background_light" />
 
     <TextView
         android:id="@+id/txtConHomeFilterBy"

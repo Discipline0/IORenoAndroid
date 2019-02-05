@@ -8,8 +8,8 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import DBManager.DBSQLiteManager;
-import Model.Contractor;
+import com.ioreno.grecoantoine.ioreno.DBManager.DBSQLiteManager;
+import com.ioreno.grecoantoine.ioreno.Model.Contractor;
 
 public class ContractorSignUp extends AppCompatActivity {
 

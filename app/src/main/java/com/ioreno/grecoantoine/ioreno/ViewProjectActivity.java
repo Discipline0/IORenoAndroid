@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 import java.text.DecimalFormat;
 
-import Model.Project;
+import com.ioreno.grecoantoine.ioreno.Model.Project;
 
 public class ViewProjectActivity extends AppCompatActivity {
 
