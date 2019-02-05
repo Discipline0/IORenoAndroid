@@ -18,8 +18,8 @@ import android.widget.Toast;
 import java.text.DecimalFormat;
 import java.util.List;
 
-import DBManager.DBSQLiteManager;
-import Model.Project;
+import com.ioreno.grecoantoine.ioreno.DBManager.DBSQLiteManager;
+import com.ioreno.grecoantoine.ioreno.Model.Project;
 
 public class ProjectAdapter extends RecyclerView.Adapter<ProjectAdapter.ViewHolder>
 {

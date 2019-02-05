@@ -21,9 +21,9 @@ import com.ioreno.grecoantoine.ioreno.Fragments.contact_frag;
 import com.ioreno.grecoantoine.ioreno.Fragments.index_frag;
 import com.ioreno.grecoantoine.ioreno.Fragments.terms_of_use_frag;
 
-import DBManager.DBSQLiteManager;
-import Model.Contractor;
-import Model.Customer;
+import com.ioreno.grecoantoine.ioreno.DBManager.DBSQLiteManager;
+import com.ioreno.grecoantoine.ioreno.Model.Contractor;
+import com.ioreno.grecoantoine.ioreno.Model.Customer;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
