@@ -74,6 +74,28 @@ public class DBSQLiteManager extends SQLiteOpenHelper {
         return list;
     }
 
+    public Customer getCustomerFromEmail(String email)
+    {
+        Customer customer = new Customer();
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        String GET_LIST = "SELECT * FROM " + Customer.CUSTOMER_TABLE_NAME+" WHERE " + Customer.CUSTOMER_COL_EMAIL
+                + " = '" + email + "';";
+        Cursor c = db.rawQuery(GET_LIST,null);
+
+        if (c.moveToFirst())
+        {
+            customer.setCustomerID(c.getInt(c.getColumnIndex(Customer.CUSTOMER_COL_ID)));
+            customer.setCustomerName(c.getString(c.getColumnIndex(Customer.CUSTOMER_COL_NAME)));
+            customer.setCustomerEmail(c.getString(c.getColumnIndex(Customer.CUSTOMER_COL_EMAIL)));
+            customer.setCustomerPhone(c.getString(c.getColumnIndex(Customer.CUSTOMER_COL_PHONE)));
+            customer.setCustomerPassword(c.getString(c.getColumnIndex(Customer.CUSTOMER_COL_PASSWORD)));
+        }
+        c.close();
+        db.close();
+        return customer;
+    }
+
     public boolean checkForCustomer(String email, String password)
     {
         ArrayList<Customer> list = getCustomerList();

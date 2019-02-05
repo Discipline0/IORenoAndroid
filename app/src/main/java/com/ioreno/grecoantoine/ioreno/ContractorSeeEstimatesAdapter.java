@@ -1,5 +1,6 @@
 package com.ioreno.grecoantoine.ioreno;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
@@ -100,11 +101,10 @@ public class ContractorSeeEstimatesAdapter extends RecyclerView.Adapter<Contract
             @Override
             public void onClick(View v)
             {
-                // To Implement once we do the layout is created
-//                Intent intent = new Intent(v.getContext(), ContractorReadMoreActivity.class);
-//                intent.putExtra("project", project);
+                Intent intent = new Intent(v.getContext(), GetCustomerInfoActivity.class);
+                intent.putExtra("project", project);
 
-//                v.getContext().startActivity(intent);
+                v.getContext().startActivity(intent);
             }
         });
     }

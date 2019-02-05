@@ -13,6 +13,8 @@
         <activity android:name=".ContractorSeeEstimatesActivity" />
         <activity android:name=".AdminHome" />
         <activity android:name=".customerSeeEstimatesItemActivity"></activity>
+        <activity android:name=".GetCustomerInfoActivity"></activity>
+        <activity android:name=".customerSeeEstimatesItemActivity" />
         <activity android:name=".LeaveReviewActivity"></activity>
         <activity android:name=".customerSeeEstimatesItemActivity" />
         <activity android:name=".CustomerSeeEstimatesActivity" />
