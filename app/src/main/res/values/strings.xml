@@ -88,4 +88,9 @@
     <string name="LeaveReview">Leave Review</string>
     <string name="GetCustomerInformation">Get Customer Information</string>
     <string name="NoEstimateYet">You don\'t have any estimates yet!</string>
+    <string name="CustomerInformationAndProject">Customer Information and Project</string>
+    <string name="CustomerInformation">Customer Information</string>
+    <string name="Name">Name:</string>
+    <string name="PhoneNumber">Phone Number:</string>
+    <string name="EmailAddress">Email Address:</string>
 </resources>
