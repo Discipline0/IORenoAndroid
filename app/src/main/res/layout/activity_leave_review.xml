@@ -15,6 +15,15 @@
         android:text="@string/LeaveAReview"
         android:textSize="30sp" />
 
+    <TextView
+        android:id="@+id/txtLeaveReviewError"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/YouMustSelectARating"
+        android:textColor="@color/Red"
+        android:textSize="16sp"
+        android:visibility="gone" />
+
     <RatingBar
         android:id="@+id/ratingBarReviewValue"
         android:layout_width="wrap_content"

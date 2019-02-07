@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RatingBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ioreno.grecoantoine.ioreno.DBManager.DBSQLiteManager;
@@ -23,6 +24,7 @@ public class LeaveReviewActivity extends AppCompatActivity
     private DBSQLiteManager manager;
     private RatingBar ratingBarReviewValue;
     private EditText editReviewText;
+    private TextView txtErrorMsg;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -37,6 +39,8 @@ public class LeaveReviewActivity extends AppCompatActivity
         customer = manager.getCustomerFromEmail(Customer.currUser);
         ratingBarReviewValue = findViewById(R.id.ratingBarReviewValue);
         editReviewText = findViewById(R.id.editReviewText);
+        txtErrorMsg = findViewById(R.id.txtLeaveReviewError);
+        txtErrorMsg.setVisibility(View.GONE);
     }
 
     public void btnSubmitReview_onClick(View v)
@@ -50,17 +54,26 @@ public class LeaveReviewActivity extends AppCompatActivity
                 switch (which){
                     case DialogInterface.BUTTON_POSITIVE:
                         // The Yes button clicked
-                        Review review = new Review(
-                            contractor.getContractorCONum(),
-                            customer.getCustomerID(),
-                            (int) ratingBarReviewValue.getRating(),
-                            editReviewText.getText().toString());
+                        if (ratingBarReviewValue.getRating() < 1 || ratingBarReviewValue.getRating() > 5)
+                        {
+                            txtErrorMsg.setVisibility(View.VISIBLE);
+                        }
+                        else
+                        {
+                            txtErrorMsg.setVisibility(View.GONE);
 
-                        manager.insertOrReplaceReview(review);
-                        Toast.makeText(getApplicationContext(), "Your review has been added", Toast.LENGTH_LONG).show();
+                            Review review = new Review(
+                                contractor.getContractorCONum(),
+                                customer.getCustomerID(),
+                                (int) ratingBarReviewValue.getRating(),
+                                editReviewText.getText().toString());
 
-                        LeaveReviewActivity leaveReviewActivity = (LeaveReviewActivity) context;
-                        leaveReviewActivity.finish();
+                            manager.insertOrReplaceReview(review);
+                            Toast.makeText(getApplicationContext(), "Your review has been added", Toast.LENGTH_LONG).show();
+
+                            LeaveReviewActivity leaveReviewActivity = (LeaveReviewActivity) context;
+                            leaveReviewActivity.finish();
+                        }
 
                         break;
 

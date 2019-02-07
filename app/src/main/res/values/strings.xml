@@ -95,4 +95,5 @@
     <string name="PhoneNumber">Phone Number:</string>
     <string name="EmailAddress">Email Address:</string>
     <string name="SubmitReview">Submit Review</string>
+    <string name="YouMustSelectARating">You must select a rating.</string>
 </resources>
