@@ -13,9 +13,10 @@ import com.ioreno.grecoantoine.ioreno.Model.Customer;
 import com.ioreno.grecoantoine.ioreno.Model.Payment;
 import com.ioreno.grecoantoine.ioreno.Model.Project;
 import com.ioreno.grecoantoine.ioreno.Model.Proposal;
+import com.ioreno.grecoantoine.ioreno.Model.Review;
 
 public class DBSQLiteManager extends SQLiteOpenHelper {
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2;
     private static final String DATABASE_NAME = "IOReno_Android_SQLite_DB";
     public DBSQLiteManager(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -674,7 +675,26 @@ public class DBSQLiteManager extends SQLiteOpenHelper {
     }
 
     //Review***************************************************************************************
+    public static final String CREATE_REVIEW_QUERY = "CREATE TABLE " + Review.REVIEW_TABLE_NAME + " (" +
+            Review.REVIEW_COL_CON_NO + " INTEGER," +
+            Review.REVIEW_COL_CUST_ID + " INTEGER," +
+            Review.REVIEW_COL_Rating + " INTEGER," +
+            Review.REVIEW_COL_REVIEW_TEXT + " TEXT," +
+            "PRIMARY KEY (" + Review.REVIEW_COL_CON_NO + "," + Review.REVIEW_COL_CUST_ID + "))";
 
+    public void insertOrReplaceReview(Review review)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues vals = new ContentValues();
+
+        vals.put(Review.REVIEW_COL_CON_NO, review.getContractorNo());
+        vals.put(Review.REVIEW_COL_CUST_ID, review.getCustomerId());
+        vals.put(Review.REVIEW_COL_Rating, review.getRating());
+        vals.put(Review.REVIEW_COL_REVIEW_TEXT, review.getReviewText());
+
+        db.replace(Review.REVIEW_TABLE_NAME, null, vals);
+        db.close();
+    }
 
 
     //General Methods******************************************************************************
@@ -708,6 +728,7 @@ public class DBSQLiteManager extends SQLiteOpenHelper {
         db.execSQL(CREATE_PROJECT_TABLE_QUERY);
         db.execSQL(CREATE_PROPOSAL_QUERY);
         db.execSQL(CREATE_PAYMENT_QUERY);
+        db.execSQL(CREATE_REVIEW_QUERY);
     }
 
     @Override

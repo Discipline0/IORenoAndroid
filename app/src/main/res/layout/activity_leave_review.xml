@@ -28,13 +28,12 @@
         android:id="@+id/txtReviewLeaveAReview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="TextView" />
+        android:text="@string/LeaveAReview" />
 
     <EditText
         android:id="@+id/editReviewText"
         android:layout_width="match_parent"
         android:layout_height="109dp"
-        android:autofillHints="@string/LeaveAReview"
         android:ems="10"
         android:inputType="textMultiLine" />
 
@@ -42,12 +41,17 @@
         android:id="@+id/btnReviewSubmitReview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Button" />
+        android:backgroundTint="@color/DarkerBlue"
+        android:onClick="btnSubmitReview_onClick"
+        android:text="@string/SubmitReview"
+        android:textColor="@android:color/background_light" />
 
     <Button
         android:id="@+id/btnReviewGoBack"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:backgroundTint="@color/Red"
+        android:onClick="btnGoBack_onClick"
         android:text="@string/CreateNewProjectGoBack"
-        android:onClick="btnGoBack_onClick"/>
+        android:textColor="@android:color/background_light" />
 </LinearLayout>

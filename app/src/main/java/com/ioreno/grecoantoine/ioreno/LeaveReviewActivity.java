@@ -1,6 +1,7 @@
 package com.ioreno.grecoantoine.ioreno;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -40,17 +41,26 @@ public class LeaveReviewActivity extends AppCompatActivity
 
     public void btnSubmitReview_onClick(View v)
     {
+        final Context context = v.getContext();
+
         DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+
                 switch (which){
                     case DialogInterface.BUTTON_POSITIVE:
                         // The Yes button clicked
                         Review review = new Review(
                             contractor.getContractorCONum(),
                             customer.getCustomerID(),
-                            ratingBarReviewValue.getNumStars(),
+                            (int) ratingBarReviewValue.getRating(),
                             editReviewText.getText().toString());
+
+                        manager.insertOrReplaceReview(review);
+                        Toast.makeText(getApplicationContext(), "Your review has been added", Toast.LENGTH_LONG).show();
+
+                        LeaveReviewActivity leaveReviewActivity = (LeaveReviewActivity) context;
+                        leaveReviewActivity.finish();
 
                         break;
 
