@@ -12,7 +12,7 @@ public class Customer {
     private String customerDateRegistered;
 
     public static boolean isLoggedIn = false;
-    public static String currUser;
+    public static String currUser="";
 
     public static final String CUSTOMER_TABLE_NAME          = "Customer";
 

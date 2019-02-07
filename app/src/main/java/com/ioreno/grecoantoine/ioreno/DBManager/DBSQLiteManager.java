@@ -3,13 +3,14 @@ package com.ioreno.grecoantoine.ioreno.DBManager;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import java.util.ArrayList;
 
-import com.ioreno.grecoantoine.ioreno.Model.Contractor;
 import com.ioreno.grecoantoine.ioreno.Model.Customer;
+import com.ioreno.grecoantoine.ioreno.Model.Contractor;
 import com.ioreno.grecoantoine.ioreno.Model.Payment;
 import com.ioreno.grecoantoine.ioreno.Model.Project;
 import com.ioreno.grecoantoine.ioreno.Model.Proposal;
@@ -671,6 +672,29 @@ public class DBSQLiteManager extends SQLiteOpenHelper {
         c.close();
         db.close();
         return list;
+    }
+//Admin Methods
+
+    public long getCustomerCount(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        long count = DatabaseUtils.queryNumEntries(db,Customer.CUSTOMER_TABLE_NAME);
+        db.close();
+
+        return count;
+    }
+
+    public long getContractorCount(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        long count = DatabaseUtils.queryNumEntries(db,Contractor.CONTRACTOR_TABLE_NAME);
+        db.close();
+        return count;
+    }
+    public long getCustomerCountLastSevenDays(){
+        return 6;
+
+    }
+    public int getContractorCountLastSevenDays(){
+        return 2;
     }
 
 

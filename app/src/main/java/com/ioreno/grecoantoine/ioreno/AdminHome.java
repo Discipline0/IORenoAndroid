@@ -16,6 +16,7 @@ import android.widget.AdapterView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.ioreno.grecoantoine.ioreno.DBManager.DBSQLiteManager;
 import com.ioreno.grecoantoine.ioreno.Fragments.about_frag;
 import com.ioreno.grecoantoine.ioreno.Fragments.contact_frag;
 import com.ioreno.grecoantoine.ioreno.Fragments.index_frag;
@@ -24,9 +25,6 @@ import com.razerdp.widget.animatedpieview.AnimatedPieView;
 import com.razerdp.widget.animatedpieview.AnimatedPieViewConfig;
 import com.razerdp.widget.animatedpieview.data.SimplePieInfo;
 
-import DBManager.DBSQLiteManager;
-import Model.Contractor;
-import Model.Customer;
 
 public class AdminHome extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
   //  private DrawerLayout dl;
@@ -79,8 +77,8 @@ public class AdminHome extends AppCompatActivity implements NavigationView.OnNav
 public void drawPie(){
     AnimatedPieView mAnimatedPieView = findViewById(R.id.animatedPieView);
     AnimatedPieViewConfig config = new AnimatedPieViewConfig();
-    int custCount = getCustCount();
-    int conCount = getConCount();
+    long custCount = getCustCount();
+    long conCount = getConCount();
 
     config.startAngle(-90)// Starting angle offset
             //put row values here, does math antumatically
@@ -96,8 +94,8 @@ public void drawPie(){
     public void drawPieLastSevenDays(){
         AnimatedPieView mAnimatedPieView = findViewById(R.id.animatedPieView);
         AnimatedPieViewConfig config = new AnimatedPieViewConfig();
-        int custCount = getCustCountLastSevenDays();
-        int conCount = getConCountLastSevenDays();
+        long custCount = getCustCountLastSevenDays();
+        long conCount = getConCountLastSevenDays();
 
         config.startAngle(-90)// Starting angle offset
                 //put row values here, does math antumatically
@@ -110,22 +108,22 @@ public void drawPie(){
         mAnimatedPieView.start();
     }
 
-    public int getCustCount(){
+    public long getCustCount(){
         DBSQLiteManager db = new DBSQLiteManager(this);
         return db.getCustomerCount();
     }
 
-    public int getConCount(){
+    public long getConCount(){
         DBSQLiteManager db = new DBSQLiteManager(this);
         return  db.getContractorCount();
     }
 
-    public int getCustCountLastSevenDays(){
+    public long getCustCountLastSevenDays(){
         DBSQLiteManager db = new DBSQLiteManager(this);
         return db.getCustomerCountLastSevenDays();
     }
 
-    public int getConCountLastSevenDays(){
+    public long getConCountLastSevenDays(){
         DBSQLiteManager db = new DBSQLiteManager(this);
         return  db.getContractorCountLastSevenDays();
     }

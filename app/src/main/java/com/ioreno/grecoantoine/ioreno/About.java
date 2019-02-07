@@ -11,8 +11,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-import Model.Contractor;
-import Model.Customer;
+import com.ioreno.grecoantoine.ioreno.Model.Contractor;
+import com.ioreno.grecoantoine.ioreno.Model.Customer;
+
 
 public class About extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 

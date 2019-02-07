@@ -18,7 +18,7 @@ public class Contractor implements Serializable {
 
 
     public static boolean isLoggedIn = false;
-    public static String currUser;
+    public static String currUser="";
 
     public static final String CONTRACTOR_TABLE_NAME = "Contractor";
 
