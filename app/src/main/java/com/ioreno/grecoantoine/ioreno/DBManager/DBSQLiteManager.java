@@ -7,6 +7,8 @@ import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 import com.ioreno.grecoantoine.ioreno.Model.Customer;
@@ -66,6 +68,7 @@ public class DBSQLiteManager extends SQLiteOpenHelper {
                 cus.setCustomerEmail(c.getString(c.getColumnIndex(Customer.CUSTOMER_COL_EMAIL)));
                 cus.setCustomerPhone(c.getString(c.getColumnIndex(Customer.CUSTOMER_COL_PHONE)));
                 cus.setCustomerPassword(c.getString(c.getColumnIndex(Customer.CUSTOMER_COL_PASSWORD)));
+                cus.setCustomerDateRegistered(c.getString(c.getColumnIndex(Customer.CUSTOMER_COL_DATE_REGISTERED)));
 
                 list.add(cus);
             } while (c.moveToNext());
