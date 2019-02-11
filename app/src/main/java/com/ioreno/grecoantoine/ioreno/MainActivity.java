@@ -10,16 +10,13 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.ioreno.grecoantoine.ioreno.Fragments.about_frag;
-import com.ioreno.grecoantoine.ioreno.Fragments.contact_frag;
-import com.ioreno.grecoantoine.ioreno.Fragments.index_frag;
-import com.ioreno.grecoantoine.ioreno.Fragments.terms_of_use_frag;
 
 import com.ioreno.grecoantoine.ioreno.DBManager.DBSQLiteManager;
 import com.ioreno.grecoantoine.ioreno.Model.Contractor;
@@ -34,8 +31,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        //load index fragment by default
-        loadFragment(new index_frag());
 
         dl = (DrawerLayout)findViewById(R.id.drawer_layout);
         t  = new ActionBarDrawerToggle(this, dl, R.string.nav_open, R.string.nav_close);
@@ -47,6 +42,25 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         NavigationView nv = findViewById(R.id.nav_view);
         nv.setNavigationItemSelectedListener(this);
+
+        //if user not logged in hide
+        if(Customer.currUser.equals("") && Contractor.currUser.equals("")) {
+            hideItem();
+        }
+        //if logged in change menu item depending on role
+        else{
+            Menu menu = nv.getMenu();
+            MenuItem item = menu.findItem(R.id.user_home);
+            if(!Customer.currUser.equals("")){
+                item.setTitle("Customer Home");
+            }
+            else if(!Contractor.currUser.equals("")){
+                item.setTitle("Contractor Home");
+            }
+        }
+
+
+
     }
 
     public void onCustomerSignUpClick(View v){
@@ -74,13 +88,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (db.checkForCustomer(editEmailLogin, hashPassword))
         {
             Customer.currUser = editEmailLogin;
-
+            Contractor.currUser = "";
             Intent i = new Intent(this,CustomerHome.class);
             startActivity(i);
 
         }
         else if(db.checkForContractor(editEmailLogin, hashPassword)){
             Contractor.currUser = editEmailLogin;
+            Customer.currUser = "";
 
             Intent i = new Intent(this, ContractorHome.class);
             startActivity(i);
@@ -114,20 +129,39 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         int checkedId = menuItem.getItemId();
 
         //call diff fragment based on id selected
+        if(checkedId == R.id.user_home){
+            if(!Customer.currUser.equals("")){
+                Intent i = new Intent(this,CustomerHome.class);
+                startActivity(i);
+            }
+            else if(!Contractor.currUser.equals("")){
+                Intent i = new Intent(this, ContractorHome.class);
+                startActivity(i);
+            }
+        }
         if(checkedId == R.id.nav_index){
-            loadFragment(new index_frag());
+            //already on this activity
+         //   Intent i = new Intent(this, MainActivity.class);
+         //   startActivity(i);
         }
         if(checkedId == R.id.nav_about){
-            loadFragment(new about_frag());
+            Intent i = new Intent(this, About.class);
+            startActivity(i);
         }
         if(checkedId == R.id.nav_terms_of_use){
-            loadFragment(new terms_of_use_frag());
+            Intent i = new Intent(this, TermsOfUse.class);
+            startActivity(i);
         }
         if(checkedId == R.id.nav_contact){
-            loadFragment(new contact_frag());
+            Intent i = new Intent(this, ContactUs.class);
+            startActivity(i);
         }
         if(checkedId == R.id.nav_sign_out){
-           //sign out
+            Contractor.currUser = "";
+            Customer.currUser   = "";
+            //already on this page
+        //    Intent i = new Intent(this, MainActivity.class);
+        //    startActivity(i);
         }
         if(checkedId == R.id.nav_exit){
             finish();
@@ -136,11 +170,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return false;
     }
 
-    //load fragment method
-    public void loadFragment(Fragment fg){
-        FragmentManager fm = getSupportFragmentManager();
-        FragmentTransaction ft = fm.beginTransaction();
-        ft.replace(R.id.frameLay, fg );
-        ft.commit();
+    //hide menu item
+    private void hideItem()
+    {
+        NavigationView nv = findViewById(R.id.nav_view);
+        Menu nav_Menu = nv.getMenu();
+        nav_Menu.findItem(R.id.user_home).setVisible(false);
     }
+
 }

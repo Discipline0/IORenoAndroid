@@ -3,14 +3,17 @@ package com.ioreno.grecoantoine.ioreno.DBManager;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Pair;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
-import com.ioreno.grecoantoine.ioreno.Model.Contractor;
 import com.ioreno.grecoantoine.ioreno.Model.Customer;
+import com.ioreno.grecoantoine.ioreno.Model.Contractor;
 import com.ioreno.grecoantoine.ioreno.Model.Payment;
 import com.ioreno.grecoantoine.ioreno.Model.Project;
 import com.ioreno.grecoantoine.ioreno.Model.Proposal;
@@ -67,6 +70,7 @@ public class DBSQLiteManager extends SQLiteOpenHelper {
                 cus.setCustomerEmail(c.getString(c.getColumnIndex(Customer.CUSTOMER_COL_EMAIL)));
                 cus.setCustomerPhone(c.getString(c.getColumnIndex(Customer.CUSTOMER_COL_PHONE)));
                 cus.setCustomerPassword(c.getString(c.getColumnIndex(Customer.CUSTOMER_COL_PASSWORD)));
+                cus.setCustomerDateRegistered(c.getString(c.getColumnIndex(Customer.CUSTOMER_COL_DATE_REGISTERED)));
 
                 list.add(cus);
             } while (c.moveToNext());
@@ -244,6 +248,30 @@ public class DBSQLiteManager extends SQLiteOpenHelper {
         }
         return valid;
 
+    }
+
+    public void approveContractor(Contractor con){
+        Contractor contractor = new Contractor();
+        SQLiteDatabase db = this.getReadableDatabase();
+        ContentValues vals = new ContentValues();
+
+        vals.put(Contractor.CONTRACTOR_COL_APPROVED, 1);
+
+        db.update(Contractor.CONTRACTOR_TABLE_NAME, vals, Contractor.CONTRACTOR_COL_CO_NUM+"="+ con.getContractorCONum(), null);
+
+        db.close();
+    }
+
+    public void denyContractor(Contractor con){
+        Contractor contractor = new Contractor();
+        SQLiteDatabase db = this.getReadableDatabase();
+        ContentValues vals = new ContentValues();
+
+        vals.put(Contractor.CONTRACTOR_COL_APPROVED, 2);
+
+        db.update(Contractor.CONTRACTOR_TABLE_NAME, vals, Contractor.CONTRACTOR_COL_CO_NUM+"="+ con.getContractorCONum(), null);
+
+        db.close();
     }
 
     //Project**************************************************************************************
@@ -718,6 +746,29 @@ public class DBSQLiteManager extends SQLiteOpenHelper {
         c.close();
         db.close();
         return list;
+    }
+//Admin Methods
+
+    public long getCustomerCount(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        long count = DatabaseUtils.queryNumEntries(db,Customer.CUSTOMER_TABLE_NAME);
+        db.close();
+
+        return count;
+    }
+
+    public long getContractorCount(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        long count = DatabaseUtils.queryNumEntries(db,Contractor.CONTRACTOR_TABLE_NAME);
+        db.close();
+        return count;
+    }
+    public long getCustomerCountLastSevenDays(){
+        return 6;
+
+    }
+    public int getContractorCountLastSevenDays(){
+        return 2;
     }
 
     //Review***************************************************************************************
