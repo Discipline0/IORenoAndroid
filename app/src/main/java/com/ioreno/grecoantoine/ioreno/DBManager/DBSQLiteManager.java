@@ -248,6 +248,30 @@ public class DBSQLiteManager extends SQLiteOpenHelper {
 
     }
 
+    public void approveContractor(Contractor con){
+        Contractor contractor = new Contractor();
+        SQLiteDatabase db = this.getReadableDatabase();
+        ContentValues vals = new ContentValues();
+
+        vals.put(Contractor.CONTRACTOR_COL_APPROVED, 1);
+
+        db.update(Contractor.CONTRACTOR_TABLE_NAME, vals, Contractor.CONTRACTOR_COL_CO_NUM+"="+ con.getContractorCONum(), null);
+
+        db.close();
+    }
+
+    public void denyContractor(Contractor con){
+        Contractor contractor = new Contractor();
+        SQLiteDatabase db = this.getReadableDatabase();
+        ContentValues vals = new ContentValues();
+
+        vals.put(Contractor.CONTRACTOR_COL_APPROVED, 2);
+
+        db.update(Contractor.CONTRACTOR_TABLE_NAME, vals, Contractor.CONTRACTOR_COL_CO_NUM+"="+ con.getContractorCONum(), null);
+
+        db.close();
+    }
+
     //Project**************************************************************************************
     public static final String CREATE_PROJECT_TABLE_QUERY = "CREATE TABLE " + Project.PROJECT_TABLE_NAME + " (" +
             Project.PROJECT_COL_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +

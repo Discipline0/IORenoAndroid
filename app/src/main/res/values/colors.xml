@@ -15,4 +15,6 @@
     <color name="Green">#009900</color>
     <color name="LegendCustomer">#FF0055</color>
     <color name="LegendContractor">#03C0FF</color>"
+    <color name="CheckMarkGreen">#14b866</color>
+    <color name="TableBlue">#add8e6</color>
 </resources>

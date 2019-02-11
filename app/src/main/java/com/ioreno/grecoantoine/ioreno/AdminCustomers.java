@@ -48,7 +48,7 @@ public class AdminCustomers extends AppCompatActivity implements NavigationView.
 
         //header
         TableRow tr_head = new TableRow(this);
-        tr_head.setBackgroundColor(getResources().getColor(R.color.Blue));
+        tr_head.setBackgroundColor(getResources().getColor(R.color.TableBlue));
         tr_head.setLayoutParams(new TableLayout.LayoutParams(
                 TableLayout.LayoutParams.FILL_PARENT,
                 TableLayout.LayoutParams.WRAP_CONTENT));
@@ -79,7 +79,7 @@ public class AdminCustomers extends AppCompatActivity implements NavigationView.
         TextView customer_email = new TextView(this);
         customer_email.setText("Customer Email");
         customer_email.setTextColor(Color.BLACK);
-        customer_email.setPadding(5, 5, 30, 5);
+        customer_email.setPadding(5, 5, 300, 5);
         customer_email.setTypeface(null, Typeface.BOLD);
         tr_head.addView(customer_email);// add the column to the table row here
 
@@ -99,7 +99,7 @@ public class AdminCustomers extends AppCompatActivity implements NavigationView.
         int count = 0;
         for(Customer c : cust_list){
             TableRow tr = new TableRow(this);
-            if(count%2!=0) tr.setBackgroundColor(getResources().getColor(R.color.Blue));
+            if(count%2!=0) tr.setBackgroundColor(getResources().getColor(R.color.TableBlue));
             tr.setLayoutParams(new TableLayout.LayoutParams(
                     TableRow.LayoutParams.FILL_PARENT,
                     TableRow.LayoutParams.WRAP_CONTENT));
