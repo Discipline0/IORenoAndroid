@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Pair;
 
 import java.util.ArrayList;
 
@@ -330,6 +331,51 @@ public class DBSQLiteManager extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
 
         String GET_LIST = "SELECT * FROM " + Project.PROJECT_TABLE_NAME+";";
+        Cursor c = db.rawQuery(GET_LIST,null);
+
+        if (c.moveToFirst())
+        {
+            do {
+                Project proj = new Project();
+                proj.setProjectID(c.getInt(c.getColumnIndex(Project.PROJECT_COL_ID)));
+                proj.setCustomerEmail(c.getString(c.getColumnIndex(Project.PROJECT_COL_CUST_EMAIL)));
+                proj.setProjectDescription(c.getString(c.getColumnIndex(Project.PROJECT_COL_DESCRIPTION)));
+                proj.setProjectType(c.getString(c.getColumnIndex(Project.PROJECT_COL_TYPE)));
+                proj.setProjectBudget(c.getDouble(c.getColumnIndex(Project.PROJECT_COL_BUDGET)));
+                proj.setTitle(c.getString(c.getColumnIndex(Project.PROJECT_COL_TITLE)));
+                proj.setAddress(c.getString(c.getColumnIndex(Project.PROJECT_COL_ADDRESS)));
+                proj.setCity(c.getString(c.getColumnIndex(Project.PROJECT_COL_CITY)));
+                proj.setImage(c.getBlob(c.getColumnIndex(Project.PROJECT_COL_IMAGE)));
+                proj.setDatePosted(c.getString(c.getColumnIndex(Project.PROJECT_COL_DATE_POSTED)));
+
+                list.add(proj);
+            } while (c.moveToNext());
+        }
+        c.close();
+        db.close();
+        return list;
+    }
+
+    public ArrayList<Project> getPendingProjectList()
+    {
+        ArrayList<Project> list = new ArrayList<Project>();
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        String GET_LIST = "SELECT * FROM " + Project.PROJECT_TABLE_NAME + " EXCEPT "
+            + "SELECT "+ Project.PROJECT_TABLE_NAME + "." + Project.PROJECT_COL_ID + ","
+            + Project.PROJECT_TABLE_NAME + "." + Project.PROJECT_COL_CUST_EMAIL + ","
+            + Project.PROJECT_TABLE_NAME + "." + Project.PROJECT_COL_DESCRIPTION + ","
+            + Project.PROJECT_TABLE_NAME + "." + Project.PROJECT_COL_TYPE + ","
+            + Project.PROJECT_TABLE_NAME + "." + Project.PROJECT_COL_BUDGET + ","
+            + Project.PROJECT_TABLE_NAME + "." + Project.PROJECT_COL_TITLE + ","
+            + Project.PROJECT_TABLE_NAME + "." + Project.PROJECT_COL_ADDRESS + ","
+            + Project.PROJECT_TABLE_NAME + "." + Project.PROJECT_COL_CITY + ","
+            + Project.PROJECT_TABLE_NAME + "." + Project.PROJECT_COL_IMAGE + ","
+            + Project.PROJECT_TABLE_NAME + "." + Project.PROJECT_COL_DATE_POSTED
+            + " FROM " + Project.PROJECT_TABLE_NAME + "," + Proposal.PROPOSAL_TABLE_NAME
+            + " WHERE " + Proposal.PROPOSAL_TABLE_NAME + "." + Proposal.PROPOSAL_PROJECT_ID + " = "
+            + Project.PROJECT_TABLE_NAME + "." + Project.PROJECT_COL_ID + " AND " + Proposal.PROPOSAL_APPROVED
+            + " <> 2";
         Cursor c = db.rawQuery(GET_LIST,null);
 
         if (c.moveToFirst())
@@ -694,6 +740,26 @@ public class DBSQLiteManager extends SQLiteOpenHelper {
 
         db.replace(Review.REVIEW_TABLE_NAME, null, vals);
         db.close();
+    }
+
+    public double[] getReviewCountAndRatingForContractor(Contractor contractor)
+    {
+        double[] values = new double[2];
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        String GET_LIST = "SELECT COUNT(*), AVG("+ Review.REVIEW_COL_Rating +") FROM "
+                + Review.REVIEW_TABLE_NAME + " WHERE " + Review.REVIEW_COL_CON_NO + " = " + contractor.getContractorCONum() + ";";
+        Cursor c = db.rawQuery(GET_LIST,null);
+
+        if (c.moveToFirst())
+        {
+            values[0] = c.getInt(0);
+            values[1] = c.getDouble(1);
+        }
+
+        c.close();
+        db.close();
+        return values;
     }
 
 

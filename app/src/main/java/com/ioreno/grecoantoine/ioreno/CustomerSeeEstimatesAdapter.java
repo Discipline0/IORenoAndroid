@@ -2,6 +2,7 @@ package com.ioreno.grecoantoine.ioreno;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -73,11 +74,10 @@ public class CustomerSeeEstimatesAdapter extends RecyclerView.Adapter<CustomerSe
             @Override
             public void onClick(View v)
             {
-                // To Implement once we do the Reviews
-//                Intent intent = new Intent(v.getContext(), ContractorReadMoreActivity.class);
-//                intent.putExtra("project", project);
+                Intent intent = new Intent(v.getContext(), SeeReviewsActivity.class);
+                intent.putExtra("contractor", contractor);
 
-//                v.getContext().startActivity(intent);
+                v.getContext().startActivity(intent);
             }
         });
 
