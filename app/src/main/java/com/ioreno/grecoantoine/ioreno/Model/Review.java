@@ -14,6 +14,10 @@ public class Review
     public static final String REVIEW_COL_Rating      = "Review_Rating";
     public static final String REVIEW_COL_REVIEW_TEXT = "Review_Text";
 
+    public Review()
+    {
+    }
+
     public Review(int contractorNo, int customerId, int rating, String reviewText)
     {
         this.contractorNo = contractorNo;

@@ -17,6 +17,7 @@ import android.widget.Toast;
 import android.graphics.Typeface;
 
 import com.ioreno.grecoantoine.ioreno.DBManager.DBSQLiteManager;
+import com.ioreno.grecoantoine.ioreno.Model.Contractor;
 import com.ioreno.grecoantoine.ioreno.Model.Customer;
 
 import java.time.format.DateTimeFormatter;
@@ -186,6 +187,10 @@ public class AdminCustomers extends AppCompatActivity implements NavigationView.
             startActivity(i);
         }
         if(checkedId == R.id.nav_sign_out){
+            Contractor.currUser = "";
+            Customer.currUser = "";
+            AdminHome.isAdminLoggedIn = false;
+
             Intent i = new Intent(this, MainActivity.class);
             startActivity(i);
         }

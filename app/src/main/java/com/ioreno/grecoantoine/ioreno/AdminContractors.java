@@ -20,6 +20,7 @@ import android.widget.Toast;
 
 import com.ioreno.grecoantoine.ioreno.DBManager.DBSQLiteManager;
 import com.ioreno.grecoantoine.ioreno.Model.Contractor;
+import com.ioreno.grecoantoine.ioreno.Model.Customer;
 
 import java.util.ArrayList;
 
@@ -114,6 +115,16 @@ public class AdminContractors extends AppCompatActivity  implements NavigationVi
         contractor_deny.setTypeface(null, Typeface.BOLD);
         tr_head.addView( contractor_deny);// add the column
 
+        if (AdminHome.isAdminLoggedIn)
+        {
+            TextView reviews_header = new TextView(this);
+            reviews_header.setText("Reviews");
+            reviews_header.setTextColor(Color.BLACK);
+            reviews_header.setPadding(20, 5, 150, 5);
+            reviews_header.setTypeface(null, Typeface.BOLD);
+            tr_head.addView(reviews_header);// add the column
+        }
+
         tl.addView(tr_head, new TableLayout.LayoutParams(
                 TableLayout.LayoutParams.FILL_PARENT,
                 TableLayout.LayoutParams.WRAP_CONTENT));
@@ -140,6 +151,8 @@ public class AdminContractors extends AppCompatActivity  implements NavigationVi
             Button btnConDeny = new Button(this);
             ImageView imgConApprove = new ImageView(this);
             ImageView imgConDeny = new ImageView(this);
+            Button btnSeeReviews = new Button(this);
+            TextView labelNoReview = new TextView(this);
 
 
             labelCompNum.setText((c.getContractorCONum()+""));
@@ -172,7 +185,8 @@ public class AdminContractors extends AppCompatActivity  implements NavigationVi
             labelConDate.setTextColor(Color.BLACK);
             tr.addView(labelConDate);
 
-            if(c.getApproved() == 0) {
+            if(c.getApproved() == 0)
+            {
                 btnConApprove.setText("Approve");
                 btnConApprove.setId(c.getContractorCONum());
                 btnConApprove.setPadding(2, 0, 5, 0);
@@ -191,7 +205,6 @@ public class AdminContractors extends AppCompatActivity  implements NavigationVi
                    }
                 });
 
-
                 btnConDeny.setText("Deny");
                 btnConDeny.setPadding(2, 0, 5, 0);
                 btnConDeny.setBackgroundTintList(this.getResources().getColorStateList(R.color.LegendCustomer));
@@ -208,7 +221,8 @@ public class AdminContractors extends AppCompatActivity  implements NavigationVi
 
                 tr.addView(btnConDeny);
             }
-            else{
+            else
+            {
                 //they arent black its a jebait
                 //forgot to change name :^)
                 imgConApprove.setImageResource(R.drawable.ic_check_black_24dp);
@@ -224,21 +238,43 @@ public class AdminContractors extends AppCompatActivity  implements NavigationVi
 
             }
 
+            if (AdminHome.isAdminLoggedIn)
+            {
+                DBSQLiteManager manager = new DBSQLiteManager(this);
+                boolean isThereReview = !manager.getReviewListForContractor(c).isEmpty();
 
+                if (isThereReview)
+                {
+                    btnSeeReviews.setText("See Reviews");
+                    btnSeeReviews.setPadding(0, 0, 0, 0);
+                    btnSeeReviews.setBackgroundTintList(this.getResources().getColorStateList(R.color.DarkerBlue));
+                    btnSeeReviews.setTextColor(Color.WHITE);
+
+                    btnSeeReviews.setOnClickListener(new View.OnClickListener(){
+                        public void onClick(View v){
+                            Intent intent = new Intent(v.getContext(), SeeReviewsActivity.class);
+                            intent.putExtra("contractor", c);
+
+                            startActivity(intent);
+                        }
+                    });
+
+                    tr.addView(btnSeeReviews);
+                }
+                else
+                {
+                    labelNoReview.setText("There is no review available.");
+                    labelNoReview.setPadding(2, 0, 5, 0);
+                    labelNoReview.setTextColor(Color.BLACK);
+                    tr.addView(labelNoReview);
+                }
+
+            }
 
             tl.addView(tr, new TableLayout.LayoutParams(
                     TableRow.LayoutParams.FILL_PARENT,
                     TableRow.LayoutParams.WRAP_CONTENT));
         }
-
-
-
-
-
-
-
-
-
     }
 
     public ArrayList<Contractor> getConList(){
@@ -286,6 +322,10 @@ public class AdminContractors extends AppCompatActivity  implements NavigationVi
             startActivity(i);
         }
         if(checkedId == R.id.nav_sign_out){
+            Contractor.currUser = "";
+            Customer.currUser = "";
+            AdminHome.isAdminLoggedIn = false;
+
             Intent i = new Intent(this, MainActivity.class);
             startActivity(i);
         }

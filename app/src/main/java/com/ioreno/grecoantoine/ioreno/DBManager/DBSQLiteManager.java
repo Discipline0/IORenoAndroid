@@ -18,6 +18,7 @@ import com.ioreno.grecoantoine.ioreno.Model.Payment;
 import com.ioreno.grecoantoine.ioreno.Model.Project;
 import com.ioreno.grecoantoine.ioreno.Model.Proposal;
 import com.ioreno.grecoantoine.ioreno.Model.Review;
+import com.ioreno.grecoantoine.ioreno.R;
 
 public class DBSQLiteManager extends SQLiteOpenHelper {
     private static final int DATABASE_VERSION = 2;
@@ -36,7 +37,7 @@ public class DBSQLiteManager extends SQLiteOpenHelper {
             Customer.CUSTOMER_COL_DATE_REGISTERED + " TEXT" +
             ")";
 
-    public void addCustomer(Customer c )
+    public void addCustomer(Customer c)
     {
 
         SQLiteDatabase db = this.getWritableDatabase();
@@ -87,6 +88,28 @@ public class DBSQLiteManager extends SQLiteOpenHelper {
 
         String GET_LIST = "SELECT * FROM " + Customer.CUSTOMER_TABLE_NAME+" WHERE " + Customer.CUSTOMER_COL_EMAIL
                 + " = '" + email + "';";
+        Cursor c = db.rawQuery(GET_LIST,null);
+
+        if (c.moveToFirst())
+        {
+            customer.setCustomerID(c.getInt(c.getColumnIndex(Customer.CUSTOMER_COL_ID)));
+            customer.setCustomerName(c.getString(c.getColumnIndex(Customer.CUSTOMER_COL_NAME)));
+            customer.setCustomerEmail(c.getString(c.getColumnIndex(Customer.CUSTOMER_COL_EMAIL)));
+            customer.setCustomerPhone(c.getString(c.getColumnIndex(Customer.CUSTOMER_COL_PHONE)));
+            customer.setCustomerPassword(c.getString(c.getColumnIndex(Customer.CUSTOMER_COL_PASSWORD)));
+        }
+        c.close();
+        db.close();
+        return customer;
+    }
+
+    public Customer getCustomerFromId(int customerId)
+    {
+        Customer customer = new Customer();
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        String GET_LIST = "SELECT * FROM " + Customer.CUSTOMER_TABLE_NAME+" WHERE " + Customer.CUSTOMER_COL_ID
+                + " = " + customerId + ";";
         Cursor c = db.rawQuery(GET_LIST,null);
 
         if (c.moveToFirst())
@@ -779,6 +802,34 @@ public class DBSQLiteManager extends SQLiteOpenHelper {
             Review.REVIEW_COL_REVIEW_TEXT + " TEXT," +
             "PRIMARY KEY (" + Review.REVIEW_COL_CON_NO + "," + Review.REVIEW_COL_CUST_ID + "))";
 
+    public ArrayList<Review> getReviewListForContractor(Contractor contractor)
+    {
+        ArrayList<Review> list = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        String GET_LIST = "SELECT * FROM " + Review.REVIEW_TABLE_NAME +" WHERE "
+                + Review.REVIEW_COL_CON_NO + " = " + contractor.getContractorCONum() + ";";
+        Cursor c = db.rawQuery(GET_LIST,null);
+
+        if (c.moveToFirst())
+        {
+            do {
+                Review review = new Review();
+
+                review.setContractorNo(c.getInt(c.getColumnIndex(Review.REVIEW_COL_CON_NO)));
+                review.setCustomerId(c.getInt(c.getColumnIndex(Review.REVIEW_COL_CUST_ID)));
+                review.setRating(c.getInt(c.getColumnIndex(Review.REVIEW_COL_Rating)));
+                review.setReviewText(c.getString(c.getColumnIndex(Review.REVIEW_COL_REVIEW_TEXT)));
+
+                list.add(review);
+            } while (c.moveToNext());
+        }
+
+        c.close();
+        db.close();
+        return list;
+    }
+
     public void insertOrReplaceReview(Review review)
     {
         SQLiteDatabase db = this.getWritableDatabase();
@@ -791,6 +842,19 @@ public class DBSQLiteManager extends SQLiteOpenHelper {
 
         db.replace(Review.REVIEW_TABLE_NAME, null, vals);
         db.close();
+    }
+
+    public boolean deleteReview(Review review)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        boolean isDeleted = db.delete(
+                Review.REVIEW_TABLE_NAME,
+                Review.REVIEW_COL_CON_NO + "=" + review.getContractorNo() + " AND "
+                        + Review.REVIEW_COL_CUST_ID + "=" + review.getCustomerId(),
+                null) > 0;
+        db.close();
+
+        return isDeleted;
     }
 
     public double[] getReviewCountAndRatingForContractor(Contractor contractor)
