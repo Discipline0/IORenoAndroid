@@ -88,8 +88,7 @@ public class ContractorHome extends AppCompatActivity implements NavigationView.
 
         manager = new DBSQLiteManager(this);
 
-        // Change this for project that weren't accepted
-        projects = manager.getProjectList();
+        projects = manager.getPendingProjectList();
 
         adapter = new ProjectContractorHomeAdapter(projects);
         recyclerView.setAdapter(adapter);

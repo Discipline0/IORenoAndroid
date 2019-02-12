@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Pair;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -16,9 +17,11 @@ import com.ioreno.grecoantoine.ioreno.Model.Contractor;
 import com.ioreno.grecoantoine.ioreno.Model.Payment;
 import com.ioreno.grecoantoine.ioreno.Model.Project;
 import com.ioreno.grecoantoine.ioreno.Model.Proposal;
+import com.ioreno.grecoantoine.ioreno.Model.Review;
+import com.ioreno.grecoantoine.ioreno.R;
 
 public class DBSQLiteManager extends SQLiteOpenHelper {
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2;
     private static final String DATABASE_NAME = "IOReno_Android_SQLite_DB";
     public DBSQLiteManager(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -34,7 +37,7 @@ public class DBSQLiteManager extends SQLiteOpenHelper {
             Customer.CUSTOMER_COL_DATE_REGISTERED + " TEXT" +
             ")";
 
-    public void addCustomer(Customer c )
+    public void addCustomer(Customer c)
     {
 
         SQLiteDatabase db = this.getWritableDatabase();
@@ -85,6 +88,28 @@ public class DBSQLiteManager extends SQLiteOpenHelper {
 
         String GET_LIST = "SELECT * FROM " + Customer.CUSTOMER_TABLE_NAME+" WHERE " + Customer.CUSTOMER_COL_EMAIL
                 + " = '" + email + "';";
+        Cursor c = db.rawQuery(GET_LIST,null);
+
+        if (c.moveToFirst())
+        {
+            customer.setCustomerID(c.getInt(c.getColumnIndex(Customer.CUSTOMER_COL_ID)));
+            customer.setCustomerName(c.getString(c.getColumnIndex(Customer.CUSTOMER_COL_NAME)));
+            customer.setCustomerEmail(c.getString(c.getColumnIndex(Customer.CUSTOMER_COL_EMAIL)));
+            customer.setCustomerPhone(c.getString(c.getColumnIndex(Customer.CUSTOMER_COL_PHONE)));
+            customer.setCustomerPassword(c.getString(c.getColumnIndex(Customer.CUSTOMER_COL_PASSWORD)));
+        }
+        c.close();
+        db.close();
+        return customer;
+    }
+
+    public Customer getCustomerFromId(int customerId)
+    {
+        Customer customer = new Customer();
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        String GET_LIST = "SELECT * FROM " + Customer.CUSTOMER_TABLE_NAME+" WHERE " + Customer.CUSTOMER_COL_ID
+                + " = " + customerId + ";";
         Cursor c = db.rawQuery(GET_LIST,null);
 
         if (c.moveToFirst())
@@ -357,6 +382,51 @@ public class DBSQLiteManager extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
 
         String GET_LIST = "SELECT * FROM " + Project.PROJECT_TABLE_NAME+";";
+        Cursor c = db.rawQuery(GET_LIST,null);
+
+        if (c.moveToFirst())
+        {
+            do {
+                Project proj = new Project();
+                proj.setProjectID(c.getInt(c.getColumnIndex(Project.PROJECT_COL_ID)));
+                proj.setCustomerEmail(c.getString(c.getColumnIndex(Project.PROJECT_COL_CUST_EMAIL)));
+                proj.setProjectDescription(c.getString(c.getColumnIndex(Project.PROJECT_COL_DESCRIPTION)));
+                proj.setProjectType(c.getString(c.getColumnIndex(Project.PROJECT_COL_TYPE)));
+                proj.setProjectBudget(c.getDouble(c.getColumnIndex(Project.PROJECT_COL_BUDGET)));
+                proj.setTitle(c.getString(c.getColumnIndex(Project.PROJECT_COL_TITLE)));
+                proj.setAddress(c.getString(c.getColumnIndex(Project.PROJECT_COL_ADDRESS)));
+                proj.setCity(c.getString(c.getColumnIndex(Project.PROJECT_COL_CITY)));
+                proj.setImage(c.getBlob(c.getColumnIndex(Project.PROJECT_COL_IMAGE)));
+                proj.setDatePosted(c.getString(c.getColumnIndex(Project.PROJECT_COL_DATE_POSTED)));
+
+                list.add(proj);
+            } while (c.moveToNext());
+        }
+        c.close();
+        db.close();
+        return list;
+    }
+
+    public ArrayList<Project> getPendingProjectList()
+    {
+        ArrayList<Project> list = new ArrayList<Project>();
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        String GET_LIST = "SELECT * FROM " + Project.PROJECT_TABLE_NAME + " EXCEPT "
+            + "SELECT "+ Project.PROJECT_TABLE_NAME + "." + Project.PROJECT_COL_ID + ","
+            + Project.PROJECT_TABLE_NAME + "." + Project.PROJECT_COL_CUST_EMAIL + ","
+            + Project.PROJECT_TABLE_NAME + "." + Project.PROJECT_COL_DESCRIPTION + ","
+            + Project.PROJECT_TABLE_NAME + "." + Project.PROJECT_COL_TYPE + ","
+            + Project.PROJECT_TABLE_NAME + "." + Project.PROJECT_COL_BUDGET + ","
+            + Project.PROJECT_TABLE_NAME + "." + Project.PROJECT_COL_TITLE + ","
+            + Project.PROJECT_TABLE_NAME + "." + Project.PROJECT_COL_ADDRESS + ","
+            + Project.PROJECT_TABLE_NAME + "." + Project.PROJECT_COL_CITY + ","
+            + Project.PROJECT_TABLE_NAME + "." + Project.PROJECT_COL_IMAGE + ","
+            + Project.PROJECT_TABLE_NAME + "." + Project.PROJECT_COL_DATE_POSTED
+            + " FROM " + Project.PROJECT_TABLE_NAME + "," + Proposal.PROPOSAL_TABLE_NAME
+            + " WHERE " + Proposal.PROPOSAL_TABLE_NAME + "." + Proposal.PROPOSAL_PROJECT_ID + " = "
+            + Project.PROJECT_TABLE_NAME + "." + Project.PROJECT_COL_ID + " AND " + Proposal.PROPOSAL_APPROVED
+            + " <> 2";
         Cursor c = db.rawQuery(GET_LIST,null);
 
         if (c.moveToFirst())
@@ -752,8 +822,88 @@ public class DBSQLiteManager extends SQLiteOpenHelper {
         return 0;
     }
 
+    //Review***************************************************************************************
+    public static final String CREATE_REVIEW_QUERY = "CREATE TABLE " + Review.REVIEW_TABLE_NAME + " (" +
+            Review.REVIEW_COL_CON_NO + " INTEGER," +
+            Review.REVIEW_COL_CUST_ID + " INTEGER," +
+            Review.REVIEW_COL_Rating + " INTEGER," +
+            Review.REVIEW_COL_REVIEW_TEXT + " TEXT," +
+            "PRIMARY KEY (" + Review.REVIEW_COL_CON_NO + "," + Review.REVIEW_COL_CUST_ID + "))";
 
+    public ArrayList<Review> getReviewListForContractor(Contractor contractor)
+    {
+        ArrayList<Review> list = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
 
+        String GET_LIST = "SELECT * FROM " + Review.REVIEW_TABLE_NAME +" WHERE "
+                + Review.REVIEW_COL_CON_NO + " = " + contractor.getContractorCONum() + ";";
+        Cursor c = db.rawQuery(GET_LIST,null);
+
+        if (c.moveToFirst())
+        {
+            do {
+                Review review = new Review();
+
+                review.setContractorNo(c.getInt(c.getColumnIndex(Review.REVIEW_COL_CON_NO)));
+                review.setCustomerId(c.getInt(c.getColumnIndex(Review.REVIEW_COL_CUST_ID)));
+                review.setRating(c.getInt(c.getColumnIndex(Review.REVIEW_COL_Rating)));
+                review.setReviewText(c.getString(c.getColumnIndex(Review.REVIEW_COL_REVIEW_TEXT)));
+
+                list.add(review);
+            } while (c.moveToNext());
+        }
+
+        c.close();
+        db.close();
+        return list;
+    }
+
+    public void insertOrReplaceReview(Review review)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues vals = new ContentValues();
+
+        vals.put(Review.REVIEW_COL_CON_NO, review.getContractorNo());
+        vals.put(Review.REVIEW_COL_CUST_ID, review.getCustomerId());
+        vals.put(Review.REVIEW_COL_Rating, review.getRating());
+        vals.put(Review.REVIEW_COL_REVIEW_TEXT, review.getReviewText());
+
+        db.replace(Review.REVIEW_TABLE_NAME, null, vals);
+        db.close();
+    }
+
+    public boolean deleteReview(Review review)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        boolean isDeleted = db.delete(
+                Review.REVIEW_TABLE_NAME,
+                Review.REVIEW_COL_CON_NO + "=" + review.getContractorNo() + " AND "
+                        + Review.REVIEW_COL_CUST_ID + "=" + review.getCustomerId(),
+                null) > 0;
+        db.close();
+
+        return isDeleted;
+    }
+
+    public double[] getReviewCountAndRatingForContractor(Contractor contractor)
+    {
+        double[] values = new double[2];
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        String GET_LIST = "SELECT COUNT(*), AVG("+ Review.REVIEW_COL_Rating +") FROM "
+                + Review.REVIEW_TABLE_NAME + " WHERE " + Review.REVIEW_COL_CON_NO + " = " + contractor.getContractorCONum() + ";";
+        Cursor c = db.rawQuery(GET_LIST,null);
+
+        if (c.moveToFirst())
+        {
+            values[0] = c.getInt(0);
+            values[1] = c.getDouble(1);
+        }
+
+        c.close();
+        db.close();
+        return values;
+    }
 
 
     //General Methods******************************************************************************
@@ -787,6 +937,7 @@ public class DBSQLiteManager extends SQLiteOpenHelper {
         db.execSQL(CREATE_PROJECT_TABLE_QUERY);
         db.execSQL(CREATE_PROPOSAL_QUERY);
         db.execSQL(CREATE_PAYMENT_QUERY);
+        db.execSQL(CREATE_REVIEW_QUERY);
     }
 
     @Override

@@ -10,6 +10,9 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.ioreno.grecoantoine.ioreno.Model.Contractor;
+import com.ioreno.grecoantoine.ioreno.Model.Customer;
+
 public class AdminDeniedPayments extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
     //  private DrawerLayout dl;
     private DrawerLayout dlAdmin;
@@ -69,6 +72,10 @@ public class AdminDeniedPayments extends AppCompatActivity implements Navigation
             startActivity(i);
         }
         if(checkedId == R.id.nav_sign_out){
+            Contractor.currUser = "";
+            Customer.currUser = "";
+            AdminHome.isAdminLoggedIn = false;
+
             Intent i = new Intent(this, MainActivity.class);
             startActivity(i);
         }
