@@ -716,12 +716,40 @@ public class DBSQLiteManager extends SQLiteOpenHelper {
         db.close();
         return count;
     }
-    public long getCustomerCountLastSevenDays(){
-        return 6;
+    public long getCustomerCountLastSevenDays()
+    {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String GET_LIST = "SELECT COUNT(*) FROM " + Customer.CUSTOMER_TABLE_NAME + " WHERE "
+                + Customer.CUSTOMER_COL_DATE_REGISTERED + " < (date('now') - 7);";
 
+        Cursor c = db.rawQuery(GET_LIST,null);
+        if (c.moveToFirst())
+        {
+            return c.getLong(0);
+        }
+
+        c.close();
+        db.close();
+
+        return 0;
     }
-    public int getContractorCountLastSevenDays(){
-        return 2;
+
+    public long getContractorCountLastSevenDays()
+    {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String GET_LIST = "SELECT COUNT(*) FROM " + Contractor.CONTRACTOR_TABLE_NAME + " WHERE "
+                + Contractor.CONTRACTOR_COL_DATE_REGISTERED + " < (date('now') - 7);";
+
+        Cursor c = db.rawQuery(GET_LIST,null);
+        if (c.moveToFirst())
+        {
+            return c.getLong(0);
+        }
+
+        c.close();
+        db.close();
+
+        return 0;
     }
 
 
