@@ -19,9 +19,15 @@
         <activity android:name=".AdminCustomers" />
         <activity android:name=".AdminHome" />
         <activity android:name=".ContractorSeeEstimatesItemActivity"></activity>
+        <activity android:name=".SeeReviewsActivity"></activity>
+        <activity android:name=".ContractorSeeEstimatesItemActivity" />
         <activity android:name=".ContractorSeeEstimatesActivity" />
         <activity android:name=".customerSeeEstimatesItemActivity"></activity>
         <activity android:name=".GetCustomerInfoActivity"></activity>
+        <activity android:name=".customerSeeEstimatesItemActivity" />
+        <activity android:name=".GetCustomerInfoActivity" />
+        <activity android:name=".customerSeeEstimatesItemActivity" />
+        <activity android:name=".LeaveReviewActivity" />
         <activity android:name=".customerSeeEstimatesItemActivity" />
         <activity android:name=".CustomerSeeEstimatesActivity" />
         <activity android:name=".CustomerEditProject" />

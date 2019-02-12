@@ -53,7 +53,7 @@ public class GetCustomerInfoActivity extends AppCompatActivity
         TextView txtCustEmail = findViewById(R.id.txtGetCustInfoCustomerEmailValue);
 
         txtCustName.setText(" " + customer.getCustomerName());
-        String phoneNumber = customer.getCustomerPhone();
+        String phoneNumber = customer.getCustomerPhone().replace("-", "");
         txtCustPhone.setText(" (" + phoneNumber.substring(0, 3) + ") "+ phoneNumber.substring(3, 6)
                 + "-" + phoneNumber.substring(6, 10));
         txtCustEmail.setText(" " + customer.getCustomerEmail());

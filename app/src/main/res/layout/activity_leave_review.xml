@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:visibility="visible"
+    tools:context=".LeaveReviewActivity">
+
+    <TextView
+        android:id="@+id/txtLeaveReviewTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/LeaveAReview"
+        android:textSize="30sp" />
+
+    <TextView
+        android:id="@+id/txtLeaveReviewError"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/YouMustSelectARating"
+        android:textColor="@color/Red"
+        android:textSize="16sp"
+        android:visibility="gone" />
+
+    <RatingBar
+        android:id="@+id/ratingBarReviewValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:numStars="5"
+        android:stepSize="1"
+        android:theme="@style/RatingBar"/>
+
+    <TextView
+        android:id="@+id/txtReviewLeaveAReview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/LeaveAReview" />
+
+    <EditText
+        android:id="@+id/editReviewText"
+        android:layout_width="match_parent"
+        android:layout_height="109dp"
+        android:ems="10"
+        android:inputType="textMultiLine" />
+
+    <Button
+        android:id="@+id/btnReviewSubmitReview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/DarkerBlue"
+        android:onClick="btnSubmitReview_onClick"
+        android:text="@string/SubmitReview"
+        android:textColor="@android:color/background_light" />
+
+    <Button
+        android:id="@+id/btnReviewGoBack"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/Red"
+        android:onClick="btnGoBack_onClick"
+        android:text="@string/CreateNewProjectGoBack"
+        android:textColor="@android:color/background_light" />
+</LinearLayout>
