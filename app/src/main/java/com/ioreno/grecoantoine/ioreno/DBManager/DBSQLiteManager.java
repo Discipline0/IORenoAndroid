@@ -790,7 +790,7 @@ public class DBSQLiteManager extends SQLiteOpenHelper {
     {
         SQLiteDatabase db = this.getReadableDatabase();
         String GET_LIST = "SELECT COUNT(*) FROM " + Customer.CUSTOMER_TABLE_NAME + " WHERE "
-                + Customer.CUSTOMER_COL_DATE_REGISTERED + " < (date('now') - 7);";
+                + Customer.CUSTOMER_COL_DATE_REGISTERED + " > date('now', '-7 day');";
 
         Cursor c = db.rawQuery(GET_LIST,null);
         if (c.moveToFirst())
@@ -808,7 +808,7 @@ public class DBSQLiteManager extends SQLiteOpenHelper {
     {
         SQLiteDatabase db = this.getReadableDatabase();
         String GET_LIST = "SELECT COUNT(*) FROM " + Contractor.CONTRACTOR_TABLE_NAME + " WHERE "
-                + Contractor.CONTRACTOR_COL_DATE_REGISTERED + " < (date('now') - 7);";
+                + Contractor.CONTRACTOR_COL_DATE_REGISTERED + " > date('now', '-7 day');";
 
         Cursor c = db.rawQuery(GET_LIST,null);
         if (c.moveToFirst())

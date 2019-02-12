@@ -106,8 +106,8 @@ public void drawPie(){
 
         config.startAngle(-90)// Starting angle offset
                 //put row values here, does math antumatically
-                .addData(new SimplePieInfo(custCount, Color.parseColor("#FF0055"), custCount+"a"))//Data (bean that implements the IPieInfo interface)
-                .addData(new SimplePieInfo(conCount, Color.parseColor("#03C0FF"), conCount+"a")).drawText(true)
+                .addData(new SimplePieInfo(custCount, Color.parseColor("#FF0055"), custCount+""))//Data (bean that implements the IPieInfo interface)
+                .addData(new SimplePieInfo(conCount, Color.parseColor("#03C0FF"), conCount+"")).drawText(true)
                 .duration(2000).textSize(50).canTouch(true);// draw pie animation duration
 
 // The following two sentences can be replace directly 'mAnimatedPieView.start (config); '
