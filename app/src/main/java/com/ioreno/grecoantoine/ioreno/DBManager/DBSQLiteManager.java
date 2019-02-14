@@ -744,6 +744,8 @@ public class DBSQLiteManager extends SQLiteOpenHelper {
         db.close();
     }
 
+
+
     public ArrayList<Payment> getPaymentList()
     {
         ArrayList<Payment> list = new ArrayList<Payment>();
@@ -770,11 +772,61 @@ public class DBSQLiteManager extends SQLiteOpenHelper {
         db.close();
         return list;
     }
+
+    public ArrayList<Payment> getDeniedPaymentList()
+    {
+        ArrayList<Payment> list = new ArrayList<Payment>();
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        String GET_LIST = "SELECT * FROM " + Payment.PAYMENT_TABLE_NAME
+                + " WHERE " + Payment.PAYMENT_STATUS + " = 0;";
+        Cursor c = db.rawQuery(GET_LIST,null);
+
+        if (c.moveToFirst())
+        {
+            do {
+                Payment pay = new Payment();
+                pay.setPaymentID(c.getInt(c.getColumnIndex(Payment.PAYMENT_ID)));
+                pay.setContractorCONum(c.getInt(c.getColumnIndex(Payment.PAYMENT_CONTRACTOR_CO_NUM)));
+                pay.setPaymentAmount(c.getDouble(c.getColumnIndex(Payment.PAYMENT_AMOUNT)));
+                pay.setProposalID(c.getInt(c.getColumnIndex(Payment.PAYMENT_PROPOSAL_ID)));
+                pay.setPaymentStatus(c.getInt(c.getColumnIndex(Payment.PAYMENT_STATUS)));
+                pay.setPaymentDate(c.getString(c.getColumnIndex(Payment.PAYMENT_DATE)));
+
+                list.add(pay);
+            } while (c.moveToNext());
+        }
+        c.close();
+        db.close();
+        return list;
+    }
+
+    public long getPaymentCount(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        long count = DatabaseUtils.queryNumEntries(db,Payment.PAYMENT_TABLE_NAME);
+        db.close();
+
+        return count;
+    }
+
+    public double getTotalPayments(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String GET_LIST = "SELECT SUM("+ Payment.PAYMENT_AMOUNT+") FROM "+Payment.PAYMENT_TABLE_NAME+";";
+        Cursor c = db.rawQuery(GET_LIST,null);
+        double total = 0;
+
+        if(c.moveToFirst()){
+                total = c.getDouble(0);
+        }
+        return total;
+    }
+
 //Admin Methods
 
     public long getCustomerCount(){
         SQLiteDatabase db = this.getWritableDatabase();
         long count = DatabaseUtils.queryNumEntries(db,Customer.CUSTOMER_TABLE_NAME);
+
         db.close();
 
         return count;
@@ -937,6 +989,19 @@ public class DBSQLiteManager extends SQLiteOpenHelper {
         db.execSQL(CREATE_PROJECT_TABLE_QUERY);
         db.execSQL(CREATE_PROPOSAL_QUERY);
         db.execSQL(CREATE_PAYMENT_QUERY);
+
+        //fake data for now
+        Payment p1 = new Payment(0,1,6.99,1,1);
+        Payment p2 = new Payment(0,2,12.99,2,0);
+        Payment p3 = new Payment(0,3,3.99,3,1);
+        Payment p4 = new Payment(0,4,24.99,4,1);
+        Payment p5 = new Payment(0,5,7.99,5,0);
+
+        addPayment(p1);
+        addPayment(p2);
+        addPayment(p3);
+        addPayment(p4);
+        addPayment(p5);
         db.execSQL(CREATE_REVIEW_QUERY);
     }
 
