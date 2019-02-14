@@ -104,66 +104,64 @@ public class AdminDeniedPayments extends AppCompatActivity implements Navigation
                 TableLayout.LayoutParams.WRAP_CONTENT));
 
         int count = 0;
-        ArrayList<Payment> pay_list = getPaymentList();
+        ArrayList<Payment> pay_list = getDeniedPaymentList();
         for(Payment p : pay_list){
-            if(p.getPaymentStatus() == 0) {
-                TableRow tr = new TableRow(this);
-                if (count % 2 != 0)
-                    tr.setBackgroundColor(getResources().getColor(R.color.TableBlue));
-                tr.setLayoutParams(new TableLayout.LayoutParams(
-                        TableRow.LayoutParams.FILL_PARENT,
-                        TableRow.LayoutParams.WRAP_CONTENT));
-                TextView paymentID = new TextView(this);
-                TextView companyNum = new TextView(this);
-                TextView paymentAMT = new TextView(this);
-                TextView proposalID = new TextView(this);
-                TextView paymentStatus = new TextView(this);
-                TextView paymentDate = new TextView(this);
+            TableRow tr = new TableRow(this);
+            if (count % 2 != 0)
+                tr.setBackgroundColor(getResources().getColor(R.color.TableBlue));
+            tr.setLayoutParams(new TableLayout.LayoutParams(
+                    TableRow.LayoutParams.FILL_PARENT,
+                    TableRow.LayoutParams.WRAP_CONTENT));
+            TextView paymentID = new TextView(this);
+            TextView companyNum = new TextView(this);
+            TextView paymentAMT = new TextView(this);
+            TextView proposalID = new TextView(this);
+            TextView paymentStatus = new TextView(this);
+            TextView paymentDate = new TextView(this);
 
-                NumberFormat df = new DecimalFormat("#.00");
+            NumberFormat df = new DecimalFormat("#.00");
 
-                paymentID.setText(p.getPaymentID() + "");
-                paymentID.setPadding(2, 0, 5, 0);
-                paymentID.setTextColor(Color.BLACK);
-                tr.addView(paymentID);
+            paymentID.setText(p.getPaymentID() + "");
+            paymentID.setPadding(2, 0, 5, 0);
+            paymentID.setTextColor(Color.BLACK);
+            tr.addView(paymentID);
 
-                companyNum.setText(p.getContractorCONum() + "");
-                companyNum.setPadding(2, 0, 5, 0);
-                companyNum.setTextColor(Color.BLACK);
-                tr.addView(companyNum);
+            companyNum.setText(p.getContractorCONum() + "");
+            companyNum.setPadding(2, 0, 5, 0);
+            companyNum.setTextColor(Color.BLACK);
+            tr.addView(companyNum);
 
-                paymentAMT.setText(df.format(p.getPaymentAmount()) + " ");
-                paymentAMT.setPadding(2, 0, 5, 0);
-                paymentAMT.setTextColor(Color.BLACK);
-                tr.addView(paymentAMT);
+            paymentAMT.setText(df.format(p.getPaymentAmount()) + " ");
+            paymentAMT.setPadding(2, 0, 5, 0);
+            paymentAMT.setTextColor(Color.BLACK);
+            tr.addView(paymentAMT);
 
-                proposalID.setText(p.getProposalID() + "");
-                proposalID.setPadding(2, 0, 5, 0);
-                proposalID.setTextColor(Color.BLACK);
-                tr.addView(proposalID);
+            proposalID.setText(p.getProposalID() + "");
+            proposalID.setPadding(2, 0, 5, 0);
+            proposalID.setTextColor(Color.BLACK);
+            tr.addView(proposalID);
 
-                paymentStatus.setText(p.getPaymentStatus() + "");
-                paymentStatus.setPadding(2, 0, 5, 0);
-                paymentStatus.setTextColor(Color.BLACK);
-                tr.addView(paymentStatus);
+            paymentStatus.setText(p.getPaymentStatus() + "");
+            paymentStatus.setPadding(2, 0, 5, 0);
+            paymentStatus.setTextColor(Color.BLACK);
+            tr.addView(paymentStatus);
 
-                paymentDate.setText(p.getPaymentDate().substring(0, 10));
-                paymentDate.setPadding(2, 0, 5, 0);
-                paymentDate.setTextColor(Color.BLACK);
-                tr.addView(paymentDate);
+            paymentDate.setText(p.getPaymentDate().substring(0, 10));
+            paymentDate.setPadding(2, 0, 5, 0);
+            paymentDate.setTextColor(Color.BLACK);
+            tr.addView(paymentDate);
 
-                tl.addView(tr, new TableLayout.LayoutParams(
-                        TableRow.LayoutParams.FILL_PARENT,
-                        TableRow.LayoutParams.WRAP_CONTENT));
+            tl.addView(tr, new TableLayout.LayoutParams(
+                    TableRow.LayoutParams.FILL_PARENT,
+                    TableRow.LayoutParams.WRAP_CONTENT));
 
-                count++;
-            }
+            count++;
         }
     }
 
-    public ArrayList<Payment> getPaymentList(){
+    public ArrayList<Payment> getDeniedPaymentList(){
         DBSQLiteManager db = new DBSQLiteManager(this);
-        return db.getPaymentList();
+        return db.getDeniedPaymentList();
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

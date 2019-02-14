@@ -773,6 +773,34 @@ public class DBSQLiteManager extends SQLiteOpenHelper {
         return list;
     }
 
+    public ArrayList<Payment> getDeniedPaymentList()
+    {
+        ArrayList<Payment> list = new ArrayList<Payment>();
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        String GET_LIST = "SELECT * FROM " + Payment.PAYMENT_TABLE_NAME
+                + " WHERE " + Payment.PAYMENT_STATUS + " = 0;";
+        Cursor c = db.rawQuery(GET_LIST,null);
+
+        if (c.moveToFirst())
+        {
+            do {
+                Payment pay = new Payment();
+                pay.setPaymentID(c.getInt(c.getColumnIndex(Payment.PAYMENT_ID)));
+                pay.setContractorCONum(c.getInt(c.getColumnIndex(Payment.PAYMENT_CONTRACTOR_CO_NUM)));
+                pay.setPaymentAmount(c.getDouble(c.getColumnIndex(Payment.PAYMENT_AMOUNT)));
+                pay.setProposalID(c.getInt(c.getColumnIndex(Payment.PAYMENT_PROPOSAL_ID)));
+                pay.setPaymentStatus(c.getInt(c.getColumnIndex(Payment.PAYMENT_STATUS)));
+                pay.setPaymentDate(c.getString(c.getColumnIndex(Payment.PAYMENT_DATE)));
+
+                list.add(pay);
+            } while (c.moveToNext());
+        }
+        c.close();
+        db.close();
+        return list;
+    }
+
     public long getPaymentCount(){
         SQLiteDatabase db = this.getWritableDatabase();
         long count = DatabaseUtils.queryNumEntries(db,Payment.PAYMENT_TABLE_NAME);
@@ -788,9 +816,7 @@ public class DBSQLiteManager extends SQLiteOpenHelper {
         double total = 0;
 
         if(c.moveToFirst()){
-            do{
                 total = c.getDouble(0);
-            } while(c.moveToNext());
         }
         return total;
     }
