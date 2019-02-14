@@ -17,4 +17,6 @@
     <color name="LegendContractor">#03C0FF</color>"
     <color name="CheckMarkGreen">#14b866</color>
     <color name="TableBlue">#add8e6</color>
+    <color name="white">#ffffff</color>
+    <color name="black">#000000</color>
 </resources>
