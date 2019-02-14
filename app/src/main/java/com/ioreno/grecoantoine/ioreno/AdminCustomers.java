@@ -10,6 +10,9 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.Spinner;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -27,6 +30,8 @@ public class AdminCustomers extends AppCompatActivity implements NavigationView.
     //  private DrawerLayout dl;
     private DrawerLayout dlAdmin;
     private ActionBarDrawerToggle t;
+    private ArrayList<Customer> cust_list;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -96,7 +101,26 @@ public class AdminCustomers extends AppCompatActivity implements NavigationView.
                 TableLayout.LayoutParams.WRAP_CONTENT));
 
         //get customer list
-        ArrayList<Customer> cust_list = getCustList();
+        cust_list = getCustList();
+        final Spinner spinner = (Spinner) findViewById(R.id.spinnerAdminCustomerTime);
+
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if(spinner.getSelectedItem().toString().equals("All-Time")){
+                    cust_list = getCustList();
+
+                }
+                else if(spinner.getSelectedItem().toString().equals("Last 7 Days")){
+                    cust_list = getCustListLastWeek();
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
         int count = 0;
         for(Customer c : cust_list){
             TableRow tr = new TableRow(this);
@@ -142,13 +166,18 @@ public class AdminCustomers extends AppCompatActivity implements NavigationView.
 
             count++;
         }
-
-}
+    }
 
     public ArrayList<Customer> getCustList(){
         DBSQLiteManager db = new DBSQLiteManager(this);
         return  db.getCustomerList();
     }
+
+    public ArrayList<Customer> getCustListLastWeek(){
+        DBSQLiteManager db = new DBSQLiteManager(this);
+        return  db.getCustomerListLastWeek();
+    }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if(t.onOptionsItemSelected(item))

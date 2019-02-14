@@ -10,6 +10,9 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.Spinner;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -29,6 +32,8 @@ public class AdminDeniedPayments extends AppCompatActivity implements Navigation
     //  private DrawerLayout dl;
     private DrawerLayout dlAdmin;
     private ActionBarDrawerToggle t;
+    private ArrayList<Payment> pay_list;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -104,7 +109,29 @@ public class AdminDeniedPayments extends AppCompatActivity implements Navigation
                 TableLayout.LayoutParams.WRAP_CONTENT));
 
         int count = 0;
-        ArrayList<Payment> pay_list = getDeniedPaymentList();
+
+        pay_list = getDeniedPaymentList();
+        final Spinner spinner = (Spinner) findViewById(R.id.spinnerAdminDeniedPaymentsTime);
+
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if(spinner.getSelectedItem().toString().equals("All-Time")){
+                    pay_list = getDeniedPaymentList();
+
+                }
+                else if(spinner.getSelectedItem().toString().equals("Last 7 Days")){
+                    pay_list = getDeniedPaymentListLastWeek();
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+
         for(Payment p : pay_list){
             TableRow tr = new TableRow(this);
             if (count % 2 != 0)
@@ -163,6 +190,12 @@ public class AdminDeniedPayments extends AppCompatActivity implements Navigation
         DBSQLiteManager db = new DBSQLiteManager(this);
         return db.getDeniedPaymentList();
     }
+
+    public ArrayList<Payment> getDeniedPaymentListLastWeek(){
+        DBSQLiteManager db = new DBSQLiteManager(this);
+        return db.getDeniedPaymentListLastWeek();
+    }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if(t.onOptionsItemSelected(item))

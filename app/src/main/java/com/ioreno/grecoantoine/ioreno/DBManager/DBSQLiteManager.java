@@ -12,6 +12,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
+import com.ioreno.grecoantoine.ioreno.ContactUs;
 import com.ioreno.grecoantoine.ioreno.Model.Customer;
 import com.ioreno.grecoantoine.ioreno.Model.Contractor;
 import com.ioreno.grecoantoine.ioreno.Model.Payment;
@@ -60,6 +61,34 @@ public class DBSQLiteManager extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
 
         String GET_LIST = "SELECT * FROM " + Customer.CUSTOMER_TABLE_NAME+";";
+        Cursor c = db.rawQuery(GET_LIST,null);
+
+        if (c.moveToFirst())
+        {
+            do {
+                Customer cus = new Customer();
+                cus.setCustomerID(c.getInt(c.getColumnIndex(Customer.CUSTOMER_COL_ID)));
+                cus.setCustomerName(c.getString(c.getColumnIndex(Customer.CUSTOMER_COL_NAME)));
+                cus.setCustomerEmail(c.getString(c.getColumnIndex(Customer.CUSTOMER_COL_EMAIL)));
+                cus.setCustomerPhone(c.getString(c.getColumnIndex(Customer.CUSTOMER_COL_PHONE)));
+                cus.setCustomerPassword(c.getString(c.getColumnIndex(Customer.CUSTOMER_COL_PASSWORD)));
+                cus.setCustomerDateRegistered(c.getString(c.getColumnIndex(Customer.CUSTOMER_COL_DATE_REGISTERED)));
+
+                list.add(cus);
+            } while (c.moveToNext());
+        }
+        c.close();
+        db.close();
+        return list;
+    }
+
+    public ArrayList<Customer> getCustomerListLastWeek()
+    {
+        ArrayList<Customer> list = new ArrayList<Customer>();
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        String GET_LIST = "SELECT * FROM " + Customer.CUSTOMER_TABLE_NAME + " WHERE "
+                + Customer.CUSTOMER_COL_DATE_REGISTERED + " > date('now', '-7 day');";
         Cursor c = db.rawQuery(GET_LIST,null);
 
         if (c.moveToFirst())
@@ -177,6 +206,37 @@ public class DBSQLiteManager extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
 
         String GET_LIST = "SELECT * FROM " + Contractor.CONTRACTOR_TABLE_NAME+";";
+        Cursor c = db.rawQuery(GET_LIST,null);
+
+        if (c.moveToFirst())
+        {
+            do {
+                Contractor con = new Contractor();
+                con.setContractorCONum(c.getInt(c.getColumnIndex(Contractor.CONTRACTOR_COL_CO_NUM)));
+                con.setContractorCOName(c.getString(c.getColumnIndex(Contractor.CONTRACTOR_COL_CO_NAME)));
+                con.setContractorPhone(c.getString(c.getColumnIndex(Contractor.CONTRACTOR_COL_PHONE)));
+                con.setContractorEmail(c.getString(c.getColumnIndex(Contractor.CONTRACTOR_COL_EMAIL)));
+                con.setContractorContactName(c.getString(c.getColumnIndex(Contractor.CONTRACTOR_COL_CONTACT_NAME)));
+                con.setContractorPassword(c.getString(c.getColumnIndex(Contractor.CONTRACTOR_COL_PASSWORD)));
+                con.setContractorDateRegistered(c.getString(c.getColumnIndex(Contractor.CONTRACTOR_COL_DATE_REGISTERED)));
+                con.setApproved(c.getInt(c.getColumnIndex(Contractor.CONTRACTOR_COL_APPROVED)));
+
+
+                list.add(con);
+            } while (c.moveToNext());
+        }
+        c.close();
+        db.close();
+        return list;
+    }
+
+    public ArrayList<Contractor> getContractorListLastWeek()
+    {
+        ArrayList<Contractor> list = new ArrayList<Contractor>();
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        String GET_LIST = "SELECT * FROM " + Contractor.CONTRACTOR_TABLE_NAME + " WHERE "
+                + Contractor.CONTRACTOR_COL_DATE_REGISTERED + " > date('now', '-7 day');";
         Cursor c = db.rawQuery(GET_LIST,null);
 
         if (c.moveToFirst())
@@ -773,6 +833,34 @@ public class DBSQLiteManager extends SQLiteOpenHelper {
         return list;
     }
 
+    public ArrayList<Payment> getPaymentListLastWeek()
+    {
+        ArrayList<Payment> list = new ArrayList<Payment>();
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        String GET_LIST = "SELECT * FROM " + Payment.PAYMENT_TABLE_NAME + " WHERE "
+                + Payment.PAYMENT_DATE + " > date('now', '-7 day');";
+        Cursor c = db.rawQuery(GET_LIST,null);
+
+        if (c.moveToFirst())
+        {
+            do {
+                Payment pay = new Payment();
+                pay.setPaymentID(c.getInt(c.getColumnIndex(Payment.PAYMENT_ID)));
+                pay.setContractorCONum(c.getInt(c.getColumnIndex(Payment.PAYMENT_CONTRACTOR_CO_NUM)));
+                pay.setPaymentAmount(c.getDouble(c.getColumnIndex(Payment.PAYMENT_AMOUNT)));
+                pay.setProposalID(c.getInt(c.getColumnIndex(Payment.PAYMENT_PROPOSAL_ID)));
+                pay.setPaymentStatus(c.getInt(c.getColumnIndex(Payment.PAYMENT_STATUS)));
+                pay.setPaymentDate(c.getString(c.getColumnIndex(Payment.PAYMENT_DATE)));
+
+                list.add(pay);
+            } while (c.moveToNext());
+        }
+        c.close();
+        db.close();
+        return list;
+    }
+
     public ArrayList<Payment> getDeniedPaymentList()
     {
         ArrayList<Payment> list = new ArrayList<Payment>();
@@ -780,6 +868,35 @@ public class DBSQLiteManager extends SQLiteOpenHelper {
 
         String GET_LIST = "SELECT * FROM " + Payment.PAYMENT_TABLE_NAME
                 + " WHERE " + Payment.PAYMENT_STATUS + " = 0;";
+        Cursor c = db.rawQuery(GET_LIST,null);
+
+        if (c.moveToFirst())
+        {
+            do {
+                Payment pay = new Payment();
+                pay.setPaymentID(c.getInt(c.getColumnIndex(Payment.PAYMENT_ID)));
+                pay.setContractorCONum(c.getInt(c.getColumnIndex(Payment.PAYMENT_CONTRACTOR_CO_NUM)));
+                pay.setPaymentAmount(c.getDouble(c.getColumnIndex(Payment.PAYMENT_AMOUNT)));
+                pay.setProposalID(c.getInt(c.getColumnIndex(Payment.PAYMENT_PROPOSAL_ID)));
+                pay.setPaymentStatus(c.getInt(c.getColumnIndex(Payment.PAYMENT_STATUS)));
+                pay.setPaymentDate(c.getString(c.getColumnIndex(Payment.PAYMENT_DATE)));
+
+                list.add(pay);
+            } while (c.moveToNext());
+        }
+        c.close();
+        db.close();
+        return list;
+    }
+
+    public ArrayList<Payment> getDeniedPaymentListLastWeek()
+    {
+        ArrayList<Payment> list = new ArrayList<Payment>();
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        String GET_LIST = "SELECT * FROM " + Payment.PAYMENT_TABLE_NAME
+                + " WHERE " + Payment.PAYMENT_STATUS + " = 0 AND "
+                + Payment.PAYMENT_DATE + " > date('now', '-7 day');";
         Cursor c = db.rawQuery(GET_LIST,null);
 
         if (c.moveToFirst())
@@ -809,6 +926,19 @@ public class DBSQLiteManager extends SQLiteOpenHelper {
         return count;
     }
 
+    public double getPaymentCountLastWeek(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String GET_LIST = "SELECT COUNT(*) FROM " + Payment.PAYMENT_TABLE_NAME
+                + " WHERE " + Payment.PAYMENT_DATE + " > date('now', '-7 day');";
+        Cursor c = db.rawQuery(GET_LIST,null);
+        double count = 0;
+
+        if(c.moveToFirst()){
+            count = c.getDouble(0);
+        }
+        return count;
+    }
+
     public double getTotalPayments(){
         SQLiteDatabase db = this.getWritableDatabase();
         String GET_LIST = "SELECT SUM("+ Payment.PAYMENT_AMOUNT+") FROM "+Payment.PAYMENT_TABLE_NAME+";";
@@ -816,7 +946,20 @@ public class DBSQLiteManager extends SQLiteOpenHelper {
         double total = 0;
 
         if(c.moveToFirst()){
-                total = c.getDouble(0);
+            total = c.getDouble(0);
+        }
+        return total;
+    }
+
+    public double getTotalPaymentsLastWeek(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String GET_LIST = "SELECT SUM("+ Payment.PAYMENT_AMOUNT+") FROM "+Payment.PAYMENT_TABLE_NAME
+                + " WHERE " + Payment.PAYMENT_DATE + " > date('now', '-7 day');";
+        Cursor c = db.rawQuery(GET_LIST,null);
+        double total = 0;
+
+        if(c.moveToFirst()){
+            total = c.getDouble(0);
         }
         return total;
     }

@@ -11,8 +11,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -28,6 +30,8 @@ public class AdminContractors extends AppCompatActivity  implements NavigationVi
     //  private DrawerLayout dl;
     private DrawerLayout dlAdmin;
     private ActionBarDrawerToggle t;
+    private ArrayList<Contractor> con_list;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -130,7 +134,27 @@ public class AdminContractors extends AppCompatActivity  implements NavigationVi
                 TableLayout.LayoutParams.WRAP_CONTENT));
 
         //get contractor list
-        ArrayList<Contractor> con_list = getConList();
+        con_list = getConList();
+        final Spinner spinner = (Spinner) findViewById(R.id.spinnerAdminContractorTime);
+
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if(spinner.getSelectedItem().toString().equals("All-Time")){
+                    con_list = getConList();
+
+                }
+                else if(spinner.getSelectedItem().toString().equals("Last 7 Days")){
+                    con_list = getConListLastWeek();
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
         //use nub forloop to make changes to inner object
         for(int i=0; i<con_list.size(); i++){
             final Contractor c = con_list.get(i);
@@ -280,6 +304,11 @@ public class AdminContractors extends AppCompatActivity  implements NavigationVi
     public ArrayList<Contractor> getConList(){
         DBSQLiteManager db = new DBSQLiteManager(this);
         return db.getContractorList();
+    }
+
+    public ArrayList<Contractor> getConListLastWeek(){
+        DBSQLiteManager db = new DBSQLiteManager(this);
+        return db.getContractorListLastWeek();
     }
 
 

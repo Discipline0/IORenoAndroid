@@ -21,6 +21,7 @@ import android.widget.Toast;
 import com.ioreno.grecoantoine.ioreno.DBManager.DBSQLiteManager;
 import com.ioreno.grecoantoine.ioreno.Model.Contractor;
 import com.ioreno.grecoantoine.ioreno.Model.Customer;
+import com.ioreno.grecoantoine.ioreno.Model.Payment;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
