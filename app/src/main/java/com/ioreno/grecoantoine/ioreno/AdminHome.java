@@ -21,19 +21,26 @@ import com.ioreno.grecoantoine.ioreno.Fragments.about_frag;
 import com.ioreno.grecoantoine.ioreno.Fragments.contact_frag;
 import com.ioreno.grecoantoine.ioreno.Fragments.index_frag;
 import com.ioreno.grecoantoine.ioreno.Fragments.terms_of_use_frag;
+import com.ioreno.grecoantoine.ioreno.Model.Contractor;
+import com.ioreno.grecoantoine.ioreno.Model.Customer;
 import com.razerdp.widget.animatedpieview.AnimatedPieView;
 import com.razerdp.widget.animatedpieview.AnimatedPieViewConfig;
 import com.razerdp.widget.animatedpieview.data.SimplePieInfo;
 
 
 public class AdminHome extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
-  //  private DrawerLayout dl;
+
+    public static boolean isAdminLoggedIn = false;
+
     private DrawerLayout dlAdmin;
     private ActionBarDrawerToggle t;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_home);
+
+        isAdminLoggedIn = true;
 
         //hamburger menu
         dlAdmin = (DrawerLayout)findViewById(R.id.drawer_layout);
@@ -167,6 +174,10 @@ public void drawPie(){
             startActivity(i);
         }
         if(checkedId == R.id.nav_sign_out){
+            Contractor.currUser = "";
+            Customer.currUser = "";
+            isAdminLoggedIn = false;
+
             Intent i = new Intent(this, MainActivity.class);
             startActivity(i);
         }

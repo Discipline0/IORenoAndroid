@@ -72,10 +72,10 @@ public class CustomerSeeEstimatesActivity extends AppCompatActivity {
                         @Override
                         public void onClick(View v)
                         {
-                            //Intent i = new Intent(this, LeaveReview.class);
-                            //i.putExtra("contractor", contractor);
+                            Intent i = new Intent(v.getContext(), LeaveReviewActivity.class);
+                            i.putExtra("contractor", contractor);
 
-                            //startActivity(i);
+                            startActivity(i);
                         }
                     });
 
