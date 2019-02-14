@@ -123,4 +123,6 @@
     <string name="Payments">Payments</string>
     <string name="DeniedPayments">Denied Payments</string>
     <string name="Totals">Totals</string>
+    <string name="HomePageCustomerSignUp">Have a Project?\nSign Up</string>
+    <string name="HomePageContractorSignUp">You are a Contractor?\nSign Up</string>
 </resources>
