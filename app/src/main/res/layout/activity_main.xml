@@ -8,18 +8,20 @@
     android:layout_height="match_parent">
 
     <!-- Layout to contain contents of main body of screen (drawer will slide over this) -->
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <LinearLayout
         android:id="@+id/frameLay"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
+
         >
 
         <LinearLayout
             android:id="@+id/horiSignIn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            >
 
             <TextView
                 android:id="@+id/txtEmailLogin"
@@ -85,7 +87,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="3"
-            android:background="@color/PaleGreen"
+            android:background="@drawable/reno1"
             android:gravity="center"
             android:orientation="vertical">
 
@@ -100,6 +102,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"
+                    android:textSize="32sp"
+                    android:textColor="@color/black"
                     android:text="@string/CustomerSignupTitle" />
             </LinearLayout>
 
@@ -125,6 +129,7 @@
             android:layout_height="match_parent"
             android:layout_weight="3"
             android:gravity="center"
+            android:background="@drawable/reno2"
             android:orientation="vertical">
 
             <LinearLayout
@@ -138,6 +143,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"
+                    android:textSize="32sp"
+                    android:textColor="@color/white"
                     android:text="@string/ContnractorSignUpTitle" />
 
             </LinearLayout>
