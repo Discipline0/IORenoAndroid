@@ -100,7 +100,7 @@ public class ContractorHome extends AppCompatActivity implements NavigationView.
     {
         String selectedTypes = spinner.getSelectedItemsAsString();
         // change manager.getProjectList() to the only show projects that weren't approved
-        projects = selectedTypes.equals("") ? manager.getProjectList() : manager.getProjectListFromTypes(selectedTypes);
+        projects = selectedTypes.equals("") ? manager.getPendingProjectList() : manager.getProjectListFromTypes(selectedTypes);
 
         adapter = new ProjectContractorHomeAdapter(projects);
         recyclerView.setAdapter(adapter);

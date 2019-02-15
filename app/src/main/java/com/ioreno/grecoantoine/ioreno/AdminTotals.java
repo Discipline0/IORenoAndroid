@@ -32,6 +32,7 @@ public class AdminTotals extends AppCompatActivity implements NavigationView.OnN
     private ActionBarDrawerToggle t;
     private double total;
     private double number;
+    private TableLayout tl;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,8 +52,39 @@ public class AdminTotals extends AppCompatActivity implements NavigationView.OnN
         nv.setNavigationItemSelectedListener(this);
 
         //table
-        TableLayout tl = (TableLayout)findViewById(R.id.TotalTable);
+        tl = (TableLayout)findViewById(R.id.TotalTable);
 
+        total = getTotal();
+        number = getNumber();
+
+        final Spinner spinner = (Spinner) findViewById(R.id.spinnerAdminTotalsTime);
+
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if(spinner.getSelectedItem().toString().equals("All-Time")){
+                    total = getTotal();
+                    number = getNumber();
+                    tl.removeAllViews();
+                    drawTable();
+                }
+                else if(spinner.getSelectedItem().toString().equals("Last 7 Days")){
+                    total = getTotalLastWeek();
+                    number = getNumberLastWeek();
+                    tl.removeAllViews();
+                    drawTable();
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+    }
+
+    public void drawTable()
+    {
         //header
         TableRow tr_head = new TableRow(this);
         tr_head.setBackgroundColor(getResources().getColor(R.color.TableBlue));
@@ -89,30 +121,6 @@ public class AdminTotals extends AppCompatActivity implements NavigationView.OnN
 
         NumberFormat dfTotal = new DecimalFormat("#.00");
         NumberFormat dfNumber = new DecimalFormat("#.##");
-
-        total = getTotal();
-        number = getNumber();
-
-        final Spinner spinner = (Spinner) findViewById(R.id.spinnerAdminTotalsTime);
-
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if(spinner.getSelectedItem().toString().equals("All-Time")){
-                    total = getTotal();
-                    number = getNumber();
-                }
-                else if(spinner.getSelectedItem().toString().equals("Last 7 Days")){
-                    total = getTotalLastWeek();
-                    number = getNumberLastWeek();
-                }
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
 
         labelNumPay.setText(dfNumber.format(number)+"");
         labelNumPay.setPadding(2, 0, 5, 0);

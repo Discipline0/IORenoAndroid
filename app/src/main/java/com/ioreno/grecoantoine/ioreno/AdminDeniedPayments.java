@@ -33,6 +33,7 @@ public class AdminDeniedPayments extends AppCompatActivity implements Navigation
     private DrawerLayout dlAdmin;
     private ActionBarDrawerToggle t;
     private ArrayList<Payment> pay_list;
+    private TableLayout tl;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,8 +53,35 @@ public class AdminDeniedPayments extends AppCompatActivity implements Navigation
         nv.setNavigationItemSelectedListener(this);
 
         //table
-        TableLayout tl = (TableLayout)findViewById(R.id.DeniedTable);
+        tl = (TableLayout)findViewById(R.id.DeniedTable);
 
+        pay_list = getDeniedPaymentList();
+        final Spinner spinner = (Spinner) findViewById(R.id.spinnerAdminDeniedPaymentsTime);
+
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if(spinner.getSelectedItem().toString().equals("All-Time")){
+                    pay_list = getDeniedPaymentList();
+                    tl.removeAllViews();
+                    drawTable();
+                }
+                else if(spinner.getSelectedItem().toString().equals("Last 7 Days")){
+                    pay_list = getDeniedPaymentListLastWeek();
+                    tl.removeAllViews();
+                    drawTable();
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+    }
+
+    public void drawTable()
+    {
         //header
         TableRow tr_head = new TableRow(this);
         tr_head.setBackgroundColor(getResources().getColor(R.color.TableBlue));
@@ -109,28 +137,6 @@ public class AdminDeniedPayments extends AppCompatActivity implements Navigation
                 TableLayout.LayoutParams.WRAP_CONTENT));
 
         int count = 0;
-
-        pay_list = getDeniedPaymentList();
-        final Spinner spinner = (Spinner) findViewById(R.id.spinnerAdminDeniedPaymentsTime);
-
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if(spinner.getSelectedItem().toString().equals("All-Time")){
-                    pay_list = getDeniedPaymentList();
-
-                }
-                else if(spinner.getSelectedItem().toString().equals("Last 7 Days")){
-                    pay_list = getDeniedPaymentListLastWeek();
-                }
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-
 
         for(Payment p : pay_list){
             TableRow tr = new TableRow(this);

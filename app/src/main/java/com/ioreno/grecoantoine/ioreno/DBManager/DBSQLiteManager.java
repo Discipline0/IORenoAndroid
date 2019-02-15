@@ -550,7 +550,22 @@ public class DBSQLiteManager extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
 
         String GET_LIST = "SELECT * FROM " + Project.PROJECT_TABLE_NAME + " WHERE "
-                + Project.PROJECT_COL_TYPE + " in ('"+ types + "');";
+                + Project.PROJECT_COL_TYPE + " in ('"+ types + "')"
+                + " EXCEPT "
+                + "SELECT "+ Project.PROJECT_TABLE_NAME + "." + Project.PROJECT_COL_ID + ","
+                + Project.PROJECT_TABLE_NAME + "." + Project.PROJECT_COL_CUST_EMAIL + ","
+                + Project.PROJECT_TABLE_NAME + "." + Project.PROJECT_COL_DESCRIPTION + ","
+                + Project.PROJECT_TABLE_NAME + "." + Project.PROJECT_COL_TYPE + ","
+                + Project.PROJECT_TABLE_NAME + "." + Project.PROJECT_COL_BUDGET + ","
+                + Project.PROJECT_TABLE_NAME + "." + Project.PROJECT_COL_TITLE + ","
+                + Project.PROJECT_TABLE_NAME + "." + Project.PROJECT_COL_ADDRESS + ","
+                + Project.PROJECT_TABLE_NAME + "." + Project.PROJECT_COL_CITY + ","
+                + Project.PROJECT_TABLE_NAME + "." + Project.PROJECT_COL_IMAGE + ","
+                + Project.PROJECT_TABLE_NAME + "." + Project.PROJECT_COL_DATE_POSTED
+                + " FROM " + Project.PROJECT_TABLE_NAME + "," + Proposal.PROPOSAL_TABLE_NAME
+                + " WHERE " + Proposal.PROPOSAL_TABLE_NAME + "." + Proposal.PROPOSAL_PROJECT_ID + " = "
+                + Project.PROJECT_TABLE_NAME + "." + Project.PROJECT_COL_ID
+                + " AND " + Proposal.PROPOSAL_APPROVED + " <> 2;";
         Cursor c = db.rawQuery(GET_LIST,null);
 
         if (c.moveToFirst())
