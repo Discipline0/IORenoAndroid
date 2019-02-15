@@ -88,8 +88,5 @@ public class CustomerSignUp extends AppCompatActivity {
         else{
             custErrorIn.setText(error);
         }
-
-        error="";
-
     }
 }
