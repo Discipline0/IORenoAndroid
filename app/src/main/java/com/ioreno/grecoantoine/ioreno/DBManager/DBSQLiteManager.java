@@ -145,7 +145,7 @@ public class DBSQLiteManager extends SQLiteOpenHelper {
 
     //Contractor ***********************************************************************************
     public static final String CREATE_CONTRACTOR_TABLE_QUERY = "CREATE TABLE " + Contractor.CONTRACTOR_TABLE_NAME + " (" +
-            Contractor.CONTRACTOR_COL_CO_NUM + " INTEGER PRIMARY KEY AUTOINCREMENT," +
+            Contractor.CONTRACTOR_COL_CO_NUM + " INTEGER PRIMARY KEY," +
             Contractor.CONTRACTOR_COL_CO_NAME + " TEXT," +
             Contractor.CONTRACTOR_COL_PHONE + " TEXT," +
             Contractor.CONTRACTOR_COL_EMAIL + " TEXT," +
@@ -159,6 +159,7 @@ public class DBSQLiteManager extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues vals = new ContentValues();
 
+        vals.put(Contractor.CONTRACTOR_COL_CO_NUM, c.getContractorCONum());
         vals.put(Contractor.CONTRACTOR_COL_CO_NAME, c.getContractorCOName());
         vals.put(Contractor.CONTRACTOR_COL_PHONE, c.getContractorPhone());
         vals.put(Contractor.CONTRACTOR_COL_EMAIL, c.getContractorEmail());
@@ -169,6 +170,17 @@ public class DBSQLiteManager extends SQLiteOpenHelper {
 
         db.insert(Contractor.CONTRACTOR_TABLE_NAME, null, vals);
         db.close();
+    }
+
+    public boolean checkContractorCONum(int num){
+        ArrayList<Contractor> con = getContractorList();
+        boolean found = false;
+        for(Contractor c : con){
+            if(c.getContractorCONum() == num)
+                found = true;
+        }
+
+        return found;
     }
 
     public ArrayList<Contractor> getContractorList()

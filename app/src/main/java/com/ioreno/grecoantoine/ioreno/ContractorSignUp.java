@@ -20,7 +20,8 @@ public class ContractorSignUp extends AppCompatActivity {
     }
 
     public void OnConSignUp(View v){
-        EditText conCONameIn            = (EditText)findViewById(R.id.editConName);
+        EditText conCONameIn          = (EditText)findViewById(R.id.editConName);
+        EditText conCoNumIn           = (EditText)findViewById(R.id.editConNum);
         EditText conPhoneIn           = (EditText)findViewById(R.id.editConPhone);
         EditText conEmailIn           = (EditText)findViewById(R.id.editConEmail);
         EditText conContactNameIn     = (EditText)findViewById(R.id.editConContactName);
@@ -30,10 +31,11 @@ public class ContractorSignUp extends AppCompatActivity {
         TextView conErrorIn           = (TextView)findViewById(R.id.txtConError);
         conErrorIn.setSingleLine(false);
 
-        String conCOName            = conCONameIn.getText().toString().trim();
+        String conCOName          = conCONameIn.getText().toString().trim();
+        String    conNum          =  conCoNumIn.getText().toString().trim();
         String conPhone           = conPhoneIn.getText().toString().trim();
         String conEmail           = conEmailIn.getText().toString().trim();
-        String conContactName         = conContactNameIn.getText().toString().trim();
+        String conContactName     = conContactNameIn.getText().toString().trim();
         String conPassword        = conPasswordIn.getText().toString().trim();
         String conPasswordConfirm = conPasswordConfirmIn.getText().toString().trim();
 
@@ -49,6 +51,31 @@ public class ContractorSignUp extends AppCompatActivity {
                 error += "\nName can only contain letters";
             }
         }
+        int conNumParsed =0;
+        boolean parsed = false;
+        try{
+            conNumParsed = Integer.parseInt(conNum);
+            parsed = true;
+        }
+        catch(Exception e){
+            error+="\nContractor number can only contain letters";
+        }
+        if(parsed){
+            if(conNum.length() != 10){
+                error+= "\nContractor number must be 10 numbers";
+            }
+            else{
+                if (db.checkContractorCONum(conNumParsed)) {
+                    error += "\nContractor Number already exists";
+                }
+            }
+        }
+
+
+
+
+
+
 
         if(!conPhone.matches("^(\\d[\\s-]?)?[\\(\\[\\s-]{0,2}?\\d{3}[\\)\\]\\s-]{0,2}?\\d{3}[\\s-]?\\d{4}$")){
             error+="\nInvalid phone number";
@@ -86,12 +113,14 @@ public class ContractorSignUp extends AppCompatActivity {
             }
         }
 
+
+
         if(error.equals("")){
             String emailPassword = conEmail + conPassword;
             String hashPassword = Sha1Hashing.sha1(emailPassword);
 
             //contractorCONum set 0, will be updated when inserted in database
-            Contractor c = new Contractor(0, conCOName, conPhone, conEmail, conContactName, hashPassword);
+            Contractor c = new Contractor(conNumParsed, conCOName, conPhone, conEmail, conContactName, hashPassword);
             db.addContractor(c);
             Intent i = new Intent(this, MainActivity.class);
             startActivity(i);
@@ -99,8 +128,5 @@ public class ContractorSignUp extends AppCompatActivity {
         else{
             conErrorIn.setText(error);
         }
-
-        error="";
-
     }
 }
