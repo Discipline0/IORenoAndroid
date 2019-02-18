@@ -1159,19 +1159,6 @@ public class DBSQLiteManager extends SQLiteOpenHelper {
         db.execSQL(CREATE_PROJECT_TABLE_QUERY);
         db.execSQL(CREATE_PROPOSAL_QUERY);
         db.execSQL(CREATE_PAYMENT_QUERY);
-
-        //fake data for now
-        Payment p1 = new Payment(0,1,6.99,1,1);
-        Payment p2 = new Payment(0,2,12.99,2,0);
-        Payment p3 = new Payment(0,3,3.99,3,1);
-        Payment p4 = new Payment(0,4,24.99,4,1);
-        Payment p5 = new Payment(0,5,7.99,5,0);
-
-        addPayment(p1);
-        addPayment(p2);
-        addPayment(p3);
-        addPayment(p4);
-        addPayment(p5);
         db.execSQL(CREATE_REVIEW_QUERY);
     }
 
