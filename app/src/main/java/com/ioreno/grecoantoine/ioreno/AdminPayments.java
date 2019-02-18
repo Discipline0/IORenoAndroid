@@ -10,6 +10,9 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.Spinner;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -29,6 +32,9 @@ public class AdminPayments extends AppCompatActivity implements NavigationView.O
     //  private DrawerLayout dl;
     private DrawerLayout dlAdmin;
     private ActionBarDrawerToggle t;
+    private ArrayList<Payment> pay_list;
+    TableLayout tl;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,8 +54,35 @@ public class AdminPayments extends AppCompatActivity implements NavigationView.O
         nv.setNavigationItemSelectedListener(this);
 
         //table
-        TableLayout tl = (TableLayout)findViewById(R.id.PaymentTable);
+        tl = (TableLayout)findViewById(R.id.PaymentTable);
 
+        pay_list = getPaymentList();
+        final Spinner spinner = (Spinner) findViewById(R.id.spinnerAdminPaymentsTime);
+
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if(spinner.getSelectedItem().toString().equals("All-Time")){
+                    pay_list = getPaymentList();
+                    tl.removeAllViews();
+                    drawTable();
+                }
+                else if(spinner.getSelectedItem().toString().equals("Last 7 Days")){
+                    pay_list = getPaymentListLastWeek();
+                    tl.removeAllViews();
+                    drawTable();
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+    }
+
+    public void drawTable()
+    {
         //header
         TableRow tr_head = new TableRow(this);
         tr_head.setBackgroundColor(getResources().getColor(R.color.TableBlue));
@@ -105,7 +138,7 @@ public class AdminPayments extends AppCompatActivity implements NavigationView.O
                 TableLayout.LayoutParams.WRAP_CONTENT));
 
         int count = 0;
-        ArrayList<Payment> pay_list = getPaymentList();
+
         for(Payment p : pay_list){
             TableRow tr = new TableRow(this);
             if(count%2!=0) tr.setBackgroundColor(getResources().getColor(R.color.TableBlue));
@@ -162,6 +195,11 @@ public class AdminPayments extends AppCompatActivity implements NavigationView.O
     public ArrayList<Payment> getPaymentList(){
         DBSQLiteManager db = new DBSQLiteManager(this);
         return db.getPaymentList();
+    }
+
+    public ArrayList<Payment> getPaymentListLastWeek(){
+        DBSQLiteManager db = new DBSQLiteManager(this);
+        return db.getPaymentListLastWeek();
     }
 
     @Override

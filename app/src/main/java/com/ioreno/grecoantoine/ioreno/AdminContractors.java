@@ -11,8 +11,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -28,6 +30,9 @@ public class AdminContractors extends AppCompatActivity  implements NavigationVi
     //  private DrawerLayout dl;
     private DrawerLayout dlAdmin;
     private ActionBarDrawerToggle t;
+    private ArrayList<Contractor> con_list;
+    private TableLayout tl;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,8 +51,38 @@ public class AdminContractors extends AppCompatActivity  implements NavigationVi
         nv.setNavigationItemSelectedListener(this);
 
         //table
-        TableLayout tl = (TableLayout)findViewById(R.id.ContractorTable);
+        tl = (TableLayout)findViewById(R.id.ContractorTable);
 
+
+
+        //get contractor list
+        con_list = getConList();
+        final Spinner spinner = (Spinner) findViewById(R.id.spinnerAdminContractorTime);
+
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if(spinner.getSelectedItem().toString().equals("All-Time")){
+                    con_list = getConList();
+                    tl.removeAllViews();
+                    drawTable();
+                }
+                else if(spinner.getSelectedItem().toString().equals("Last 7 Days")){
+                    con_list = getConListLastWeek();
+                    tl.removeAllViews();
+                    drawTable();
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+    }
+
+    public void drawTable()
+    {
         //header
         TableRow tr_head = new TableRow(this);
         tr_head.setBackgroundColor(getResources().getColor(R.color.TableBlue));
@@ -129,9 +164,6 @@ public class AdminContractors extends AppCompatActivity  implements NavigationVi
                 TableLayout.LayoutParams.FILL_PARENT,
                 TableLayout.LayoutParams.WRAP_CONTENT));
 
-        //get contractor list
-        ArrayList<Contractor> con_list = getConList();
-        //use nub forloop to make changes to inner object
         for(int i=0; i<con_list.size(); i++){
             final Contractor c = con_list.get(i);
 
@@ -143,7 +175,7 @@ public class AdminContractors extends AppCompatActivity  implements NavigationVi
 
             TextView labelCompNum = new TextView(this);
             TextView labelCompName = new TextView(this);
-          //  TextView labelConName = new TextView(this);
+            //  TextView labelConName = new TextView(this);
             TextView labelConPhone = new TextView(this);
             TextView labelConEmail = new TextView(this);
             TextView labelConDate = new TextView(this);
@@ -197,12 +229,12 @@ public class AdminContractors extends AppCompatActivity  implements NavigationVi
                 final DBSQLiteManager db = new DBSQLiteManager(this);
 
                 btnConApprove.setOnClickListener(new View.OnClickListener(){
-                   public void onClick(View v){
-                       db.approveContractor(c);
-                       Intent intent = getIntent();
-                       finish();
-                       startActivity(intent);
-                   }
+                    public void onClick(View v){
+                        db.approveContractor(c);
+                        Intent intent = getIntent();
+                        finish();
+                        startActivity(intent);
+                    }
                 });
 
                 btnConDeny.setText("Deny");
@@ -280,6 +312,11 @@ public class AdminContractors extends AppCompatActivity  implements NavigationVi
     public ArrayList<Contractor> getConList(){
         DBSQLiteManager db = new DBSQLiteManager(this);
         return db.getContractorList();
+    }
+
+    public ArrayList<Contractor> getConListLastWeek(){
+        DBSQLiteManager db = new DBSQLiteManager(this);
+        return db.getContractorListLastWeek();
     }
 
 

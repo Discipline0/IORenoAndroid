@@ -10,6 +10,9 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.Spinner;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -29,6 +32,9 @@ public class AdminDeniedPayments extends AppCompatActivity implements Navigation
     //  private DrawerLayout dl;
     private DrawerLayout dlAdmin;
     private ActionBarDrawerToggle t;
+    private ArrayList<Payment> pay_list;
+    private TableLayout tl;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,8 +53,35 @@ public class AdminDeniedPayments extends AppCompatActivity implements Navigation
         nv.setNavigationItemSelectedListener(this);
 
         //table
-        TableLayout tl = (TableLayout)findViewById(R.id.DeniedTable);
+        tl = (TableLayout)findViewById(R.id.DeniedTable);
 
+        pay_list = getDeniedPaymentList();
+        final Spinner spinner = (Spinner) findViewById(R.id.spinnerAdminDeniedPaymentsTime);
+
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if(spinner.getSelectedItem().toString().equals("All-Time")){
+                    pay_list = getDeniedPaymentList();
+                    tl.removeAllViews();
+                    drawTable();
+                }
+                else if(spinner.getSelectedItem().toString().equals("Last 7 Days")){
+                    pay_list = getDeniedPaymentListLastWeek();
+                    tl.removeAllViews();
+                    drawTable();
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+    }
+
+    public void drawTable()
+    {
         //header
         TableRow tr_head = new TableRow(this);
         tr_head.setBackgroundColor(getResources().getColor(R.color.TableBlue));
@@ -104,7 +137,7 @@ public class AdminDeniedPayments extends AppCompatActivity implements Navigation
                 TableLayout.LayoutParams.WRAP_CONTENT));
 
         int count = 0;
-        ArrayList<Payment> pay_list = getDeniedPaymentList();
+
         for(Payment p : pay_list){
             TableRow tr = new TableRow(this);
             if (count % 2 != 0)
@@ -163,6 +196,12 @@ public class AdminDeniedPayments extends AppCompatActivity implements Navigation
         DBSQLiteManager db = new DBSQLiteManager(this);
         return db.getDeniedPaymentList();
     }
+
+    public ArrayList<Payment> getDeniedPaymentListLastWeek(){
+        DBSQLiteManager db = new DBSQLiteManager(this);
+        return db.getDeniedPaymentListLastWeek();
+    }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if(t.onOptionsItemSelected(item))

@@ -2,6 +2,7 @@
 <!-- Use DrawerLayout as root container for activity -->
 <android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -14,9 +15,7 @@
         android:layout_height="match_parent" >
 
 
-    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+    <ScrollView
         android:layout_width="fill_parent"
         android:layout_height="fill_parent">
 
@@ -25,6 +24,14 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+            <TextView
+                android:id="@+id/txtAdminHomeTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/Dashboard"
+                android:textSize="30sp"
+                android:textStyle="bold" />
+
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
@@ -32,8 +39,8 @@
 
                 <Spinner
                     android:id="@+id/adminSpinnerTime"
-                    android:layout_width="427dp"
-                    android:layout_height="match_parent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_weight="0"
                     android:entries="@array/time_arrays" />
             </LinearLayout>

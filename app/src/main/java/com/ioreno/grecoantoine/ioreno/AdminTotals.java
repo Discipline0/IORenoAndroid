@@ -10,6 +10,9 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.Spinner;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -27,6 +30,10 @@ public class AdminTotals extends AppCompatActivity implements NavigationView.OnN
     //  private DrawerLayout dl;
     private DrawerLayout dlAdmin;
     private ActionBarDrawerToggle t;
+    private double total;
+    private double number;
+    private TableLayout tl;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,8 +52,39 @@ public class AdminTotals extends AppCompatActivity implements NavigationView.OnN
         nv.setNavigationItemSelectedListener(this);
 
         //table
-        TableLayout tl = (TableLayout)findViewById(R.id.TotalTable);
+        tl = (TableLayout)findViewById(R.id.TotalTable);
 
+        total = getTotal();
+        number = getNumber();
+
+        final Spinner spinner = (Spinner) findViewById(R.id.spinnerAdminTotalsTime);
+
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if(spinner.getSelectedItem().toString().equals("All-Time")){
+                    total = getTotal();
+                    number = getNumber();
+                    tl.removeAllViews();
+                    drawTable();
+                }
+                else if(spinner.getSelectedItem().toString().equals("Last 7 Days")){
+                    total = getTotalLastWeek();
+                    number = getNumberLastWeek();
+                    tl.removeAllViews();
+                    drawTable();
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+    }
+
+    public void drawTable()
+    {
         //header
         TableRow tr_head = new TableRow(this);
         tr_head.setBackgroundColor(getResources().getColor(R.color.TableBlue));
@@ -83,9 +121,8 @@ public class AdminTotals extends AppCompatActivity implements NavigationView.OnN
 
         NumberFormat dfTotal = new DecimalFormat("#.00");
         NumberFormat dfNumber = new DecimalFormat("#.##");
-        double total = getTotal();
-        double number = getNumber();
-        labelNumPay.setText(dfNumber.format(getNumber())+"");
+
+        labelNumPay.setText(dfNumber.format(number)+"");
         labelNumPay.setPadding(2, 0, 5, 0);
         labelNumPay.setTextColor(Color.BLACK);
         tr.addView(labelNumPay);
@@ -104,9 +141,20 @@ public class AdminTotals extends AppCompatActivity implements NavigationView.OnN
         DBSQLiteManager db = new DBSQLiteManager(this);
         return  db.getPaymentCount();
     }
+
+    public double getNumberLastWeek(){
+        DBSQLiteManager db = new DBSQLiteManager(this);
+        return  db.getPaymentCountLastWeek();
+    }
+
     public double getTotal(){
         DBSQLiteManager db = new DBSQLiteManager(this);
         return  db.getTotalPayments();
+    }
+
+    public double getTotalLastWeek(){
+        DBSQLiteManager db = new DBSQLiteManager(this);
+        return  db.getTotalPaymentsLastWeek();
     }
 
     @Override

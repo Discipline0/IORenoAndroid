@@ -17,6 +17,22 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/txtAdminTotalsTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/Totals"
+                android:textSize="30sp"
+                android:textStyle="bold" />
+
+            <Spinner
+                android:id="@+id/spinnerAdminTotalsTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0"
+                android:entries="@array/time_arrays" />
+
             <ScrollView
                 android:id="@+id/layout"
                 android:layout_height="match_parent"

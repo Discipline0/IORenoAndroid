@@ -10,6 +10,9 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.Spinner;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -27,6 +30,9 @@ public class AdminCustomers extends AppCompatActivity implements NavigationView.
     //  private DrawerLayout dl;
     private DrawerLayout dlAdmin;
     private ActionBarDrawerToggle t;
+    private TableLayout tl;
+    private ArrayList<Customer> cust_list;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,8 +51,37 @@ public class AdminCustomers extends AppCompatActivity implements NavigationView.
         nv.setNavigationItemSelectedListener(this);
 
         //table
-        TableLayout tl = (TableLayout)findViewById(R.id.CustomerTable);
+        tl = (TableLayout)findViewById(R.id.CustomerTable);
 
+        //get customer list
+        cust_list = getCustList();
+        final Spinner spinner = (Spinner) findViewById(R.id.spinnerAdminCustomerTime);
+
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if(spinner.getSelectedItem().toString().equals("All-Time")){
+                    cust_list = getCustList();
+                    tl.removeAllViews();
+                    drawTable();
+                }
+                else if(spinner.getSelectedItem().toString().equals("Last 7 Days")){
+                    cust_list = getCustListLastWeek();
+                    tl.removeAllViews();
+                    drawTable();
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+    }
+
+    public void drawTable()
+    {
         //header
         TableRow tr_head = new TableRow(this);
         tr_head.setBackgroundColor(getResources().getColor(R.color.TableBlue));
@@ -95,8 +130,6 @@ public class AdminCustomers extends AppCompatActivity implements NavigationView.
                 TableLayout.LayoutParams.FILL_PARENT,
                 TableLayout.LayoutParams.WRAP_CONTENT));
 
-        //get customer list
-        ArrayList<Customer> cust_list = getCustList();
         int count = 0;
         for(Customer c : cust_list){
             TableRow tr = new TableRow(this);
@@ -139,16 +172,20 @@ public class AdminCustomers extends AppCompatActivity implements NavigationView.
                     TableRow.LayoutParams.FILL_PARENT,
                     TableRow.LayoutParams.WRAP_CONTENT));
 
-
             count++;
         }
-
-}
+    }
 
     public ArrayList<Customer> getCustList(){
         DBSQLiteManager db = new DBSQLiteManager(this);
         return  db.getCustomerList();
     }
+
+    public ArrayList<Customer> getCustListLastWeek(){
+        DBSQLiteManager db = new DBSQLiteManager(this);
+        return  db.getCustomerListLastWeek();
+    }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if(t.onOptionsItemSelected(item))
