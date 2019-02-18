@@ -28,7 +28,8 @@
                 android:layout_width="50dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/LoginTitle" />
+                android:text="@string/LoginTitle"
+                android:textAlignment="textEnd" />
 
             <EditText
                 android:id="@+id/editEmailLogin"
@@ -43,7 +44,8 @@
                 android:layout_width="70dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/LoginPasswordTitle" />
+                android:text="@string/LoginPasswordTitle"
+                android:textAlignment="textEnd" />
 
             <EditText
                 android:id="@+id/editPasswordLogin"
@@ -58,13 +60,17 @@
             android:id="@+id/horiSignInError"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_gravity="center"
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/txtLoginError"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1" />
+                android:layout_weight="0"
+                android:gravity="center"
+                android:textColor="@color/Red" />
+
         </LinearLayout>
 
         <LinearLayout

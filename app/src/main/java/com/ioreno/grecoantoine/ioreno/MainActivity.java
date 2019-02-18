@@ -94,15 +94,26 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             startActivity(i);
 
         }
-        else if(db.checkForContractor(editEmailLogin, hashPassword)){
-            Contractor.currUser = editEmailLogin;
-            Customer.currUser = "";
+        else if(db.checkForContractor(editEmailLogin, hashPassword))
+        {
+            Contractor contractor = db.getContractorFromEmail(editEmailLogin);
 
-            Intent i = new Intent(this, ContractorHome.class);
-            startActivity(i);
+            if (contractor.getApproved() == 1)
+            {
+                Contractor.currUser = editEmailLogin;
+                Customer.currUser = "";
+
+                Intent i = new Intent(this, ContractorHome.class);
+                startActivity(i);
+            }
+            else
+            {
+                txtLoginError.setText("You have not been approved yet");
+            }
         }
         //hardcore admin :)
-        else if(editEmailLogin.equals("admin") && editPasswordLogin.equals("admin")){
+        else if(editEmailLogin.equals("admin") && editPasswordLogin.equals("admin"))
+        {
             Intent i = new Intent(this, AdminHome.class);
             startActivity(i);
         }
