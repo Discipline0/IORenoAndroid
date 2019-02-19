@@ -2,9 +2,9 @@ package com.ioreno.grecoantoine.ioreno.Model;
 
 public class Review
 {
-    private int contractorNo;
-    private int customerId;
-    private int rating;
+    private long contractorNo;
+    private int  customerId;
+    private int  rating;
     private String reviewText;
 
     public static final String REVIEW_TABLE_NAME      = "Review";
@@ -18,7 +18,7 @@ public class Review
     {
     }
 
-    public Review(int contractorNo, int customerId, int rating, String reviewText)
+    public Review(long contractorNo, int customerId, int rating, String reviewText)
     {
         this.contractorNo = contractorNo;
         this.customerId   = customerId;
@@ -26,12 +26,12 @@ public class Review
         this.reviewText   = reviewText;
     }
 
-    public int getContractorNo()
+    public long getContractorNo()
     {
         return contractorNo;
     }
 
-    public void setContractorNo(int contractorNo)
+    public void setContractorNo(long contractorNo)
     {
         this.contractorNo = contractorNo;
     }

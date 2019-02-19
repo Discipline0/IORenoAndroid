@@ -220,7 +220,6 @@ public class AdminContractors extends AppCompatActivity  implements NavigationVi
             if(c.getApproved() == 0)
             {
                 btnConApprove.setText("Approve");
-                btnConApprove.setId(c.getContractorCONum());
                 btnConApprove.setPadding(2, 0, 5, 0);
                 btnConApprove.setBackgroundTintList(this.getResources().getColorStateList(R.color.CheckMarkGreen));
                 btnConApprove.setTextColor(Color.WHITE);

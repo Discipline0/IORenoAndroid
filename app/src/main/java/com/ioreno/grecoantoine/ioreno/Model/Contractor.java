@@ -5,7 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Contractor implements Serializable {
-    private int     contractorCONum;
+    private long     contractorCONum;
     private String  contractorCOName;
     private String  contractorPhone;
     private String  contractorEmail;
@@ -33,7 +33,7 @@ public class Contractor implements Serializable {
 
     public Contractor(){};
 
-    public Contractor(int contractorCONum, String contractorCOName, String contractorPhone, String contractorEmail, String contractorContactName, String contractorPassword) {
+    public Contractor(long contractorCONum, String contractorCOName, String contractorPhone, String contractorEmail, String contractorContactName, String contractorPassword) {
         this.contractorCONum = contractorCONum;
         this.contractorCOName = contractorCOName;
         this.contractorPhone = contractorPhone;
@@ -45,11 +45,11 @@ public class Contractor implements Serializable {
         this.approved = 0;
     }
 
-    public int getContractorCONum() {
+    public long getContractorCONum() {
         return contractorCONum;
     }
 
-    public void setContractorCONum(int contractorCONum) {
+    public void setContractorCONum(long contractorCONum) {
         this.contractorCONum = contractorCONum;
     }
 

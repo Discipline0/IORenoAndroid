@@ -201,7 +201,7 @@ public class DBSQLiteManager extends SQLiteOpenHelper {
         db.close();
     }
 
-    public boolean checkContractorCONum(int num){
+    public boolean checkContractorCONum(long num){
         ArrayList<Contractor> con = getContractorList();
         boolean found = false;
         for(Contractor c : con){
@@ -300,7 +300,7 @@ public class DBSQLiteManager extends SQLiteOpenHelper {
         return contractor;
     }
 
-    public Contractor getContractorFromCoNum(int coNum)
+    public Contractor getContractorFromCoNum(long coNum)
     {
         Contractor contractor = new Contractor();
         SQLiteDatabase db = this.getReadableDatabase();

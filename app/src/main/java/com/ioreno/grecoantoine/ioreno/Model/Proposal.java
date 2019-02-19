@@ -2,7 +2,7 @@ package com.ioreno.grecoantoine.ioreno.Model;
 
 public class Proposal {
     private int    proposalID;
-    private int    contractorCONum;
+    private long   contractorCONum;
     private int    projectID;
     private double projectEstimate;
     private int    proposalApproved; // 0 => Denied, 1 => Accepted, 2 => Pending
@@ -17,7 +17,7 @@ public class Proposal {
 
     public Proposal(){};
 
-    public Proposal(int proposalID, int contractorCONum, int projectID, double projectEstimate) {
+    public Proposal(int proposalID, long contractorCONum, int projectID, double projectEstimate) {
         this.proposalID = proposalID;
         this.contractorCONum = contractorCONum;
         this.projectID = projectID;
@@ -34,11 +34,11 @@ public class Proposal {
         this.proposalID = proposalID;
     }
 
-    public int getContractorCONum() {
+    public long getContractorCONum() {
         return contractorCONum;
     }
 
-    public void setContractorCONum(int contractorCONum) {
+    public void setContractorCONum(long contractorCONum) {
         this.contractorCONum = contractorCONum;
     }
 

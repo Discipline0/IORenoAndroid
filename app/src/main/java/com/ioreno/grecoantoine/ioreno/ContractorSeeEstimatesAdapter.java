@@ -68,6 +68,16 @@ public class ContractorSeeEstimatesAdapter extends RecyclerView.Adapter<Contract
         manager = new DBSQLiteManager(viewHolder.txtProjectTitle.getContext());
         final Project project = manager.getProjectFromId(proposal.getProjectID());
 
+        if (project.getImage() == null)
+        {
+            viewHolder.imgProjectImage.setVisibility(View.GONE);
+            viewHolder.btnGetCustInfo.setVisibility(View.GONE);
+            viewHolder.txtStatus.setVisibility(View.GONE);
+            viewHolder.txtEstimate.setVisibility(View.GONE);
+            viewHolder.txtProjectTitle.setVisibility(View.GONE);
+            return;
+        }
+
         viewHolder.txtProjectTitle.setText(project.getTitle());
         final String estimateStr = new DecimalFormat("$#,##0.00").format(proposal.getProjectEstimate());
         viewHolder.txtEstimate.setText(estimateStr);
@@ -107,6 +117,7 @@ public class ContractorSeeEstimatesAdapter extends RecyclerView.Adapter<Contract
                 v.getContext().startActivity(intent);
             }
         });
+
     }
 
     // Returns the total count of items in the list

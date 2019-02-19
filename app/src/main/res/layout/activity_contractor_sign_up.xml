@@ -179,9 +179,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@color/PaleGreen"
+            android:background="@color/DarkerBlue"
+            android:textColor="@color/white"
             android:text="@string/btnConSignUp"
-            android:onClick="OnConSignUp"/>\
+            android:onClick="OnConSignUp"/>
 
     </LinearLayout>
 

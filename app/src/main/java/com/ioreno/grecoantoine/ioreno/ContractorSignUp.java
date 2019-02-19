@@ -51,14 +51,14 @@ public class ContractorSignUp extends AppCompatActivity {
                 error += "\nName can only contain letters";
             }
         }
-        int conNumParsed =0;
+        long conNumParsed =0;
         boolean parsed = false;
         try{
-            conNumParsed = Integer.parseInt(conNum);
+            conNumParsed = Long.parseLong(conNum);
             parsed = true;
         }
         catch(Exception e){
-            error+="\nContractor number can only contain letters";
+            error+="\nContractor number can only contain numbers";
         }
         if(parsed){
             if(conNum.length() != 10){
