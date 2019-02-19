@@ -73,7 +73,7 @@ public class ContactUs extends AppCompatActivity implements NavigationView.OnNav
 
         Intent i = new Intent(Intent.ACTION_SEND);
         i.setType("message/rfc822");
-        i.putExtra(Intent.EXTRA_EMAIL  , new String[]{"grecoftw@gmail.com"});
+        i.putExtra(Intent.EXTRA_EMAIL  , new String[]{"yves1939@yahoo.ca"});
         i.putExtra(Intent.EXTRA_SUBJECT, subject);
         i.putExtra(Intent.EXTRA_TEXT   , message);
         try {
